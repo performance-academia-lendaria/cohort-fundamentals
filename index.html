@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cohort Fundamentals - Guia do Aluno</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -12,32 +15,33 @@
     }
 
     :root {
-      /* Colors - Primary (Red Brand - Dark Luxury) */
-      --color-primary-red: #FF2D55;
-      --color-primary-red-transparent: rgba(255, 45, 85, 0.08);
-      --color-primary-red-border: rgba(255, 45, 85, 0.12);
-      --color-primary-red-strong: rgba(255, 45, 85, 0.25);
+      /* Colors - Primary (Teal Brand) */
+      --color-primary-teal: #14B8A6;
+      --color-secondary-teal-dark: #0D9488;
+      --color-accent-teal-deep: #134E4A;
+      --color-accent-white: #FFFFFF;
 
-      /* Colors - Background (Dark Luxury) */
-      --color-bg-main: #080404;
-      --color-bg-card: #0C0606;
-      --color-bg-secondary: #080404;
+      /* Colors - Background */
+      --color-bg-primary: #000000;
+      --color-bg-gradient-start: #000000;
+      --color-bg-gradient-end: #0A2E2C;
+      --color-bg-secondary: #0F0F0F;
+      --color-bg-card: #1A1A1A;
+      --color-bg-card-hover: rgba(20, 184, 166, 0.05);
 
       /* Colors - State */
-      --color-success: #34C759;
-      --color-success-bg: rgba(52, 199, 89, 0.12);
+      --color-success: #22C55E;
+      --color-warning: #EAB308;
 
       /* Colors - Text */
-      --color-text-primary: #FAFAFA;
-      --color-text-white: #FFFFFF;
-      --color-text-light: #E8E0E0;
-      --color-text-light-secondary: #E0D8D8;
-      --color-text-medium: #A09090;
-      --color-text-gray: #908080;
-      --color-text-gray-dark: #706060;
+      --color-text-primary: #FFFFFF;
+      --color-text-secondary: #A3A3A3;
+      --color-text-muted: #6B7280;
 
       /* Colors - Border */
-      --color-border-main: #2D1518;
+      --color-border-standard: #2A2A2A;
+      --color-border-light: #3A3A3A;
+      --color-border-teal: #14B8A6;
       --color-border-white: #FFFFFF;
 
       /* Spacing */
@@ -47,23 +51,23 @@
       --space-12: 3rem;
 
       /* Border Radius */
-      --radius-lg: 1.25rem;
+      --radius-lg: 1rem;
       --radius-xl: 1.5rem;
-      --radius-2xl: 2.5rem;
       --radius-full: 9999px;
 
       /* Shadows */
-      --shadow-card: 0 4px 60px rgba(255, 45, 85, 0.08);
-      --shadow-glow-red: 0 0 20px rgba(255, 45, 85, 0.2);
+      --shadow-card: 0 4px 6px rgba(0,0,0,0.4);
+      --shadow-glow-teal-subtle: 0 0 15px rgba(20, 184, 166, 0.1);
+      --shadow-glow-teal: 0 0 20px rgba(20, 184, 166, 0.2);
 
       /* Transitions */
       --transition-fast: 0.2s ease;
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(180deg, #000000 0%, #1A0508 40%, #2D0A10 70%, #3D0D15 100%);
-      color: var(--color-text-medium);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-gradient-end) 100%);
+      color: var(--color-text-secondary);
       min-height: 100vh;
       padding: 2rem 1rem;
     }
@@ -78,38 +82,38 @@
       text-align: center;
       margin-bottom: var(--space-12);
       padding: var(--space-12) var(--space-8);
-      background: radial-gradient(circle at center, rgba(255, 45, 85, 0.15), transparent 70%);
+      background: radial-gradient(circle at center, rgba(20, 184, 166, 0.15), transparent 70%);
       border-radius: var(--radius-xl);
-      border: 1px solid var(--color-border-main);
+      border: 1px solid var(--color-border-standard);
     }
 
     .badge-pill {
       display: inline-block;
       border: 2px solid var(--color-border-white);
-      border-radius: 100px;
+      border-radius: var(--radius-full);
       padding: 0.75rem 2rem;
-      background: radial-gradient(ellipse at center, rgba(255, 45, 85, 0.1), transparent);
+      background: radial-gradient(ellipse at center, rgba(20, 184, 166, 0.1), transparent);
       margin-bottom: var(--space-4);
     }
 
     .badge-pill .cohort {
-      color: var(--color-text-white);
-      font-size: 1.375rem;
+      color: var(--color-text-primary);
+      font-size: 1.5rem;
       font-weight: 600;
       letter-spacing: -0.5px;
     }
 
     .badge-pill .fundamentals {
-      color: var(--color-primary-red);
-      font-size: 1.375rem;
-      font-weight: 600;
+      color: var(--color-primary-teal);
+      font-size: 1.5rem;
+      font-weight: 700;
       letter-spacing: -0.5px;
     }
 
     .subtitle {
-      font-size: 0.5625rem;
-      font-weight: 800;
-      color: var(--color-primary-red);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--color-primary-teal);
       letter-spacing: 3px;
       text-transform: uppercase;
       margin-top: 0.5rem;
@@ -126,35 +130,54 @@
     /* Info Cards */
     .info-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: var(--space-6);
       margin-bottom: var(--space-8);
     }
 
+    .info-grid.single-highlight {
+      grid-template-columns: 1fr;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: var(--space-6);
+    }
+
+    .info-grid.three-col {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (max-width: 968px) {
+      .info-grid,
+      .info-grid.three-col {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .info-card {
       background: var(--color-bg-card);
-      border: 1px solid var(--color-border-main);
-      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-border-standard);
+      border-radius: var(--radius-lg);
       padding: var(--space-6);
       box-shadow: var(--shadow-card);
       transition: var(--transition-fast);
     }
 
     .info-card:hover {
-      border-color: var(--color-primary-red);
+      border-color: var(--color-primary-teal);
       transform: translateY(-2px);
-      box-shadow: var(--shadow-glow-red);
+      box-shadow: var(--shadow-glow-teal);
     }
 
     .info-card.highlight {
-      background: linear-gradient(135deg, var(--color-primary-red-border) 0%, transparent 100%);
-      border-left: 3px solid var(--color-primary-red);
+      background: linear-gradient(135deg, rgba(20, 184, 166, 0.08) 0%, transparent 100%);
+      border-left: 3px solid var(--color-primary-teal);
     }
 
     .info-card-label {
-      font-size: 0.6875rem;
-      font-weight: 500;
-      color: var(--color-text-gray-dark);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--color-text-muted);
       text-transform: uppercase;
       letter-spacing: 0.5px;
       margin-bottom: 0.5rem;
@@ -164,13 +187,12 @@
       font-size: 1rem;
       font-weight: 600;
       color: var(--color-text-primary);
-      line-height: 1.65;
+      line-height: 1.5;
     }
 
     .info-card-value.large {
       font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--color-primary-red);
+      color: var(--color-primary-teal);
     }
 
     /* Section */
@@ -179,9 +201,9 @@
     }
 
     .section-header {
-      font-size: 0.5625rem;
-      font-weight: 800;
-      color: var(--color-primary-red);
+      font-size: 0.625rem;
+      font-weight: 700;
+      color: var(--color-primary-teal);
       letter-spacing: 3px;
       text-transform: uppercase;
       margin-bottom: var(--space-6);
@@ -190,7 +212,7 @@
     /* Calendar Table */
     .calendar-card {
       background: var(--color-bg-card);
-      border: 1px solid var(--color-border-main);
+      border: 1px solid var(--color-border-standard);
       border-radius: var(--radius-lg);
       overflow: hidden;
       box-shadow: var(--shadow-card);
@@ -204,23 +226,23 @@
 
     .calendar-table thead tr {
       background: var(--color-bg-secondary);
-      border-bottom: 1px solid var(--color-border-main);
+      border-bottom: 1px solid var(--color-border-standard);
     }
 
     .calendar-table th {
-      padding: 0.875rem 1.25rem;
-      font-size: 0.5625rem;
+      padding: 1rem 1.5rem;
+      font-size: 0.625rem;
       font-weight: 700;
-      color: var(--color-text-gray-dark);
-      letter-spacing: 1.5px;
+      color: var(--color-text-muted);
+      letter-spacing: 2px;
       text-transform: uppercase;
       text-align: left;
     }
 
     .calendar-table td {
-      padding: 0.875rem 1.25rem;
-      border-bottom: 1px solid var(--color-border-main);
-      font-size: 0.8125rem;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--color-border-standard);
+      font-size: 0.875rem;
     }
 
     .calendar-table tbody tr:last-child td {
@@ -228,49 +250,43 @@
     }
 
     .calendar-table tbody tr.highlight {
-      background: var(--color-primary-red-transparent);
+      background: linear-gradient(135deg, rgba(20, 184, 166, 0.08) 0%, transparent 100%);
     }
 
     .calendar-table tbody tr.highlight td:first-child {
-      border-left: 3px solid var(--color-primary-red);
+      border-left: 3px solid var(--color-primary-teal);
     }
 
     .date-cell {
-      font-weight: 600;
-      color: var(--color-text-gray);
+      font-weight: 700;
+      color: var(--color-text-secondary);
       white-space: nowrap;
     }
 
     .date-cell.highlight {
-      font-weight: 700;
-      color: var(--color-primary-red);
+      color: var(--color-primary-teal);
     }
 
     .topic-cell {
-      font-weight: 600;
-      color: var(--color-text-light-secondary);
-    }
-
-    .calendar-table tbody tr.highlight .topic-cell {
       font-weight: 600;
       color: var(--color-text-primary);
     }
 
     /* Callout */
     .callout {
-      background: linear-gradient(135deg, var(--color-primary-red-border) 0%, rgba(255, 45, 85, 0.04) 100%);
-      border: 1px solid var(--color-primary-red-strong);
-      border-left: 3px solid var(--color-primary-red);
-      border-radius: var(--radius-xl);
-      padding: 1.75rem;
+      background: linear-gradient(135deg, rgba(20, 184, 166, 0.08) 0%, transparent 100%);
+      border: 1px solid rgba(20, 184, 166, 0.3);
+      border-left: 3px solid var(--color-primary-teal);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
       margin-bottom: var(--space-8);
       box-shadow: var(--shadow-card);
     }
 
     .callout-header {
-      font-size: 0.5625rem;
-      font-weight: 800;
-      color: var(--color-primary-red);
+      font-size: 0.625rem;
+      font-weight: 700;
+      color: var(--color-primary-teal);
       letter-spacing: 3px;
       text-transform: uppercase;
       margin-bottom: 0.875rem;
@@ -278,19 +294,19 @@
 
     .callout-text {
       font-size: 1rem;
-      color: var(--color-text-light);
+      color: var(--color-text-primary);
       line-height: 1.65;
     }
 
     .callout-text strong {
-      color: var(--color-primary-red);
+      color: var(--color-primary-teal);
       font-weight: 600;
     }
 
     .callout.success {
-      background: linear-gradient(135deg, var(--color-success-bg) 0%, rgba(52, 199, 89, 0.04) 100%);
-      border: 1px solid rgba(52, 199, 89, 0.25);
-      border-left: 3px solid var(--color-success);
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.12) 0%, rgba(34, 197, 94, 0.04) 100%);
+      border-color: rgba(34, 197, 94, 0.3);
+      border-left-color: var(--color-success);
     }
 
     .callout.success .callout-header {
@@ -311,14 +327,14 @@
       display: flex;
       align-items: flex-start;
       margin-bottom: 1rem;
-      font-size: 0.9375rem;
-      color: var(--color-text-light);
-      line-height: 1.6;
+      font-size: 1rem;
+      color: var(--color-text-primary);
+      line-height: 1.65;
     }
 
     .requirements-list li::before {
       content: "✓";
-      color: var(--color-primary-red);
+      color: var(--color-primary-teal);
       font-weight: 700;
       font-size: 1.25rem;
       margin-right: 0.75rem;
@@ -330,7 +346,7 @@
       text-align: center;
       margin-top: var(--space-12);
       padding-top: var(--space-8);
-      border-top: 1px solid var(--color-border-main);
+      border-top: 1px solid var(--color-border-standard);
     }
 
     .footer-links {
@@ -338,7 +354,7 @@
     }
 
     .footer-link {
-      color: var(--color-primary-red);
+      color: var(--color-primary-teal);
       text-decoration: none;
       font-size: 0.875rem;
       font-weight: 500;
@@ -347,12 +363,12 @@
     }
 
     .footer-link:hover {
-      opacity: 0.8;
+      color: var(--color-secondary-teal-dark);
     }
 
     .footer-text {
       font-size: 0.875rem;
-      color: var(--color-text-gray-dark);
+      color: var(--color-text-muted);
     }
 
     /* Responsive */
@@ -380,7 +396,7 @@
       }
 
       .date-cell {
-        font-size: 0.75rem;
+        font-size: 0.8rem;
       }
     }
   </style>
@@ -397,11 +413,14 @@
     </div>
 
     <!-- Info Cards Principais -->
-    <div class="info-grid">
+    <div class="info-grid single-highlight">
       <div class="info-card highlight">
         <div class="info-card-label">Início do Programa</div>
         <div class="info-card-value large">12 de Fevereiro de 2026</div>
       </div>
+    </div>
+
+    <div class="info-grid three-col">
       <div class="info-card">
         <div class="info-card-label">Horários dos Encontros</div>
         <div class="info-card-value">Segundas e Quintas às 18h<br>(Horário de Brasília)</div>
@@ -412,7 +431,7 @@
       </div>
       <div class="info-card">
         <div class="info-card-label">Total de Encontros</div>
-        <div class="info-card-value">8 encontros ao vivo + gravações vitalícias</div>
+        <div class="info-card-value">8 encontros ao vivo</div>
       </div>
     </div>
 
@@ -505,28 +524,6 @@
             <a href="https://claude.ai/upgrade" class="footer-link">Ativar Claude Pro</a>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Garantias -->
-    <section class="section">
-      <h2 class="section-header">GARANTIAS</h2>
-
-      <div class="callout">
-        <div class="callout-header">GARANTIA DUPLA</div>
-        <p class="callout-text" style="margin-bottom: 1rem;">
-          <strong>7 dias sem perguntas:</strong> Reembolso integral, sem burocracia.
-        </p>
-        <p class="callout-text">
-          <strong>Garantia de resultado:</strong> Participe de 100% dos encontros. Se não conseguir criar um agente funcional, devolvemos seu dinheiro.
-        </p>
-      </div>
-
-      <div class="callout success">
-        <div class="callout-header">BÔNUS INCLUÍDO</div>
-        <p class="callout-text">
-          <strong>Cupom 100% Cashback:</strong> O valor que você investiu retorna como crédito para usar em futuros produtos da Academia Lendária.
-        </p>
       </div>
     </section>
 
