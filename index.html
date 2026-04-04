@@ -3,303 +3,278 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bem-vindo ao Cohort AIOS Fundamentals - Turma 4</title>
+  <title>Bem-vindo ao Cohort AIOX Fundamentals - Turma 4</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bb-lime: #D1FF00;
+      --bb-dark: #050505;
+      --bb-surface: #0F0F11;
+      --bb-cream: #F5F4E7;
+      --bb-dim: rgba(245,244,231,0.4);
+      --bb-border: rgba(156,156,156,0.15);
+      --bb-gray-charcoal: #3D3D3D;
+      --bb-gray-dim: #696969;
+      --bb-gray-muted: #999999;
+      --bb-error: #EF4444;
+      --font-geist: 'Geist', system-ui, -apple-system, sans-serif;
+      --font-mono: 'Roboto Mono', monospace;
+    }
+
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(180deg, #000000 0%, #0A2E2C 100%);
-      color: #A3A3A3;
+      font-family: var(--font-geist);
+      background: var(--bb-dark);
+      color: var(--bb-dim);
       min-height: 100vh;
       padding: 32px 16px;
     }
+
     .container {
-      max-width: 600px;
+      max-width: 640px;
       margin: 0 auto;
-      background: #0F0F0F;
-      border-radius: 24px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-      border: 1px solid #2A2A2A;
+      background: var(--bb-surface);
+      border: 1px solid var(--bb-border);
       overflow: hidden;
     }
+
     .header {
       padding: 48px 32px 40px;
-      background: radial-gradient(circle at center, rgba(20, 184, 166, 0.15), transparent 70%);
+      background: var(--bb-surface);
       text-align: center;
-      border-bottom: 1px solid #2A2A2A;
+      border-bottom: 1px solid var(--bb-border);
+      position: relative;
     }
+
     .badge-program {
       display: inline-block;
-      border: 2px solid #FFFFFF;
-      border-radius: 100px;
+      border: 1px solid var(--bb-border);
       padding: 12px 32px;
-      background: radial-gradient(ellipse at center, rgba(20, 184, 166, 0.1), transparent);
+      background: var(--bb-surface);
     }
-    .badge-program .cohort { color: #FFFFFF; font-size: 24px; font-weight: 600; letter-spacing: -0.5px; }
-    .badge-program .fund { color: #14B8A6; font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
+    .badge-program .cohort { color: var(--bb-cream); font-size: 24px; font-weight: 600; letter-spacing: -0.5px; }
+    .badge-program .fund { color: var(--bb-lime); font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
+
     .turma-label {
       margin-top: 16px;
-      font-size: 11px;
-      font-weight: 700;
-      color: #14B8A6;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--bb-lime);
       letter-spacing: 3px;
       text-transform: uppercase;
     }
+
     .content { padding: 48px 40px; }
-    .success-badge {
+
+    .status-badge {
       display: inline-flex;
       align-items: center;
       gap: 12px;
-      background: rgba(34, 197, 94, 0.15);
-      border-radius: 100px;
+      background: rgba(209,255,0,0.1);
       padding: 10px 28px;
-      border: 1px solid rgba(34, 197, 94, 0.3);
+      border: 1px solid rgba(209,255,0,0.25);
       margin-bottom: 40px;
     }
-    .success-dot {
+    .status-dot {
       width: 8px; height: 8px;
-      background: #22C55E;
+      background: var(--bb-lime);
       border-radius: 50%;
     }
-    .success-text {
+    .status-text {
+      font-family: var(--font-mono);
       font-size: 10px;
-      font-weight: 700;
-      color: #22C55E;
+      font-weight: 500;
+      color: var(--bb-lime);
       letter-spacing: 2.5px;
       text-transform: uppercase;
     }
+
     h2 {
-      color: #FFFFFF;
-      font-size: 30px;
+      color: var(--bb-cream);
+      font-size: 28px;
       font-weight: 700;
       letter-spacing: -0.5px;
       line-height: 1.2;
       margin-bottom: 24px;
     }
-    .msg-main {
-      font-size: 18px;
-      line-height: 1.75;
-      color: #FFFFFF;
-      margin-bottom: 20px;
-    }
-    .msg-sub {
-      font-size: 16px;
-      line-height: 1.65;
-      margin-bottom: 40px;
-    }
-    .highlight { color: #14B8A6; font-weight: 600; }
-    .cta-box {
-      border: 2px solid #14B8A6;
-      border-radius: 16px;
-      background: radial-gradient(circle at center, rgba(20, 184, 166, 0.1), transparent);
-      padding: 40px 32px;
-      text-align: center;
-      margin-bottom: 40px;
-      box-shadow: 0 0 20px rgba(20, 184, 166, 0.2);
-    }
-    .cta-label {
-      font-size: 14px;
-      font-weight: 700;
-      color: #14B8A6;
-      letter-spacing: 2px;
+
+    .msg-main { font-size: 16px; line-height: 1.75; color: var(--bb-cream); margin-bottom: 20px; }
+    .msg-sub { font-size: 15px; line-height: 1.65; margin-bottom: 40px; }
+    .highlight { color: var(--bb-lime); font-weight: 600; }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--bb-lime);
+      letter-spacing: 3px;
       text-transform: uppercase;
       margin-bottom: 8px;
     }
+
+    .cta-box {
+      border: 1px solid rgba(209,255,0,0.25);
+      background: rgba(209,255,0,0.04);
+      padding: 40px 32px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
     .cta-title {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 700;
-      color: #FFFFFF;
+      color: var(--bb-cream);
       letter-spacing: -0.5px;
       margin-bottom: 24px;
     }
     .cta-btn {
       display: inline-block;
-      background: #14B8A6;
-      color: #000000;
+      background: var(--bb-lime);
+      color: var(--bb-dark);
       text-decoration: none;
-      padding: 16px 40px;
-      border-radius: 100px;
-      font-weight: 700;
-      font-size: 16px;
-      letter-spacing: 0.5px;
-      box-shadow: 0 0 20px rgba(20, 184, 166, 0.3);
-      transition: transform 0.2s, box-shadow 0.2s;
+      padding: 14px 40px;
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
     }
     .cta-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 30px rgba(20, 184, 166, 0.5);
+      box-shadow: 0 0 20px rgba(209,255,0,0.4), 0 0 40px rgba(209,255,0,0.2);
     }
+
     .info-card {
-      background: #1A1A1A;
-      border: 1px solid #2A2A2A;
-      border-radius: 16px;
-      border-left: 3px solid #14B8A6;
+      background: var(--bb-surface);
+      border: 1px solid var(--bb-border);
+      border-left: 3px solid var(--bb-lime);
       padding: 32px;
       margin-bottom: 40px;
     }
-    .info-card h3 {
-      color: #FFFFFF;
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-    .info-card p {
-      font-size: 15px;
-      line-height: 1.8;
-    }
+    .info-card p { font-size: 15px; line-height: 1.8; }
+
     .info-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 16px;
+      gap: 1px;
+      background: var(--bb-border);
       margin-bottom: 40px;
     }
     .info-item {
-      background: #1A1A1A;
-      border: 1px solid #2A2A2A;
-      border-radius: 12px;
+      background: var(--bb-surface);
       padding: 20px;
     }
     .info-label {
-      font-size: 12px;
-      color: #6B7280;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--bb-gray-dim);
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.08em;
       margin-bottom: 8px;
     }
-    .info-value {
-      font-size: 16px;
-      color: #FFFFFF;
-      font-weight: 600;
-    }
-    .info-value-sm {
-      font-size: 14px;
-      color: #FFFFFF;
-      line-height: 1.6;
-    }
-    .info-sub { font-size: 13px; color: #A3A3A3; margin-top: 4px; }
+    .info-value { font-size: 15px; color: var(--bb-cream); font-weight: 600; }
+    .info-value-sm { font-size: 14px; color: var(--bb-cream); line-height: 1.6; }
+    .info-sub { font-size: 12px; color: var(--bb-gray-dim); margin-top: 4px; }
+
     .calendar {
-      background: #1A1A1A;
-      border: 1px solid #2A2A2A;
-      border-radius: 16px;
+      background: var(--bb-surface);
+      border: 1px solid var(--bb-border);
       padding: 32px;
       margin-bottom: 40px;
     }
-    .calendar h3 {
-      color: #14B8A6;
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 24px;
-    }
-    .calendar-week {
-      margin-bottom: 20px;
-    }
+
+    .calendar-week { margin-bottom: 24px; }
     .calendar-week:last-child { margin-bottom: 0; }
+
     .week-label {
-      font-size: 11px;
-      font-weight: 700;
-      color: #14B8A6;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--bb-lime);
       letter-spacing: 2px;
       text-transform: uppercase;
       margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--bb-border);
     }
-    .week-items {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .week-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 14px;
-    }
-    .week-date {
-      color: #FFFFFF;
-      font-weight: 600;
-      min-width: 50px;
-    }
-    .week-day {
-      color: #6B7280;
-      min-width: 35px;
-    }
-    .week-topic { color: #A3A3A3; }
+    .week-items { display: flex; flex-direction: column; gap: 8px; }
+    .week-item { display: flex; align-items: center; gap: 16px; font-size: 14px; }
+    .week-date { color: var(--bb-cream); font-weight: 600; min-width: 50px; font-family: var(--font-mono); font-size: 13px; }
+    .week-day { color: var(--bb-gray-dim); min-width: 35px; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; }
+    .week-topic { color: var(--bb-dim); }
+
     .steps-card {
-      background: #1A1A1A;
-      border: 1px solid #2A2A2A;
-      border-radius: 16px;
-      border-left: 3px solid #14B8A6;
+      background: var(--bb-surface);
+      border: 1px solid var(--bb-border);
+      border-left: 3px solid var(--bb-lime);
       padding: 32px;
       margin-bottom: 40px;
     }
-    .steps-card h3 {
-      color: #FFFFFF;
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-    .step {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 12px;
-      font-size: 15px;
-      line-height: 1.6;
-    }
+    .step { display: flex; gap: 16px; margin-bottom: 16px; font-size: 15px; line-height: 1.6; }
     .step:last-child { margin-bottom: 0; }
-    .step-num { color: #14B8A6; font-weight: 700; }
-    .step-text { color: #A3A3A3; }
-    .step-text strong { color: #FFFFFF; }
-    .step-text .teal { color: #14B8A6; }
-    .divider {
-      text-align: center;
-      margin: 40px 0;
+    .step-num {
+      color: var(--bb-lime);
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: 13px;
+      min-width: 24px;
     }
+    .step-text { color: var(--bb-dim); }
+    .step-text strong { color: var(--bb-cream); }
+    .step-text .lime { color: var(--bb-lime); }
+
+    .divider { text-align: center; margin: 40px 0; }
     .divider span {
       display: inline-block;
       width: 80px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #14B8A6, transparent);
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--bb-lime), transparent);
     }
+
     .support-card {
-      background: #1A1A1A;
-      border: 1px solid #2A2A2A;
-      border-radius: 16px;
-      padding: 24px;
+      background: var(--bb-surface);
+      border: 1px solid var(--bb-border);
+      border-left: 3px solid var(--bb-lime);
+      padding: 28px;
       text-align: center;
       margin-bottom: 40px;
     }
     .support-card p { font-size: 14px; margin-bottom: 8px; }
-    .support-card a { color: #14B8A6; text-decoration: none; font-weight: 600; }
+    .support-card a { color: var(--bb-lime); text-decoration: none; font-weight: 600; }
+
     .footer {
-      background: #0A0A0A;
+      background: var(--bb-dark);
       padding: 40px 48px;
       text-align: center;
-      border-top: 1px solid #2A2A2A;
+      border-top: 1px solid var(--bb-border);
     }
     .footer-badge {
       display: inline-block;
-      border: 1px solid #3A3A3A;
-      border-radius: 100px;
+      border: 1px solid var(--bb-border);
       padding: 8px 20px;
-      background: rgba(20, 184, 166, 0.05);
+      background: var(--bb-surface);
       margin-bottom: 24px;
     }
-    .footer-badge .f-cohort { color: #14B8A6; font-size: 14px; font-weight: 600; }
-    .footer-badge .f-fund { color: #6B7280; font-size: 14px; font-weight: 600; }
+    .footer-badge .f-cohort { color: var(--bb-lime); font-size: 13px; font-weight: 600; }
+    .footer-badge .f-fund { color: var(--bb-gray-dim); font-size: 13px; font-weight: 600; }
     .footer-links { margin-bottom: 24px; }
     .footer-links a {
-      color: #6B7280;
+      color: var(--bb-gray-dim);
       text-decoration: none;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 500;
       margin: 0 12px;
     }
-    .footer-links span { color: #2A2A2A; }
+    .footer-links a:hover { color: var(--bb-lime); }
+    .footer-links span { color: var(--bb-gray-charcoal); }
     .footer-copy {
-      font-size: 11px;
-      color: #6B7280;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--bb-gray-dim);
+      letter-spacing: 0.05em;
     }
 
     @media (max-width: 640px) {
@@ -308,7 +283,7 @@
       .header { padding: 32px 20px 28px; }
       .badge-program { padding: 10px 24px; }
       .badge-program .cohort, .badge-program .fund { font-size: 20px; }
-      h2 { font-size: 24px; }
+      h2 { font-size: 22px; }
       .info-grid { grid-template-columns: 1fr; }
       .cta-box { padding: 28px 20px; }
       .cta-title { font-size: 18px; }
@@ -332,40 +307,40 @@
     <!-- Content -->
     <div class="content">
 
-      <!-- Success Badge -->
+      <!-- Status Badge -->
       <div style="text-align: center;">
-        <div class="success-badge">
-          <div class="success-dot"></div>
-          <span class="success-text">MATRICULA CONFIRMADA</span>
+        <div class="status-badge">
+          <div class="status-dot"></div>
+          <span class="status-text">MATRICULA CONFIRMADA</span>
         </div>
       </div>
 
       <!-- Saudacao -->
-      <h2>Parabens! Voce esta dentro! &#128640;</h2>
+      <h2>Voce esta dentro.</h2>
 
       <p class="msg-main">
-        Sua vaga no <strong class="highlight">Cohort AIOS Fundamentals - Turma 4</strong> esta confirmada.
+        Sua vaga no <strong class="highlight">Cohort AIOX Fundamentals - Turma 4</strong> esta confirmada.
       </p>
 
       <p class="msg-sub">
-        Em 4 semanas voce vai construir sua primeira equipe de IA funcionando 24/7. Mas primeiro, um passo importante:
+        Em 4 semanas voce vai construir sua primeira equipe de IA funcionando 24/7. Primeiro passo:
       </p>
 
       <!-- CTA WhatsApp -->
       <div class="cta-box">
-        <div class="cta-label">Primeiro Passo</div>
-        <div class="cta-title">&#128241; Entre no Grupo do WhatsApp</div>
+        <div class="section-label">PRIMEIRO PASSO</div>
+        <div class="cta-title">Entre no Grupo do WhatsApp</div>
         <a href="https://chat.whatsapp.com/FiIYuIkpeFdDAkUhhKX1CG" class="cta-btn">ENTRAR NO GRUPO</a>
       </div>
 
       <!-- Por que e importante -->
       <div class="info-card">
-        <h3>Por que e importante?</h3>
+        <div class="section-label" style="margin-bottom: 16px;">POR QUE E IMPORTANTE</div>
         <p>
-          &#10003; Link das aulas ao vivo sai por la<br>
-          &#10003; Avisos importantes do programa<br>
-          &#10003; Suporte direto da equipe<br>
-          &#10003; Networking com sua turma
+          &bull; Link das aulas ao vivo sai por la<br>
+          &bull; Avisos importantes do programa<br>
+          &bull; Suporte direto da equipe<br>
+          &bull; Networking com sua turma
         </p>
       </div>
 
@@ -397,7 +372,7 @@
 
       <!-- Calendario -->
       <div class="calendar">
-        <h3>&#128197; Calendario de Aulas</h3>
+        <div class="section-label" style="margin-bottom: 24px;">CALENDARIO DE AULAS</div>
 
         <div class="calendar-week">
           <div class="week-label">Semana 1 &mdash; 20 a 23 Abr</div>
@@ -463,31 +438,31 @@
           </div>
         </div>
 
-        <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid #2A2A2A;">
-          <p style="font-size: 13px; color: #6B7280;">
-            &#129657; <strong style="color: #A3A3A3;">Pronto Socorro:</strong> Tercas e Quintas as 18h (tira-duvidas ao vivo)
+        <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--bb-border);">
+          <p style="font-family: var(--font-mono); font-size: 11px; color: var(--bb-gray-dim); letter-spacing: 0.05em;">
+            PRONTO SOCORRO: Tercas e Quintas as 18h (tira-duvidas ao vivo)
           </p>
         </div>
       </div>
 
       <!-- Proximos Passos -->
       <div class="steps-card">
-        <h3>&#10004; Proximos Passos</h3>
+        <div class="section-label" style="margin-bottom: 20px;">PROXIMOS PASSOS</div>
         <div class="step">
-          <span class="step-num">1.</span>
-          <span class="step-text"><strong class="teal">Entre no grupo WhatsApp</strong> (botao acima)</span>
+          <span class="step-num">01</span>
+          <span class="step-text"><strong class="lime">Entre no grupo WhatsApp</strong> (botao acima)</span>
         </div>
         <div class="step">
-          <span class="step-num">2.</span>
+          <span class="step-num">02</span>
           <span class="step-text"><strong>Fique atento</strong> ao email com acesso a plataforma</span>
         </div>
         <div class="step">
-          <span class="step-num">3.</span>
+          <span class="step-num">03</span>
           <span class="step-text"><strong>Reserve segundas e quartas</strong> na agenda (20/04 a 13/05)</span>
         </div>
         <div class="step">
-          <span class="step-num">4.</span>
-          <span class="step-text"><strong>Garanta conta no Claude Pro</strong> (~US$20/mes) - essencial!</span>
+          <span class="step-num">04</span>
+          <span class="step-text"><strong>Garanta conta no Claude Pro</strong> (~US$20/mes)</span>
         </div>
       </div>
 
@@ -495,7 +470,7 @@
 
       <!-- Suporte -->
       <div class="support-card">
-        <p style="color: #FFFFFF; font-weight: 600; margin-bottom: 12px;">Precisa de ajuda?</p>
+        <div class="section-label" style="margin-bottom: 12px;">SUPORTE</div>
         <p>WhatsApp: <a href="https://wa.me/554888000116">+55 48 8800-0116</a></p>
         <p>Email: <a href="mailto:suporte@academialendaria.ai">suporte@academialendaria.ai</a></p>
       </div>
@@ -514,7 +489,7 @@
         <span>|</span>
         <a href="https://instagram.com/academialendaria">Instagram</a>
       </div>
-      <p class="footer-copy">Academia Lendaria &copy; 2026</p>
+      <p class="footer-copy">ACADEMIA LENDARIA &copy; 2026</p>
     </div>
 
   </div>
