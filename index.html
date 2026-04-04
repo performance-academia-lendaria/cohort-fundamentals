@@ -3,558 +3,521 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cohort Fundamentals - Guia do Aluno</title>
+  <title>Bem-vindo ao Cohort AIOS Fundamentals - Turma 4</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      /* Colors - Primary (Teal Brand) */
-      --color-primary-teal: #14B8A6;
-      --color-secondary-teal-dark: #0D9488;
-      --color-accent-teal-deep: #134E4A;
-      --color-accent-white: #FFFFFF;
-
-      /* Colors - Background */
-      --color-bg-primary: #000000;
-      --color-bg-gradient-start: #000000;
-      --color-bg-gradient-end: #0A2E2C;
-      --color-bg-secondary: #0F0F0F;
-      --color-bg-card: #1A1A1A;
-      --color-bg-card-hover: rgba(20, 184, 166, 0.05);
-
-      /* Colors - State */
-      --color-success: #22C55E;
-      --color-warning: #EAB308;
-
-      /* Colors - Text */
-      --color-text-primary: #FFFFFF;
-      --color-text-secondary: #A3A3A3;
-      --color-text-muted: #6B7280;
-
-      /* Colors - Border */
-      --color-border-standard: #2A2A2A;
-      --color-border-light: #3A3A3A;
-      --color-border-teal: #14B8A6;
-      --color-border-white: #FFFFFF;
-
-      /* Spacing */
-      --space-4: 1rem;
-      --space-6: 1.5rem;
-      --space-8: 2rem;
-      --space-12: 3rem;
-
-      /* Border Radius */
-      --radius-lg: 1rem;
-      --radius-xl: 1.5rem;
-      --radius-full: 9999px;
-
-      /* Shadows */
-      --shadow-card: 0 4px 6px rgba(0,0,0,0.4);
-      --shadow-glow-teal-subtle: 0 0 15px rgba(20, 184, 166, 0.1);
-      --shadow-glow-teal: 0 0 20px rgba(20, 184, 166, 0.2);
-
-      /* Transitions */
-      --transition-fast: 0.2s ease;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-gradient-end) 100%);
-      color: var(--color-text-secondary);
+      background: linear-gradient(180deg, #000000 0%, #0A2E2C 100%);
+      color: #A3A3A3;
       min-height: 100vh;
-      padding: 2rem 1rem;
+      padding: 32px 16px;
     }
-
     .container {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    /* Header */
-    .header {
-      text-align: center;
-      margin-bottom: var(--space-12);
-      padding: var(--space-12) var(--space-8);
-      background: radial-gradient(circle at center, rgba(20, 184, 166, 0.15), transparent 70%);
-      border-radius: var(--radius-xl);
-      border: 1px solid var(--color-border-standard);
-    }
-
-    .badge-pill {
-      display: inline-block;
-      border: 2px solid var(--color-border-white);
-      border-radius: var(--radius-full);
-      padding: 0.75rem 2rem;
-      background: radial-gradient(ellipse at center, rgba(20, 184, 166, 0.1), transparent);
-      margin-bottom: var(--space-4);
-    }
-
-    .badge-pill .cohort {
-      color: var(--color-text-primary);
-      font-size: 1.5rem;
-      font-weight: 600;
-      letter-spacing: -0.5px;
-    }
-
-    .badge-pill .fundamentals {
-      color: var(--color-primary-teal);
-      font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-    }
-
-    .subtitle {
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: var(--color-primary-teal);
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin-top: 0.5rem;
-    }
-
-    h1 {
-      color: var(--color-text-primary);
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      margin-top: var(--space-6);
-    }
-
-    /* Info Cards */
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-6);
-      margin-bottom: var(--space-8);
-    }
-
-    .info-grid.single-highlight {
-      grid-template-columns: 1fr;
       max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-      margin-bottom: var(--space-6);
+      margin: 0 auto;
+      background: #0F0F0F;
+      border-radius: 24px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      border: 1px solid #2A2A2A;
+      overflow: hidden;
     }
-
-    .info-grid.three-col {
-      grid-template-columns: repeat(3, 1fr);
+    .header {
+      padding: 48px 32px 40px;
+      background: radial-gradient(circle at center, rgba(20, 184, 166, 0.15), transparent 70%);
+      text-align: center;
+      border-bottom: 1px solid #2A2A2A;
     }
-
-    @media (max-width: 968px) {
-      .info-grid,
-      .info-grid.three-col {
-        grid-template-columns: 1fr;
-      }
+    .badge-program {
+      display: inline-block;
+      border: 2px solid #FFFFFF;
+      border-radius: 100px;
+      padding: 12px 32px;
+      background: radial-gradient(ellipse at center, rgba(20, 184, 166, 0.1), transparent);
     }
-
-    .info-card {
-      background: var(--color-bg-card);
-      border: 1px solid var(--color-border-standard);
-      border-radius: var(--radius-lg);
-      padding: var(--space-6);
-      box-shadow: var(--shadow-card);
-      transition: var(--transition-fast);
-    }
-
-    .info-card:hover {
-      border-color: var(--color-primary-teal);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-glow-teal);
-    }
-
-    .info-card.highlight {
-      background: linear-gradient(135deg, rgba(20, 184, 166, 0.08) 0%, transparent 100%);
-      border-left: 3px solid var(--color-primary-teal);
-    }
-
-    .info-card-label {
-      font-size: 0.75rem;
+    .badge-program .cohort { color: #FFFFFF; font-size: 24px; font-weight: 600; letter-spacing: -0.5px; }
+    .badge-program .fund { color: #14B8A6; font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
+    .turma-label {
+      margin-top: 16px;
+      font-size: 11px;
       font-weight: 700;
-      color: var(--color-text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 0.5rem;
-    }
-
-    .info-card-value {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--color-text-primary);
-      line-height: 1.5;
-    }
-
-    .info-card-value.large {
-      font-size: 1.5rem;
-      color: var(--color-primary-teal);
-    }
-
-    /* Section */
-    .section {
-      margin-bottom: var(--space-12);
-    }
-
-    .section-header {
-      font-size: 0.625rem;
-      font-weight: 700;
-      color: var(--color-primary-teal);
+      color: #14B8A6;
       letter-spacing: 3px;
       text-transform: uppercase;
-      margin-bottom: var(--space-6);
     }
-
-    /* Calendar Table */
-    .calendar-card {
-      background: var(--color-bg-card);
-      border: 1px solid var(--color-border-standard);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow-card);
-      margin-bottom: var(--space-8);
+    .content { padding: 48px 40px; }
+    .success-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(34, 197, 94, 0.15);
+      border-radius: 100px;
+      padding: 10px 28px;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      margin-bottom: 40px;
     }
-
-    .calendar-table {
-      width: 100%;
-      border-collapse: collapse;
+    .success-dot {
+      width: 8px; height: 8px;
+      background: #22C55E;
+      border-radius: 50%;
     }
-
-    .calendar-table thead tr {
-      background: var(--color-bg-secondary);
-      border-bottom: 1px solid var(--color-border-standard);
-    }
-
-    .calendar-table th {
-      padding: 1rem 1.5rem;
-      font-size: 0.625rem;
+    .success-text {
+      font-size: 10px;
       font-weight: 700;
-      color: var(--color-text-muted);
+      color: #22C55E;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+    h2 {
+      color: #FFFFFF;
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+    .msg-main {
+      font-size: 18px;
+      line-height: 1.75;
+      color: #FFFFFF;
+      margin-bottom: 20px;
+    }
+    .msg-sub {
+      font-size: 16px;
+      line-height: 1.65;
+      margin-bottom: 40px;
+    }
+    .highlight { color: #14B8A6; font-weight: 600; }
+    .cta-box {
+      border: 2px solid #14B8A6;
+      border-radius: 16px;
+      background: radial-gradient(circle at center, rgba(20, 184, 166, 0.1), transparent);
+      padding: 40px 32px;
+      text-align: center;
+      margin-bottom: 40px;
+      box-shadow: 0 0 20px rgba(20, 184, 166, 0.2);
+    }
+    .cta-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #14B8A6;
       letter-spacing: 2px;
       text-transform: uppercase;
-      text-align: left;
+      margin-bottom: 8px;
     }
-
-    .calendar-table td {
-      padding: 1rem 1.5rem;
-      border-bottom: 1px solid var(--color-border-standard);
-      font-size: 0.875rem;
-    }
-
-    .calendar-table tbody tr:last-child td {
-      border-bottom: none;
-    }
-
-    .calendar-table tbody tr.highlight {
-      background: linear-gradient(135deg, rgba(20, 184, 166, 0.08) 0%, transparent 100%);
-    }
-
-    .calendar-table tbody tr.highlight td:first-child {
-      border-left: 3px solid var(--color-primary-teal);
-    }
-
-    .date-cell {
+    .cta-title {
+      font-size: 22px;
       font-weight: 700;
-      color: var(--color-text-secondary);
-      white-space: nowrap;
+      color: #FFFFFF;
+      letter-spacing: -0.5px;
+      margin-bottom: 24px;
     }
-
-    .date-cell.highlight {
-      color: var(--color-primary-teal);
-    }
-
-    .topic-cell {
-      font-weight: 600;
-      color: var(--color-text-primary);
-    }
-
-    /* Callout */
-    .callout {
-      background: linear-gradient(135deg, rgba(20, 184, 166, 0.08) 0%, transparent 100%);
-      border: 1px solid rgba(20, 184, 166, 0.3);
-      border-left: 3px solid var(--color-primary-teal);
-      border-radius: var(--radius-lg);
-      padding: var(--space-6);
-      margin-bottom: var(--space-8);
-      box-shadow: var(--shadow-card);
-    }
-
-    .callout-header {
-      font-size: 0.625rem;
-      font-weight: 700;
-      color: var(--color-primary-teal);
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin-bottom: 0.875rem;
-    }
-
-    .callout-text {
-      font-size: 1rem;
-      color: var(--color-text-primary);
-      line-height: 1.65;
-    }
-
-    .callout-text strong {
-      color: var(--color-primary-teal);
-      font-weight: 600;
-    }
-
-    .callout.success {
-      background: linear-gradient(135deg, rgba(34, 197, 94, 0.12) 0%, rgba(34, 197, 94, 0.04) 100%);
-      border-color: rgba(34, 197, 94, 0.3);
-      border-left-color: var(--color-success);
-    }
-
-    .callout.success .callout-header {
-      color: var(--color-success);
-    }
-
-    .callout.success .callout-text strong {
-      color: var(--color-success);
-    }
-
-    /* Requirements List */
-    .requirements-list {
-      list-style: none;
-      padding: 0;
-    }
-
-    .requirements-list li {
-      display: flex;
-      align-items: flex-start;
-      margin-bottom: 1rem;
-      font-size: 1rem;
-      color: var(--color-text-primary);
-      line-height: 1.65;
-    }
-
-    .requirements-list li::before {
-      content: "✓";
-      color: var(--color-primary-teal);
-      font-weight: 700;
-      font-size: 1.25rem;
-      margin-right: 0.75rem;
-      flex-shrink: 0;
-    }
-
-    /* Footer */
-    .footer {
-      text-align: center;
-      margin-top: var(--space-12);
-      padding-top: var(--space-8);
-      border-top: 1px solid var(--color-border-standard);
-    }
-
-    .footer-links {
-      margin-bottom: var(--space-4);
-    }
-
-    .footer-link {
-      color: var(--color-primary-teal);
+    .cta-btn {
+      display: inline-block;
+      background: #14B8A6;
+      color: #000000;
       text-decoration: none;
-      font-size: 0.875rem;
+      padding: 16px 40px;
+      border-radius: 100px;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+      box-shadow: 0 0 20px rgba(20, 184, 166, 0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(20, 184, 166, 0.5);
+    }
+    .info-card {
+      background: #1A1A1A;
+      border: 1px solid #2A2A2A;
+      border-radius: 16px;
+      border-left: 3px solid #14B8A6;
+      padding: 32px;
+      margin-bottom: 40px;
+    }
+    .info-card h3 {
+      color: #FFFFFF;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .info-card p {
+      font-size: 15px;
+      line-height: 1.8;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .info-item {
+      background: #1A1A1A;
+      border: 1px solid #2A2A2A;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .info-label {
+      font-size: 12px;
+      color: #6B7280;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .info-value {
+      font-size: 16px;
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+    .info-value-sm {
+      font-size: 14px;
+      color: #FFFFFF;
+      line-height: 1.6;
+    }
+    .info-sub { font-size: 13px; color: #A3A3A3; margin-top: 4px; }
+    .calendar {
+      background: #1A1A1A;
+      border: 1px solid #2A2A2A;
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 40px;
+    }
+    .calendar h3 {
+      color: #14B8A6;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+    .calendar-week {
+      margin-bottom: 20px;
+    }
+    .calendar-week:last-child { margin-bottom: 0; }
+    .week-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #14B8A6;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .week-items {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .week-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+    }
+    .week-date {
+      color: #FFFFFF;
+      font-weight: 600;
+      min-width: 50px;
+    }
+    .week-day {
+      color: #6B7280;
+      min-width: 35px;
+    }
+    .week-topic { color: #A3A3A3; }
+    .steps-card {
+      background: #1A1A1A;
+      border: 1px solid #2A2A2A;
+      border-radius: 16px;
+      border-left: 3px solid #14B8A6;
+      padding: 32px;
+      margin-bottom: 40px;
+    }
+    .steps-card h3 {
+      color: #FFFFFF;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .step {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .step:last-child { margin-bottom: 0; }
+    .step-num { color: #14B8A6; font-weight: 700; }
+    .step-text { color: #A3A3A3; }
+    .step-text strong { color: #FFFFFF; }
+    .step-text .teal { color: #14B8A6; }
+    .divider {
+      text-align: center;
+      margin: 40px 0;
+    }
+    .divider span {
+      display: inline-block;
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #14B8A6, transparent);
+    }
+    .support-card {
+      background: #1A1A1A;
+      border: 1px solid #2A2A2A;
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .support-card p { font-size: 14px; margin-bottom: 8px; }
+    .support-card a { color: #14B8A6; text-decoration: none; font-weight: 600; }
+    .footer {
+      background: #0A0A0A;
+      padding: 40px 48px;
+      text-align: center;
+      border-top: 1px solid #2A2A2A;
+    }
+    .footer-badge {
+      display: inline-block;
+      border: 1px solid #3A3A3A;
+      border-radius: 100px;
+      padding: 8px 20px;
+      background: rgba(20, 184, 166, 0.05);
+      margin-bottom: 24px;
+    }
+    .footer-badge .f-cohort { color: #14B8A6; font-size: 14px; font-weight: 600; }
+    .footer-badge .f-fund { color: #6B7280; font-size: 14px; font-weight: 600; }
+    .footer-links { margin-bottom: 24px; }
+    .footer-links a {
+      color: #6B7280;
+      text-decoration: none;
+      font-size: 12px;
       font-weight: 500;
-      margin: 0 0.75rem;
-      transition: var(--transition-fast);
+      margin: 0 12px;
+    }
+    .footer-links span { color: #2A2A2A; }
+    .footer-copy {
+      font-size: 11px;
+      color: #6B7280;
     }
 
-    .footer-link:hover {
-      color: var(--color-secondary-teal-dark);
-    }
-
-    .footer-text {
-      font-size: 0.875rem;
-      color: var(--color-text-muted);
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      body {
-        padding: 1rem 0.5rem;
-      }
-
-      .header {
-        padding: var(--space-8) var(--space-4);
-      }
-
-      h1 {
-        font-size: 1.5rem;
-      }
-
-      .info-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .calendar-table th,
-      .calendar-table td {
-        padding: 0.75rem 1rem;
-        font-size: 0.75rem;
-      }
-
-      .date-cell {
-        font-size: 0.8rem;
-      }
+    @media (max-width: 640px) {
+      body { padding: 16px 8px; }
+      .content { padding: 32px 24px; }
+      .header { padding: 32px 20px 28px; }
+      .badge-program { padding: 10px 24px; }
+      .badge-program .cohort, .badge-program .fund { font-size: 20px; }
+      h2 { font-size: 24px; }
+      .info-grid { grid-template-columns: 1fr; }
+      .cta-box { padding: 28px 20px; }
+      .cta-title { font-size: 18px; }
+      .calendar { padding: 24px 20px; }
+      .footer { padding: 32px 24px; }
     }
   </style>
 </head>
 <body>
+
   <div class="container">
+
     <!-- Header -->
     <div class="header">
-      <div class="badge-pill">
-        <span class="cohort">Cohort</span><span class="fundamentals"> Fundamentals</span>
+      <div class="badge-program">
+        <span class="cohort">Cohort</span><span class="fund"> Fundamentals</span>
       </div>
-      <div class="subtitle">TURMA DE INICIANTES 2026</div>
-      <h1>Guia de Consulta Rápida</h1>
+      <div class="turma-label">TURMA 4 &bull; ABRIL 2026</div>
     </div>
 
-    <!-- Info Cards Principais -->
-    <div class="info-grid single-highlight">
-      <div class="info-card highlight">
-        <div class="info-card-label">Início do Programa</div>
-        <div class="info-card-value large">12 de Fevereiro de 2026</div>
-      </div>
-    </div>
+    <!-- Content -->
+    <div class="content">
 
-    <div class="info-grid three-col">
+      <!-- Success Badge -->
+      <div style="text-align: center;">
+        <div class="success-badge">
+          <div class="success-dot"></div>
+          <span class="success-text">MATRICULA CONFIRMADA</span>
+        </div>
+      </div>
+
+      <!-- Saudacao -->
+      <h2>Parabens! Voce esta dentro! &#128640;</h2>
+
+      <p class="msg-main">
+        Sua vaga no <strong class="highlight">Cohort AIOS Fundamentals - Turma 4</strong> esta confirmada.
+      </p>
+
+      <p class="msg-sub">
+        Em 4 semanas voce vai construir sua primeira equipe de IA funcionando 24/7. Mas primeiro, um passo importante:
+      </p>
+
+      <!-- CTA WhatsApp -->
+      <div class="cta-box">
+        <div class="cta-label">Primeiro Passo</div>
+        <div class="cta-title">&#128241; Entre no Grupo do WhatsApp</div>
+        <a href="https://chat.whatsapp.com/FiIYuIkpeFdDAkUhhKX1CG" class="cta-btn">ENTRAR NO GRUPO</a>
+      </div>
+
+      <!-- Por que e importante -->
       <div class="info-card">
-        <div class="info-card-label">Horários dos Encontros</div>
-        <div class="info-card-value">Segundas e Quintas às 18h<br>(Horário de Brasília)</div>
-      </div>
-      <div class="info-card">
-        <div class="info-card-label">Duração dos Encontros</div>
-        <div class="info-card-value">90 a 120 minutos</div>
-      </div>
-      <div class="info-card">
-        <div class="info-card-label">Total de Encontros</div>
-        <div class="info-card-value">8 encontros ao vivo</div>
-      </div>
-    </div>
-
-    <!-- Calendário -->
-    <section class="section">
-      <h2 class="section-header">CALENDÁRIO COMPLETO DOS ENCONTROS</h2>
-
-      <div class="calendar-card">
-        <table class="calendar-table">
-          <thead>
-            <tr>
-              <th style="width: 30%;">Data</th>
-              <th>Encontro</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="highlight">
-              <td class="date-cell highlight">12/02 Qui</td>
-              <td class="topic-cell">Cockpit Configurado</td>
-            </tr>
-            <tr>
-              <td class="date-cell">16/02 Seg</td>
-              <td class="topic-cell">Seu Primeiro Agente</td>
-            </tr>
-            <tr>
-              <td class="date-cell">19/02 Qui</td>
-              <td class="topic-cell">Mentalidade CEO</td>
-            </tr>
-            <tr>
-              <td class="date-cell">23/02 Seg</td>
-              <td class="topic-cell">Agentes que Obedecem</td>
-            </tr>
-            <tr>
-              <td class="date-cell">26/02 Qui</td>
-              <td class="topic-cell">Blueprint do Projeto</td>
-            </tr>
-            <tr>
-              <td class="date-cell">02/03 Seg</td>
-              <td class="topic-cell">Memória Permanente</td>
-            </tr>
-            <tr>
-              <td class="date-cell">05/03 Qui</td>
-              <td class="topic-cell">Múltiplos Agentes</td>
-            </tr>
-            <tr>
-              <td class="date-cell">09/03 Seg</td>
-              <td class="topic-cell">Showcase</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Tira-Dúvidas -->
-      <div class="callout">
-        <div class="callout-header">TIRA-DÚVIDAS AO VIVO</div>
-        <p class="callout-text">
-          Além dos encontros principais, teremos sessões de tira-dúvidas ao vivo todas as <strong>Terças e Sextas</strong>. Os horários serão definidos com a turma.
+        <h3>Por que e importante?</h3>
+        <p>
+          &#10003; Link das aulas ao vivo sai por la<br>
+          &#10003; Avisos importantes do programa<br>
+          &#10003; Suporte direto da equipe<br>
+          &#10003; Networking com sua turma
         </p>
       </div>
-    </section>
 
-    <!-- Requisitos -->
-    <section class="section">
-      <h2 class="section-header">REQUISITOS TÉCNICOS</h2>
-
-      <div class="info-card">
-        <ul class="requirements-list">
-          <li><strong>Claude Pro ativo</strong> - Aproximadamente US$20/mês. É a única ferramenta obrigatória.</li>
-          <li><strong>Computador com 4GB de RAM</strong> - Qualquer notebook dos últimos 5 anos funciona.</li>
-          <li><strong>Conexão à internet estável</strong> - Para participar dos encontros ao vivo.</li>
-          <li><strong>90-120 minutos reservados</strong> - Para cada encontro ao vivo.</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Links Importantes -->
-    <section class="section">
-      <h2 class="section-header">LINKS IMPORTANTES</h2>
-
+      <!-- Info Grid -->
       <div class="info-grid">
-        <div class="info-card">
-          <div class="info-card-label">Grupo do WhatsApp</div>
-          <div class="info-card-value">
-            <a href="https://chat.whatsapp.com/Gx0KZyxHutGCicwWfIIcSQ" class="footer-link">Entrar no Grupo</a>
+        <div class="info-item">
+          <div class="info-label">Primeira Aula</div>
+          <div class="info-value">20 de Abril</div>
+          <div class="info-sub">Segunda-feira, 18h</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Instrutor</div>
+          <div class="info-value">Adavio Tittoni</div>
+          <div class="info-sub">+300 alunos formados</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Formato</div>
+          <div class="info-value-sm">
+            Seg e Qua: Aulas (18h)<br>
+            Ter e Qui: PS (18h)
           </div>
         </div>
-        <div class="info-card">
-          <div class="info-card-label">Claude Pro (Upgrade)</div>
-          <div class="info-card-value">
-            <a href="https://claude.ai/upgrade" class="footer-link">Ativar Claude Pro</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Suporte -->
-    <section class="section">
-      <h2 class="section-header">SUPORTE</h2>
-
-      <div class="info-card">
-        <div class="info-card-value">
-          <div style="margin-bottom: 0.75rem;">
-            <strong>WhatsApp:</strong> <a href="https://wa.me/5548988000116" class="footer-link">+55 48 8800-0116</a>
-          </div>
-          <div style="margin-bottom: 0.75rem;">
-            <strong>Email:</strong> <a href="mailto:suporte@academialendaria.ai" class="footer-link">suporte@academialendaria.ai</a>
-          </div>
-          <div>
-            <strong>Portal:</strong> <a href="https://academialendaria.ai/suporte" class="footer-link">academialendaria.ai/suporte</a>
-          </div>
+        <div class="info-item">
+          <div class="info-label">Plataforma</div>
+          <div class="info-value">Curseduca</div>
+          <div class="info-sub">Acesso em breve</div>
         </div>
       </div>
-    </section>
+
+      <!-- Calendario -->
+      <div class="calendar">
+        <h3>&#128197; Calendario de Aulas</h3>
+
+        <div class="calendar-week">
+          <div class="week-label">Semana 1 &mdash; 20 a 23 Abr</div>
+          <div class="week-items">
+            <div class="week-item">
+              <span class="week-date">20/04</span>
+              <span class="week-day">Seg</span>
+              <span class="week-topic">Cockpit Configurado</span>
+            </div>
+            <div class="week-item">
+              <span class="week-date">22/04</span>
+              <span class="week-day">Qua</span>
+              <span class="week-topic">Seu Primeiro Agente</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="calendar-week">
+          <div class="week-label">Semana 2 &mdash; 27 a 30 Abr</div>
+          <div class="week-items">
+            <div class="week-item">
+              <span class="week-date">27/04</span>
+              <span class="week-day">Seg</span>
+              <span class="week-topic">Mentalidade CEO</span>
+            </div>
+            <div class="week-item">
+              <span class="week-date">29/04</span>
+              <span class="week-day">Qua</span>
+              <span class="week-topic">Agentes que Obedecem</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="calendar-week">
+          <div class="week-label">Semana 3 &mdash; 04 a 07 Mai</div>
+          <div class="week-items">
+            <div class="week-item">
+              <span class="week-date">04/05</span>
+              <span class="week-day">Seg</span>
+              <span class="week-topic">Blueprint do Projeto</span>
+            </div>
+            <div class="week-item">
+              <span class="week-date">06/05</span>
+              <span class="week-day">Qua</span>
+              <span class="week-topic">Memoria Permanente</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="calendar-week">
+          <div class="week-label">Semana 4 &mdash; 11 a 14 Mai</div>
+          <div class="week-items">
+            <div class="week-item">
+              <span class="week-date">11/05</span>
+              <span class="week-day">Seg</span>
+              <span class="week-topic">Multiplos Agentes (Squads)</span>
+            </div>
+            <div class="week-item">
+              <span class="week-date">13/05</span>
+              <span class="week-day">Qua</span>
+              <span class="week-topic">Showcase Final</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid #2A2A2A;">
+          <p style="font-size: 13px; color: #6B7280;">
+            &#129657; <strong style="color: #A3A3A3;">Pronto Socorro:</strong> Tercas e Quintas as 18h (tira-duvidas ao vivo)
+          </p>
+        </div>
+      </div>
+
+      <!-- Proximos Passos -->
+      <div class="steps-card">
+        <h3>&#10004; Proximos Passos</h3>
+        <div class="step">
+          <span class="step-num">1.</span>
+          <span class="step-text"><strong class="teal">Entre no grupo WhatsApp</strong> (botao acima)</span>
+        </div>
+        <div class="step">
+          <span class="step-num">2.</span>
+          <span class="step-text"><strong>Fique atento</strong> ao email com acesso a plataforma</span>
+        </div>
+        <div class="step">
+          <span class="step-num">3.</span>
+          <span class="step-text"><strong>Reserve segundas e quartas</strong> na agenda (20/04 a 13/05)</span>
+        </div>
+        <div class="step">
+          <span class="step-num">4.</span>
+          <span class="step-text"><strong>Garanta conta no Claude Pro</strong> (~US$20/mes) - essencial!</span>
+        </div>
+      </div>
+
+      <div class="divider"><span></span></div>
+
+      <!-- Suporte -->
+      <div class="support-card">
+        <p style="color: #FFFFFF; font-weight: 600; margin-bottom: 12px;">Precisa de ajuda?</p>
+        <p>WhatsApp: <a href="https://wa.me/554888000116">+55 48 8800-0116</a></p>
+        <p>Email: <a href="mailto:suporte@academialendaria.ai">suporte@academialendaria.ai</a></p>
+      </div>
+
+    </div>
 
     <!-- Footer -->
     <div class="footer">
+      <div class="footer-badge">
+        <span class="f-cohort">Cohort</span><span class="f-fund"> Fundamentals</span>
+      </div>
       <div class="footer-links">
-        <span class="footer-text">Academia Lendária - Cohort Fundamentals 2026</span>
+        <a href="https://membros.academialendaria.ai/m/courses">Plataforma</a>
+        <span>|</span>
+        <a href="https://academialendaria.ai">Comunidade</a>
+        <span>|</span>
+        <a href="https://instagram.com/academialendaria">Instagram</a>
       </div>
-      <div class="footer-text">
-        Nos vemos nos encontros!
-      </div>
+      <p class="footer-copy">Academia Lendaria &copy; 2026</p>
     </div>
+
   </div>
+
 </body>
 </html>

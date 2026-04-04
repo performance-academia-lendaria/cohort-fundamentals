@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cohort Fundamentals - Guia do Aluno</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* Colors - Primary (Teal Brand) */
+      --color-primary-teal: #14B8A6;
+      --color-secondary-teal-dark: #0D9488;
+      --color-accent-teal-deep: #134E4A;
+      --color-accent-white: #FFFFFF;
+
+      /* Colors - Background */
+      --color-bg-primary: #000000;
+      --color-bg-gradient-start: #000000;
+      --color-bg-gradient-end: #0A2E2C;
+      --color-bg-secondary: #0F0F0F;
+      --color-bg-card: #1A1A1A;
+      --color-bg-card-hover: rgba(20, 184, 166, 0.05);
+
+      /* Colors - State */
+      --color-success: #22C55E;
+      --color-warning: #EAB308;
+
+      /* Colors - Text */
+      --color-text-primary: #FFFFFF;
+      --color-text-secondary: #A3A3A3;
+      --color-text-muted: #6B7280;
+
+      /* Colors - Border */
+      --color-border-standard: #2A2A2A;
+      --color-border-light: #3A3A3A;
+      --color-border-teal: #14B8A6;
+      --color-border-white: #FFFFFF;
+
+      /* Spacing */
+      --space-4: 1rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-12: 3rem;
+
+      /* Border Radius */
+      --radius-lg: 1rem;
+      --radius-xl: 1.5rem;
+      --radius-full: 9999px;
+
+      /* Shadows */
+      --shadow-card: 0 4px 6px rgba(0,0,0,0.4);
+      --shadow-glow-teal-subtle: 0 0 15px rgba(20, 184, 166, 0.1);
+      --shadow-glow-teal: 0 0 20px rgba(20, 184, 166, 0.2);
+
+      /* Transitions */
+      --transition-fast: 0.2s ease;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-gradient-end) 100%);
+      color: var(--color-text-secondary);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: var(--space-12);
+      padding: var(--space-12) var(--space-8);
+      background: radial-gradient(circle at center, rgba(20, 184, 166, 0.15), transparent 70%);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-border-standard);
+    }
+
+    .badge-pill {
+      display: inline-block;
+      border: 2px solid var(--color-border-white);
+      border-radius: var(--radius-full);
+      padding: 0.75rem 2rem;
+      background: radial-gradient(ellipse at center, rgba(20, 184, 166, 0.1), transparent);
+      margin-bottom: var(--space-4);
+    }
+
+    .badge-pill .cohort {
+      color: var(--color-text-primary);
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+    }
+
+    .badge-pill .fundamentals {
+      color: var(--color-primary-teal);
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--color-primary-teal);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-top: 0.5rem;
+    }
+
+    h1 {
+      color: var(--color-text-primary);
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-top: var(--space-6);
+    }
+
+    /* Info Cards */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+      margin-bottom: var(--space-8);
+    }
+
+    .info-grid.single-highlight {
+      grid-template-columns: 1fr;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: var(--space-6);
+    }
+
+    .info-grid.three-col {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (max-width: 968px) {
+      .info-grid,
+      .info-grid.three-col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .info-card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border-standard);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-card);
+      transition: var(--transition-fast);
+    }
+
+    .info-card:hover {
+      border-color: var(--color-primary-teal);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-glow-teal);
+    }
+
+    .info-card.highlight {
+      background: linear-gradient(135deg, rgba(20, 184, 166, 0.08) 0%, transparent 100%);
+      border-left: 3px solid var(--color-primary-teal);
+    }
+
+    .info-card-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .info-card-value {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      line-height: 1.5;
+    }
+
+    .info-card-value.large {
+      font-size: 1.5rem;
+      color: var(--color-primary-teal);
+    }
+
+    /* Section */
+    .section {
+      margin-bottom: var(--space-12);
+    }
+
+    .section-header {
+      font-size: 0.625rem;
+      font-weight: 700;
+      color: var(--color-primary-teal);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: var(--space-6);
+    }
+
+    /* Calendar Table */
+    .calendar-card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border-standard);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      margin-bottom: var(--space-8);
+    }
+
+    .calendar-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .calendar-table thead tr {
+      background: var(--color-bg-secondary);
+      border-bottom: 1px solid var(--color-border-standard);
+    }
+
+    .calendar-table th {
+      padding: 1rem 1.5rem;
+      font-size: 0.625rem;
+      font-weight: 700;
+      color: var(--color-text-muted);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-align: left;
+    }
+
+    .calendar-table td {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--color-border-standard);
+      font-size: 0.875rem;
+    }
+
+    .calendar-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .calendar-table tbody tr.highlight {
+      background: linear-gradient(135deg, rgba(20, 184, 166, 0.08) 0%, transparent 100%);
+    }
+
+    .calendar-table tbody tr.highlight td:first-child {
+      border-left: 3px solid var(--color-primary-teal);
+    }
+
+    .date-cell {
+      font-weight: 700;
+      color: var(--color-text-secondary);
+      white-space: nowrap;
+    }
+
+    .date-cell.highlight {
+      color: var(--color-primary-teal);
+    }
+
+    .topic-cell {
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
+
+    /* Callout */
+    .callout {
+      background: linear-gradient(135deg, rgba(20, 184, 166, 0.08) 0%, transparent 100%);
+      border: 1px solid rgba(20, 184, 166, 0.3);
+      border-left: 3px solid var(--color-primary-teal);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      margin-bottom: var(--space-8);
+      box-shadow: var(--shadow-card);
+    }
+
+    .callout-header {
+      font-size: 0.625rem;
+      font-weight: 700;
+      color: var(--color-primary-teal);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 0.875rem;
+    }
+
+    .callout-text {
+      font-size: 1rem;
+      color: var(--color-text-primary);
+      line-height: 1.65;
+    }
+
+    .callout-text strong {
+      color: var(--color-primary-teal);
+      font-weight: 600;
+    }
+
+    .callout.success {
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.12) 0%, rgba(34, 197, 94, 0.04) 100%);
+      border-color: rgba(34, 197, 94, 0.3);
+      border-left-color: var(--color-success);
+    }
+
+    .callout.success .callout-header {
+      color: var(--color-success);
+    }
+
+    .callout.success .callout-text strong {
+      color: var(--color-success);
+    }
+
+    /* Requirements List */
+    .requirements-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .requirements-list li {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      color: var(--color-text-primary);
+      line-height: 1.65;
+    }
+
+    .requirements-list li::before {
+      content: "✓";
+      color: var(--color-primary-teal);
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-right: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      margin-top: var(--space-12);
+      padding-top: var(--space-8);
+      border-top: 1px solid var(--color-border-standard);
+    }
+
+    .footer-links {
+      margin-bottom: var(--space-4);
+    }
+
+    .footer-link {
+      color: var(--color-primary-teal);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin: 0 0.75rem;
+      transition: var(--transition-fast);
+    }
+
+    .footer-link:hover {
+      color: var(--color-secondary-teal-dark);
+    }
+
+    .footer-text {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem 0.5rem;
+      }
+
+      .header {
+        padding: var(--space-8) var(--space-4);
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .calendar-table th,
+      .calendar-table td {
+        padding: 0.75rem 1rem;
+        font-size: 0.75rem;
+      }
+
+      .date-cell {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div class="badge-pill">
+        <span class="cohort">Cohort</span><span class="fundamentals"> Fundamentals</span>
+      </div>
+      <div class="subtitle">TURMA DE INICIANTES 2026</div>
+      <h1>Guia de Consulta Rápida</h1>
+    </div>
+
+    <!-- Info Cards Principais -->
+    <div class="info-grid single-highlight">
+      <div class="info-card highlight">
+        <div class="info-card-label">Início do Programa</div>
+        <div class="info-card-value large">12 de Fevereiro de 2026</div>
+      </div>
+    </div>
+
+    <div class="info-grid three-col">
+      <div class="info-card">
+        <div class="info-card-label">Horários dos Encontros</div>
+        <div class="info-card-value">Segundas e Quintas às 18h<br>(Horário de Brasília)</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Duração dos Encontros</div>
+        <div class="info-card-value">90 a 120 minutos</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Total de Encontros</div>
+        <div class="info-card-value">8 encontros ao vivo</div>
+      </div>
+    </div>
+
+    <!-- Calendário -->
+    <section class="section">
+      <h2 class="section-header">CALENDÁRIO COMPLETO DOS ENCONTROS</h2>
+
+      <div class="calendar-card">
+        <table class="calendar-table">
+          <thead>
+            <tr>
+              <th style="width: 30%;">Data</th>
+              <th>Encontro</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight">
+              <td class="date-cell highlight">12/02 Qui</td>
+              <td class="topic-cell">Cockpit Configurado</td>
+            </tr>
+            <tr>
+              <td class="date-cell">16/02 Seg</td>
+              <td class="topic-cell">Seu Primeiro Agente</td>
+            </tr>
+            <tr>
+              <td class="date-cell">19/02 Qui</td>
+              <td class="topic-cell">Mentalidade CEO</td>
+            </tr>
+            <tr>
+              <td class="date-cell">23/02 Seg</td>
+              <td class="topic-cell">Agentes que Obedecem</td>
+            </tr>
+            <tr>
+              <td class="date-cell">26/02 Qui</td>
+              <td class="topic-cell">Blueprint do Projeto</td>
+            </tr>
+            <tr>
+              <td class="date-cell">02/03 Seg</td>
+              <td class="topic-cell">Memória Permanente</td>
+            </tr>
+            <tr>
+              <td class="date-cell">05/03 Qui</td>
+              <td class="topic-cell">Múltiplos Agentes</td>
+            </tr>
+            <tr>
+              <td class="date-cell">09/03 Seg</td>
+              <td class="topic-cell">Showcase</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Tira-Dúvidas -->
+      <div class="callout">
+        <div class="callout-header">TIRA-DÚVIDAS AO VIVO</div>
+        <p class="callout-text">
+          Além dos encontros principais, teremos sessões de tira-dúvidas ao vivo todas as <strong>Terças e Sextas</strong>. Os horários serão definidos com a turma.
+        </p>
+      </div>
+    </section>
+
+    <!-- Requisitos -->
+    <section class="section">
+      <h2 class="section-header">REQUISITOS TÉCNICOS</h2>
+
+      <div class="info-card">
+        <ul class="requirements-list">
+          <li><strong>Claude Pro ativo</strong> - Aproximadamente US$20/mês. É a única ferramenta obrigatória.</li>
+          <li><strong>Computador com 4GB de RAM</strong> - Qualquer notebook dos últimos 5 anos funciona.</li>
+          <li><strong>Conexão à internet estável</strong> - Para participar dos encontros ao vivo.</li>
+          <li><strong>90-120 minutos reservados</strong> - Para cada encontro ao vivo.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Links Importantes -->
+    <section class="section">
+      <h2 class="section-header">LINKS IMPORTANTES</h2>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-card-label">Grupo do WhatsApp</div>
+          <div class="info-card-value">
+            <a href="https://chat.whatsapp.com/Gx0KZyxHutGCicwWfIIcSQ" class="footer-link">Entrar no Grupo</a>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-label">Claude Pro (Upgrade)</div>
+          <div class="info-card-value">
+            <a href="https://claude.ai/upgrade" class="footer-link">Ativar Claude Pro</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Suporte -->
+    <section class="section">
+      <h2 class="section-header">SUPORTE</h2>
+
+      <div class="info-card">
+        <div class="info-card-value">
+          <div style="margin-bottom: 0.75rem;">
+            <strong>WhatsApp:</strong> <a href="https://wa.me/5548988000116" class="footer-link">+55 48 8800-0116</a>
+          </div>
+          <div style="margin-bottom: 0.75rem;">
+            <strong>Email:</strong> <a href="mailto:suporte@academialendaria.ai" class="footer-link">suporte@academialendaria.ai</a>
+          </div>
+          <div>
+            <strong>Portal:</strong> <a href="https://academialendaria.ai/suporte" class="footer-link">academialendaria.ai/suporte</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="footer-links">
+        <span class="footer-text">Academia Lendária - Cohort Fundamentals 2026</span>
+      </div>
+      <div class="footer-text">
+        Nos vemos nos encontros!
+      </div>
+    </div>
+  </div>
+</body>
+</html>
