@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bem-vindo ao Cohort AIOX Fundamentals - Turma 5</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bb-lime: #D1FF00;
+      --bb-dark: #050505;
+      --bb-surface: #0F0F11;
+      --bb-cream: #F5F4E7;
+      --bb-dim: rgba(245,244,231,0.4);
+      --bb-border: rgba(156,156,156,0.15);
+      --bb-gray-charcoal: #3D3D3D;
+      --bb-gray-dim: #696969;
+      --bb-gray-muted: #999999;
+      --bb-error: #EF4444;
+      --font-geist: 'Geist', system-ui, -apple-system, sans-serif;
+      --font-mono: 'Roboto Mono', monospace;
+    }
+
+    body {
+      font-family: var(--font-geist);
+      background: var(--bb-dark);
+      color: var(--bb-dim);
+      min-height: 100vh;
+      padding: 32px 16px;
+    }
+
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+      background: var(--bb-surface);
+      border: 1px solid var(--bb-border);
+      overflow: hidden;
+    }
+
+    .header {
+      padding: 48px 32px 40px;
+      background: var(--bb-surface);
+      text-align: center;
+      border-bottom: 1px solid var(--bb-border);
+      position: relative;
+    }
+
+    .badge-program {
+      display: inline-block;
+      border: 1px solid var(--bb-border);
+      padding: 12px 32px;
+      background: var(--bb-surface);
+    }
+    .badge-program .cohort { color: var(--bb-cream); font-size: 24px; font-weight: 600; letter-spacing: -0.5px; }
+    .badge-program .fund { color: var(--bb-lime); font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
+
+    .turma-label {
+      margin-top: 16px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--bb-lime);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .content { padding: 48px 40px; }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(209,255,0,0.1);
+      padding: 10px 28px;
+      border: 1px solid rgba(209,255,0,0.25);
+      margin-bottom: 40px;
+    }
+    .status-dot {
+      width: 8px; height: 8px;
+      background: var(--bb-lime);
+      border-radius: 50%;
+    }
+    .status-text {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--bb-lime);
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      color: var(--bb-cream);
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    .msg-main { font-size: 16px; line-height: 1.75; color: var(--bb-cream); margin-bottom: 20px; }
+    .msg-sub { font-size: 15px; line-height: 1.65; margin-bottom: 40px; }
+    .highlight { color: var(--bb-lime); font-weight: 600; }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--bb-lime);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .cta-box {
+      border: 1px solid rgba(209,255,0,0.25);
+      background: rgba(209,255,0,0.04);
+      padding: 40px 32px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .cta-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--bb-cream);
+      letter-spacing: -0.5px;
+      margin-bottom: 24px;
+    }
+    .cta-btn {
+      display: inline-block;
+      background: var(--bb-lime);
+      color: var(--bb-dark);
+      text-decoration: none;
+      padding: 14px 40px;
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+    .cta-btn:hover {
+      box-shadow: 0 0 20px rgba(209,255,0,0.4), 0 0 40px rgba(209,255,0,0.2);
+    }
+
+    .cta-secondary {
+      background: var(--bb-surface);
+      border: 1px solid var(--bb-border);
+      border-left: 3px solid var(--bb-lime);
+      padding: 32px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .cta-secondary-desc {
+      font-size: 14px;
+      color: var(--bb-dim);
+      line-height: 1.6;
+      margin: 12px 0 24px 0;
+    }
+    .cta-btn-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--bb-lime);
+      text-decoration: none;
+      padding: 13px 36px;
+      border: 1px solid var(--bb-lime);
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+    .cta-btn-outline:hover {
+      background: var(--bb-lime);
+      color: var(--bb-dark);
+    }
+
+    .info-card {
+      background: var(--bb-surface);
+      border: 1px solid var(--bb-border);
+      border-left: 3px solid var(--bb-lime);
+      padding: 32px;
+      margin-bottom: 40px;
+    }
+    .info-card p { font-size: 15px; line-height: 1.8; }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--bb-border);
+      margin-bottom: 40px;
+    }
+    .info-item {
+      background: var(--bb-surface);
+      padding: 20px;
+    }
+    .info-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--bb-gray-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .info-value { font-size: 15px; color: var(--bb-cream); font-weight: 600; }
+    .info-value-sm { font-size: 14px; color: var(--bb-cream); line-height: 1.6; }
+    .info-sub { font-size: 12px; color: var(--bb-gray-dim); margin-top: 4px; }
+
+    .calendar {
+      background: var(--bb-surface);
+      border: 1px solid var(--bb-border);
+      padding: 32px;
+      margin-bottom: 40px;
+    }
+
+    .calendar-week { margin-bottom: 24px; }
+    .calendar-week:last-child { margin-bottom: 0; }
+
+    .week-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--bb-lime);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--bb-border);
+    }
+    .week-items { display: flex; flex-direction: column; gap: 8px; }
+    .week-item { display: flex; align-items: center; gap: 16px; font-size: 14px; }
+    .week-date { color: var(--bb-cream); font-weight: 600; min-width: 50px; font-family: var(--font-mono); font-size: 13px; }
+    .week-day { color: var(--bb-gray-dim); min-width: 35px; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; }
+    .week-topic { color: var(--bb-dim); }
+
+    .steps-card {
+      background: var(--bb-surface);
+      border: 1px solid var(--bb-border);
+      border-left: 3px solid var(--bb-lime);
+      padding: 32px;
+      margin-bottom: 40px;
+    }
+    .step { display: flex; gap: 16px; margin-bottom: 16px; font-size: 15px; line-height: 1.6; }
+    .step:last-child { margin-bottom: 0; }
+    .step-num {
+      color: var(--bb-lime);
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: 13px;
+      min-width: 24px;
+    }
+    .step-text { color: var(--bb-dim); }
+    .step-text strong { color: var(--bb-cream); }
+    .step-text .lime { color: var(--bb-lime); }
+
+    .divider { text-align: center; margin: 40px 0; }
+    .divider span {
+      display: inline-block;
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--bb-lime), transparent);
+    }
+
+    .support-card {
+      background: var(--bb-surface);
+      border: 1px solid var(--bb-border);
+      border-left: 3px solid var(--bb-lime);
+      padding: 28px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .support-card p { font-size: 14px; margin-bottom: 8px; }
+    .support-card a { color: var(--bb-lime); text-decoration: none; font-weight: 600; }
+
+    .footer {
+      background: var(--bb-dark);
+      padding: 40px 48px;
+      text-align: center;
+      border-top: 1px solid var(--bb-border);
+    }
+    .footer-badge {
+      display: inline-block;
+      border: 1px solid var(--bb-border);
+      padding: 8px 20px;
+      background: var(--bb-surface);
+      margin-bottom: 24px;
+    }
+    .footer-badge .f-cohort { color: var(--bb-lime); font-size: 13px; font-weight: 600; }
+    .footer-badge .f-fund { color: var(--bb-gray-dim); font-size: 13px; font-weight: 600; }
+    .footer-links { margin-bottom: 24px; }
+    .footer-links a {
+      color: var(--bb-gray-dim);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 500;
+      margin: 0 12px;
+    }
+    .footer-links a:hover { color: var(--bb-lime); }
+    .footer-links span { color: var(--bb-gray-charcoal); }
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--bb-gray-dim);
+      letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 640px) {
+      body { padding: 16px 8px; }
+      .content { padding: 32px 24px; }
+      .header { padding: 32px 20px 28px; }
+      .badge-program { padding: 10px 24px; }
+      .badge-program .cohort, .badge-program .fund { font-size: 20px; }
+      h2 { font-size: 22px; }
+      .info-grid { grid-template-columns: 1fr; }
+      .cta-box { padding: 28px 20px; }
+      .cta-title { font-size: 18px; }
+      .calendar { padding: 24px 20px; }
+      .footer { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="badge-program">
+        <span class="cohort">Cohort</span><span class="fund"> Fundamentals</span>
+      </div>
+      <div class="turma-label">TURMA 5 &bull; MAIO 2026</div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+
+      <!-- Status Badge -->
+      <div style="text-align: center;">
+        <div class="status-badge">
+          <div class="status-dot"></div>
+          <span class="status-text">MATRICULA CONFIRMADA</span>
+        </div>
+      </div>
+
+      <!-- Saudacao -->
+      <h2>Você está dentro.</h2>
+
+      <p class="msg-main">
+        Sua vaga no <strong class="highlight">Cohort AIOX Fundamentals - Turma 5</strong> está confirmada.
+      </p>
+
+      <p class="msg-sub">
+        Em 4 semanas você vai construir sua primeira equipe de IA — do cockpit ao capstone, com agente funcional documentado. Primeiro passo:
+      </p>
+
+      <!-- CTA WhatsApp -->
+      <div class="cta-box">
+        <div class="section-label">PRIMEIRO PASSO</div>
+        <div class="cta-title">Entre no Grupo do WhatsApp</div>
+        <a href="https://chat.whatsapp.com/IHxLMk0a79FCWbdWf378pg" class="cta-btn">ENTRAR NO GRUPO</a>
+      </div>
+
+      <!-- Por que e importante -->
+      <div class="info-card">
+        <div class="section-label" style="margin-bottom: 16px;">POR QUE É IMPORTANTE</div>
+        <p>
+          &bull; Link das aulas ao vivo sai por lá<br>
+          &bull; Avisos importantes do programa<br>
+          &bull; Suporte direto da equipe<br>
+          &bull; Networking com sua turma
+        </p>
+      </div>
+
+      <!-- Info Grid -->
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="info-label">Primeira Aula</div>
+          <div class="info-value">12 de Maio</div>
+          <div class="info-sub">Terça-feira, 18h30</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Duração</div>
+          <div class="info-value">4 semanas</div>
+          <div class="info-sub">12/05 a 05/06</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Formato</div>
+          <div class="info-value-sm">
+            Ter e Sex: Aulas (18h30)<br>
+            Seg e Qui: PS (18h30)
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Plataforma</div>
+          <div class="info-value">Curseduca</div>
+          <div class="info-sub">Aulas e gravações</div>
+        </div>
+      </div>
+
+      <!-- CTA Secundário - Área de Membros -->
+      <div class="cta-secondary">
+        <div class="section-label">SEGUNDO PASSO</div>
+        <div class="cta-title" style="margin-top: 12px; margin-bottom: 0;">Acesse a Área de Membros</div>
+        <p class="cta-secondary-desc">Plataforma Curseduca com aulas ao vivo, gravações e materiais do programa.</p>
+        <a href="https://membros.academialendaria.ai/m/courses" class="cta-btn-outline">ACESSAR ÁREA DE MEMBROS</a>
+      </div>
+
+      <!-- Calendario -->
+      <div class="calendar">
+        <div class="section-label" style="margin-bottom: 24px;">CALENDÁRIO DE AULAS</div>
+
+        <div class="calendar-week">
+          <div class="week-label">Semana 1 &mdash; 12 a 15 Mai</div>
+          <div class="week-items">
+            <div class="week-item">
+              <span class="week-date">12/05</span>
+              <span class="week-day">Ter</span>
+              <span class="week-topic">A1: Setup &amp; Cockpit</span>
+            </div>
+            <div class="week-item">
+              <span class="week-date">15/05</span>
+              <span class="week-day">Sex</span>
+              <span class="week-topic">A2: Vibe Coding Export</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="calendar-week">
+          <div class="week-label">Semana 2 &mdash; 19 a 22 Mai</div>
+          <div class="week-items">
+            <div class="week-item">
+              <span class="week-date">19/05</span>
+              <span class="week-day">Ter</span>
+              <span class="week-topic">A3: Filosofia AIOX - Vibe CEO</span>
+            </div>
+            <div class="week-item">
+              <span class="week-date">22/05</span>
+              <span class="week-day">Sex</span>
+              <span class="week-topic">A4: Estrutura AIOX</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="calendar-week">
+          <div class="week-label">Semana 3 &mdash; 26 a 29 Mai</div>
+          <div class="week-items">
+            <div class="week-item">
+              <span class="week-date">26/05</span>
+              <span class="week-day">Ter</span>
+              <span class="week-topic">A5: Por Que PRD É a Alma</span>
+            </div>
+            <div class="week-item">
+              <span class="week-date">29/05</span>
+              <span class="week-day">Sex</span>
+              <span class="week-topic">A6: PRD Mão na Massa</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="calendar-week">
+          <div class="week-label">Semana 4 &mdash; 02 a 05 Jun</div>
+          <div class="week-items">
+            <div class="week-item">
+              <span class="week-date">02/06</span>
+              <span class="week-day">Ter</span>
+              <span class="week-topic">A7: Subagentes Conceito</span>
+            </div>
+            <div class="week-item">
+              <span class="week-date">05/06</span>
+              <span class="week-day">Sex</span>
+              <span class="week-topic">A8: A Fábrica - Capstone</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--bb-border);">
+          <p style="font-family: var(--font-mono); font-size: 11px; color: var(--bb-gray-dim); letter-spacing: 0.05em;">
+            PRONTO SOCORRO: Segundas e Quintas às 18h30 (tira-dúvidas ao vivo)<br>
+            PS de finalização em 08/06 (segunda) — ponte para Advanced
+          </p>
+        </div>
+      </div>
+
+      <!-- Proximos Passos -->
+      <div class="steps-card">
+        <div class="section-label" style="margin-bottom: 20px;">PRÓXIMOS PASSOS</div>
+        <div class="step">
+          <span class="step-num">01</span>
+          <span class="step-text"><strong class="lime">Entre no grupo WhatsApp</strong> (botão acima)</span>
+        </div>
+        <div class="step">
+          <span class="step-num">02</span>
+          <span class="step-text"><strong class="lime">Acesse a área de membros</strong> na Curseduca</span>
+        </div>
+        <div class="step">
+          <span class="step-num">03</span>
+          <span class="step-text"><strong>Reserve terças e sextas</strong> na agenda (12/05 a 05/06)</span>
+        </div>
+        <div class="step">
+          <span class="step-num">04</span>
+          <span class="step-text"><strong>Garanta conta no Claude Pro</strong> (~US$20/mês)</span>
+        </div>
+      </div>
+
+      <div class="divider"><span></span></div>
+
+      <!-- Suporte -->
+      <div class="support-card">
+        <div class="section-label" style="margin-bottom: 12px;">SUPORTE</div>
+        <p>WhatsApp: <a href="https://wa.me/554888000116">+55 48 8800-0116</a></p>
+        <p>Email: <a href="mailto:suporte@academialendaria.ai">suporte@academialendaria.ai</a></p>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="footer-badge">
+        <span class="f-cohort">Cohort</span><span class="f-fund"> Fundamentals</span>
+      </div>
+      <div class="footer-links">
+        <a href="https://membros.academialendaria.ai/m/courses">Plataforma</a>
+        <span>|</span>
+        <a href="https://academialendaria.ai">Comunidade</a>
+        <span>|</span>
+        <a href="https://instagram.com/academialendaria">Instagram</a>
+      </div>
+      <p class="footer-copy">ACADEMIA LENDÁRIA &copy; 2026</p>
+    </div>
+
+  </div>
+
+</body>
+</html>
