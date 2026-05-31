@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compra confirmada — Sistema 4D | Academia Lendária</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Orbitron:wght@600;700;800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold-primary: #D4A437;
+      --gold-light: #F5C76A;
+      --gold-deep: #A07A1F;
+      --gold-dust: #8B6914;
+      --bg-void: #000000;
+      --bg-deep: #050505;
+      --bg-surface: #0D0D0D;
+      --bg-card: #141414;
+      --bg-modal: #1C1C1C;
+      --white: #FFFFFF;
+      --text-secondary: #B8B8B8;
+      --text-muted: #7A7A7A;
+      --text-charcoal: #3D3D3D;
+      --border-void: #1A1A1A;
+      --border-light: #2E2E2E;
+      --border-gold: #D4A437;
+      --font-geist: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-display: 'Orbitron', 'Geist', sans-serif;
+      --font-mono: 'Roboto Mono', monospace;
+    }
+
+    body {
+      font-family: var(--font-geist);
+      background: var(--bg-void);
+      color: var(--text-secondary);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Constelação de fundo */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(212,164,55,0.08), transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(212,164,55,0.05), transparent 40%),
+        radial-gradient(ellipse at center, rgba(212,164,55,0.04) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 64px 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* SEÇÃO 1 — HERO */
+    .hero {
+      text-align: center;
+      padding: 80px 24px 64px;
+      position: relative;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+    }
+    .eyebrow {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--gold-primary);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      border: 1px solid rgba(212,164,55,0.3);
+      padding: 8px 20px;
+      margin-bottom: 32px;
+      background: rgba(212,164,55,0.05);
+    }
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: 56px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.05;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 50%, var(--gold-deep) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 40px rgba(212,164,55,0.2);
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
+    }
+    .hero-headline em { font-style: italic; }
+    .hero-sub {
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--white);
+      max-width: 540px;
+      margin: 0 auto 40px;
+    }
+    .hero-sub strong { color: var(--gold-primary); font-weight: 600; }
+
+    /* CTA primary - bracket pill */
+    .cta-primary {
+      display: inline-block;
+      background: var(--gold-primary);
+      color: var(--bg-void);
+      text-decoration: none;
+      padding: 18px 44px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--gold-primary);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 0 24px rgba(212,164,55,0.3);
+    }
+    .cta-primary:hover {
+      background: var(--gold-light);
+      box-shadow: 0 0 40px rgba(212,164,55,0.5), 0 0 80px rgba(212,164,55,0.2);
+      transform: translateY(-2px);
+    }
+    .cta-helper {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 16px;
+      font-style: italic;
+    }
+
+    /* CTA outline */
+    .cta-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--gold-primary);
+      text-decoration: none;
+      padding: 14px 36px;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--gold-primary);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .cta-outline:hover {
+      background: rgba(212,164,55,0.1);
+      color: var(--gold-light);
+      box-shadow: 0 0 24px rgba(212,164,55,0.25);
+    }
+
+    /* Section base */
+    .section {
+      padding: 64px 0;
+      border-top: 1px solid var(--border-void);
+    }
+    .section-label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--gold-primary);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: var(--font-geist);
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+      margin-bottom: 40px;
+    }
+    .section-title em { font-style: italic; color: var(--gold-primary); }
+
+    /* Próximos passos 01/02/03 */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    .step-num {
+      font-family: var(--font-display);
+      font-size: 64px;
+      font-weight: 800;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 50%, var(--gold-deep) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 24px rgba(212,164,55,0.2);
+    }
+    .step-body h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.3px;
+      margin-bottom: 12px;
+    }
+    .step-body p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+    .step-body p strong { color: var(--white); font-weight: 600; }
+
+    /* Cards de info */
+    .info-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-void);
+      border-left: 3px solid var(--gold-primary);
+      padding: 32px 36px;
+      margin-bottom: 24px;
+    }
+    .info-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.3px;
+      margin-bottom: 16px;
+    }
+    .info-card ul {
+      list-style: none;
+      padding: 0;
+    }
+    .info-card li {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      padding-left: 20px;
+      position: relative;
+    }
+    .info-card li::before {
+      content: '•';
+      color: var(--gold-primary);
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+    }
+    .info-card li strong { color: var(--white); font-weight: 600; }
+
+    /* Card de garantia / agenda */
+    .feature-card {
+      background: rgba(212,164,55,0.04);
+      border: 1px solid rgba(212,164,55,0.25);
+      padding: 48px 40px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .feature-card h3 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.3px;
+      margin-bottom: 16px;
+    }
+    .feature-card p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin: 0 auto 24px;
+    }
+    .reassurance {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 16px;
+      font-style: italic;
+    }
+
+    /* FAQ */
+    .faq-item {
+      border-top: 1px solid var(--border-void);
+      padding: 28px 0;
+    }
+    .faq-item:last-child { border-bottom: 1px solid var(--border-void); }
+    .faq-q {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+      letter-spacing: -0.2px;
+    }
+    .faq-a {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+    .faq-a strong { color: var(--gold-primary); font-weight: 600; }
+
+    /* Suporte */
+    .support {
+      background: var(--bg-card);
+      border: 1px solid var(--border-void);
+      padding: 40px;
+      text-align: center;
+    }
+    .support h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .support p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+    .support-channels {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .support-channels a {
+      color: var(--gold-primary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      font-family: var(--font-mono);
+    }
+    .support-channels a:hover { color: var(--gold-light); }
+
+    /* Rodapé final */
+    .final-cta {
+      text-align: center;
+      padding: 80px 24px;
+      border-top: 1px solid var(--border-void);
+    }
+    .final-cta h2 {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.5px;
+      margin-bottom: 32px;
+      line-height: 1.2;
+    }
+    .final-cta h2 .gold {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold-primary), var(--gold-deep));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .final-tag {
+      margin-top: 32px;
+      font-size: 16px;
+      color: var(--text-secondary);
+    }
+    .final-tag strong { color: var(--white); }
+
+    /* Footer */
+    .footer {
+      background: var(--bg-deep);
+      border-top: 1px solid var(--border-void);
+      padding: 40px 24px;
+      text-align: center;
+    }
+    .footer-badge {
+      display: inline-block;
+      border: 1px solid rgba(212,164,55,0.25);
+      padding: 8px 20px;
+      background: var(--bg-surface);
+      margin-bottom: 20px;
+    }
+    .footer-badge .f-system { color: var(--gold-primary); font-size: 13px; font-weight: 600; }
+    .footer-badge .f-4d { color: var(--text-muted); font-size: 13px; font-weight: 600; }
+    .footer-links { margin-bottom: 20px; }
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 12px;
+      margin: 0 12px;
+      font-family: var(--font-mono);
+      letter-spacing: 0.05em;
+    }
+    .footer-links a:hover { color: var(--gold-primary); }
+    .footer-links span { color: var(--text-charcoal); }
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* Responsivo */
+    @media (max-width: 640px) {
+      .container { padding: 32px 16px; }
+      .hero { padding: 48px 16px 40px; }
+      .hero-headline { font-size: 36px; }
+      .hero-sub { font-size: 16px; }
+      .section { padding: 48px 0; }
+      .section-title { font-size: 26px; }
+      .step { grid-template-columns: 1fr; gap: 12px; }
+      .step-num { font-size: 48px; }
+      .info-card, .feature-card, .support { padding: 28px 24px; }
+      .final-cta { padding: 48px 16px; }
+      .final-cta h2 { font-size: 26px; }
+      .cta-primary { padding: 16px 32px; font-size: 12px; }
+      .footer-links a { display: inline-block; margin: 4px 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- SEÇÃO 1 — HERO -->
+    <section class="hero">
+      <span class="eyebrow">[ COMPRA CONFIRMADA ]</span>
+      <h1 class="hero-headline">Sua vaga no Sistema 4D está <em>confirmada</em>.</h1>
+      <p class="hero-sub">
+        Dia <strong>08/06</strong>, às <strong>18h</strong>, ao vivo via Zoom. Sem replay, sem enrolação.
+        <br>Agora falta um passo pra você não perder nada: <strong>entrar no grupo de WhatsApp</strong>.
+      </p>
+      <a href="https://chat.whatsapp.com/HIZwDELwWXc7o1vL95vDiM" class="cta-primary">[ ENTRAR NO GRUPO ]</a>
+      <p class="cta-helper">É no grupo que a gente vai mandar o link da sala do Zoom no dia da live.</p>
+    </section>
+
+    <!-- SEÇÃO 2 — PRÓXIMOS PASSOS -->
+    <section class="section">
+      <span class="section-label">PRÓXIMOS PASSOS</span>
+      <h2 class="section-title">Seus próximos <em>passos</em></h2>
+
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-body">
+            <h3>Entra no grupo de WhatsApp</h3>
+            <p>O link do Zoom será enviado no grupo no dia <strong>08/06 às 17h45</strong>.</p>
+            <a href="https://chat.whatsapp.com/HIZwDELwWXc7o1vL95vDiM" class="cta-outline">[ ENTRAR NO GRUPO ]</a>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-body">
+            <h3>Salva a data na agenda</h3>
+            <p><strong>08/06/2026, das 18h às 22h</strong> — a live pode durar de 2h a 4h. Reserva a janela.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-body">
+            <h3>Chega com uma dor mapeada</h3>
+            <p>A live não é teoria solta — você vai aplicar o Filtro 4D na <em>sua</em> ideia. Antes do dia 08, escolhe uma dor real: um setor que você conhece, uma pessoa real que sofre com ela, o que essa dor custa. <strong>Quanto mais real, mais útil a noite vai ser pra você.</strong></p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SEÇÃO 3 — O QUE ESPERAR -->
+    <section class="section">
+      <span class="section-label">O QUE VAI ACONTECER</span>
+      <h2 class="section-title">Dia 08/06, em uma <em>linha</em></h2>
+
+      <div class="info-card">
+        <ul>
+          <li><strong>Ao vivo via Zoom</strong>, com Alan, das 18h às 22h (2h a 4h).</li>
+          <li><strong>Sem replay.</strong> Quem está, está.</li>
+          <li>Você vai aplicar o <strong>Filtro 4D</strong> — Dono, Dor, Dinheiro, Demonstração — na sua própria ideia.</li>
+          <li>Você sai com um <strong>projeto de IA estruturado</strong> pra demonstrar e vender.</li>
+          <li>Ao final, a gente fala sobre o próximo passo dentro da Academia — sem replay, sem corte brusco. Você decide.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 4 — O QUE NÃO É -->
+    <section class="section">
+      <span class="section-label">HONESTIDADE</span>
+      <h2 class="section-title">E o que isso <em>não</em> é</h2>
+
+      <div class="info-card">
+        <ul>
+          <li>Não é palestra motivacional.</li>
+          <li>Não é teoria de IA pra você assistir e tomar nota.</li>
+          <li>Não tem certificado.</li>
+          <li>A gente não promete que você sai rico. <strong>Promete que sai com método.</strong></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 5 — GARANTIA -->
+    <section class="section">
+      <span class="section-label">GARANTIA</span>
+      <h2 class="section-title">Sua garantia, sem <em>letrinha miúda</em></h2>
+
+      <div class="feature-card">
+        <h3>7 dias incondicional + condicional até o fim do evento</h3>
+        <p>Se não fizer sentido, fala com a gente. Sem retenção, sem ginástica.</p>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 6 — AGENDA -->
+    <section class="section">
+      <span class="section-label">QUER CONVERSAR ANTES?</span>
+      <h2 class="section-title">Marca uma conversa <em>rápida</em></h2>
+
+      <div class="feature-card">
+        <h3>20 minutos com a Academia</h3>
+        <p>Se você quer entender o que vem <strong>depois</strong> do Sistema 4D — o caminho dentro da Academia, o AIOX Fundamentals, ou só tirar uma dúvida honesta — marca uma conversa rápida com a gente.</p>
+        <a href="https://www.academialendaria.ai/reuniao" class="cta-outline">[ AGENDA ]</a>
+        <p class="reassurance">Sem enrolação. Se não for pra você agora, a gente fala.</p>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 7 — FAQ -->
+    <section class="section">
+      <span class="section-label">PERGUNTAS FREQUENTES</span>
+      <h2 class="section-title">A gente <em>recebe</em> muito</h2>
+
+      <div class="faq-item">
+        <p class="faq-q">Vai ter replay?</p>
+        <p class="faq-a">Não. É ao vivo, sem replay. Por isso o <strong>grupo de WhatsApp</strong> é importante — o link do Zoom será enviado por lá no dia.</p>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">Quanto tempo dura?</p>
+        <p class="faq-a">Entre 2h e 4h. Reserva a janela inteira, das 18h às 22h.</p>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">Posso entrar pelo celular?</p>
+        <p class="faq-a">Pode, mas a gente recomenda computador. Você vai precisar trabalhar na sua ideia ao vivo — papel e caneta também ajudam.</p>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">Já posso ver o material?</p>
+        <p class="faq-a">Não tem material prévio. O método é entregue ao vivo. O que você precisa fazer antes é <strong>mapear uma dor real</strong> (o passo 03 acima).</p>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">E se eu não conseguir estar ao vivo?</p>
+        <p class="faq-a">Acontece. A garantia cobre. Mas o conselho honesto é: bloqueia a agenda. O valor da noite é estar nela.</p>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">Como vou receber o link do Zoom?</p>
+        <p class="faq-a">O link <strong>será enviado no grupo de WhatsApp</strong> no dia da live. Por isso o primeiro passo é entrar no grupo.</p>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 8 — SUPORTE -->
+    <section class="section">
+      <div class="support">
+        <h3>Travou em alguma coisa?</h3>
+        <p>Fala com a gente. Sem bot, sem ticket, sem espera de 48h. A gente lê.</p>
+        <div class="support-channels">
+          <a href="https://wa.me/554888000116">WHATSAPP: +55 48 8800-0116</a>
+          <a href="mailto:suporte@academialendaria.ai">SUPORTE@ACADEMIALENDARIA.AI</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 9 — CTA FINAL -->
+    <section class="final-cta">
+      <h2>A gente se vê dia <span class="gold">08/06 às 18h</span>.<br>Até lá.</h2>
+      <a href="https://chat.whatsapp.com/HIZwDELwWXc7o1vL95vDiM" class="cta-primary">[ ENTRAR NO GRUPO AGORA ]</a>
+      <p class="final-tag">É <strong>por lá</strong> que o link do Zoom vai sair.</p>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-badge">
+      <span class="f-system">Sistema</span><span class="f-4d"> 4D</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.academialendaria.ai/reuniao">AGENDA</a>
+      <span>|</span>
+      <a href="https://academialendaria.ai">COMUNIDADE</a>
+      <span>|</span>
+      <a href="https://instagram.com/academialendaria">INSTAGRAM</a>
+    </div>
+    <p class="footer-copy">ACADEMIA LENDÁRIA &copy; 2026</p>
+  </div>
+
+</body>
+</html>
