@@ -311,7 +311,7 @@
       margin-top: 12px;
     }
 
-    /* Garantia */
+    /* Garantia / agenda */
     .feature-card {
       background: rgba(212,164,55,0.04);
       border: 1px solid rgba(212,164,55,0.25);
@@ -330,7 +330,32 @@
       line-height: 1.7;
       color: var(--text-secondary);
       max-width: 480px;
-      margin: 0 auto;
+      margin: 0 auto 24px;
+    }
+    .reassurance {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 16px;
+      font-style: italic;
+    }
+    .cta-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--gold-primary);
+      text-decoration: none;
+      padding: 14px 36px;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--gold-primary);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .cta-outline:hover {
+      background: rgba(212,164,55,0.1);
+      color: var(--gold-light);
+      box-shadow: 0 0 24px rgba(212,164,55,0.25);
     }
 
     /* Suporte */
@@ -564,7 +589,20 @@
       </div>
     </section>
 
-    <!-- SEÇÃO 5 — Suporte -->
+    <!-- SEÇÃO 5 — Agenda -->
+    <section class="section">
+      <span class="section-label">QUER CONVERSAR ANTES?</span>
+      <h2 class="section-title">Marca uma conversa <em>rápida</em></h2>
+
+      <div class="feature-card">
+        <h3>20 minutos com a Academia</h3>
+        <p>Se você quer entender o que vem <strong>depois</strong> do Sistema 4D — o caminho dentro da Academia, o AIOX Fundamentals, ou só tirar uma dúvida honesta — marca uma conversa rápida com a gente.</p>
+        <a href="https://www.academialendaria.ai/reuniao" class="cta-outline">[ AGENDA ]</a>
+        <p class="reassurance">Sem enrolação. Se não for pra você agora, a gente fala.</p>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 6 — Suporte -->
     <section class="section">
       <div class="support">
         <h3>Travou em alguma coisa?</h3>
@@ -576,7 +614,7 @@
       </div>
     </section>
 
-    <!-- SEÇÃO 6 — CTA Final -->
+    <!-- SEÇÃO 7 — CTA Final -->
     <section class="final-cta">
       <h2>A gente se vê dia <span class="gold">08/06 às 18h</span>.<br>Até lá.</h2>
       <a href="https://chat.whatsapp.com/HIZwDELwWXc7o1vL95vDiM" class="cta-primary">[ ENTRAR NO GRUPO AGORA ]</a>
@@ -591,6 +629,8 @@
       <span class="f-system">Sistema</span><span class="f-4d"> 4D</span>
     </div>
     <div class="footer-links">
+      <a href="https://www.academialendaria.ai/reuniao">AGENDA</a>
+      <span>|</span>
       <a href="https://academialendaria.ai">COMUNIDADE</a>
       <span>|</span>
       <a href="https://instagram.com/academialendaria">INSTAGRAM</a>
