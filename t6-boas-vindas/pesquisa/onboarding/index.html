@@ -395,6 +395,7 @@
 
   <script>
     const WEBHOOK_URL = 'https://automacoes-lendarias.app.n8n.cloud/webhook/85de6ea6-5067-4b54-a7b8-545a3b79a2fa';
+    const EMAIL_LOOKUP_WEBHOOK_URL = 'https://automacoes-lendarias.app.n8n.cloud/webhook/b4bbb68a-8aee-4476-880d-59e3846d7c61';
     const CONFIRM_WEBHOOK_URL = 'https://automacoes-lendarias.app.n8n.cloud/webhook/51e49334-9147-4e9e-b24a-f325b8c763ea';
     // TODO: preencher quando os links estiverem prontos
     const GROUP_REQUEST_URL = '';      // link da solicitação de entrada no grupo (WhatsApp invite)
@@ -462,7 +463,7 @@
         placeholder: 'Pode ser técnico, de tempo, de método — o que vier primeiro.', required: true },
     ];
 
-    const state = { step: 0, answers: {}, others: {}, matrix: {}, submitting: false, confirmedPhone: null };
+    const state = { step: 0, answers: {}, others: {}, matrix: {}, submitting: false, validatingEmail: false, confirmedPhone: null };
     const EMAIL_RX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     function escapeHtml(s) {
@@ -631,10 +632,11 @@
 
       const nav = document.createElement('div');
       nav.className = 'nav';
+      const busy = state.submitting || state.validatingEmail;
       nav.innerHTML = `
-        <button type="button" class="btn btn-ghost" id="btn-back" ${step === 0 || state.submitting ? 'disabled' : ''}>← Voltar</button>
-        <button type="button" class="btn btn-primary" id="btn-next" ${state.submitting ? 'disabled' : ''}>
-          ${state.submitting ? '<span class="pulse"><span></span><span></span><span></span></span>' : (step === total - 1 ? 'Enviar respostas' : 'Próxima →')}
+        <button type="button" class="btn btn-ghost" id="btn-back" ${step === 0 || busy ? 'disabled' : ''}>← Voltar</button>
+        <button type="button" class="btn btn-primary" id="btn-next" ${busy ? 'disabled' : ''}>
+          ${busy ? '<span class="pulse"><span></span><span></span><span></span></span>' : (step === total - 1 ? 'Enviar respostas' : 'Próxima →')}
         </button>
       `;
       card.appendChild(nav);
@@ -667,6 +669,29 @@
       const q = list[state.step];
       const err = validate(q, state.answers[q.id], state.others[q.id], state.matrix[q.id]);
       if (err) { showError(err); return; }
+
+      // Antes de avançar a partir do e-mail, valida se a compra existe no sistema
+      if (q.id === 'email') {
+        state.validatingEmail = true;
+        clearError();
+        render();
+        const email = (state.answers[q.id] || '').trim();
+        const result = await lookupEmail(email);
+        state.validatingEmail = false;
+        if (result.found === false) {
+          render();
+          showError(
+            'Não encontramos esse e-mail na nossa base de compras da T6. Confere se digitou certo — ou se usou outro e-mail na hora da compra.'
+          );
+          return;
+        }
+        if (result.found === null) {
+          // Falha técnica (rede / formato). Loga e deixa seguir pra não bloquear o aluno por bug.
+          console.warn('[email-lookup] inconclusivo:', result.error);
+        }
+        // found === true → segue normal
+      }
+
       if (state.step < list.length - 1) {
         state.step++;
         clearError();
@@ -674,6 +699,73 @@
         return;
       }
       await submit();
+    }
+
+    async function lookupEmail(email) {
+      try {
+        const res = await fetch(EMAIL_LOOKUP_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: email,
+            source: 't6-boas-vindas/pesquisa/onboarding',
+            event: 'email-lookup',
+          }),
+        });
+        if (!res.ok) return { found: null, error: 'http-' + res.status };
+        const raw = (await res.text()).trim();
+        if (!raw) return { found: null, error: 'empty' };
+        try {
+          const data = JSON.parse(raw);
+          return interpretEmailLookup(data);
+        } catch {
+          // Resposta não-JSON: interpreta o texto bruto
+          return interpretEmailLookup(raw);
+        }
+      } catch (err) {
+        return { found: null, error: 'network' };
+      }
+    }
+
+    function interpretEmailLookup(data) {
+      if (data == null) return { found: null };
+      if (typeof data === 'boolean') return { found: data };
+      if (typeof data === 'string') {
+        const lower = data.toLowerCase();
+        if (/n[ãa]o[\s_-]?encontrad|not[\s_-]?found|nao_encontrado/.test(lower)) return { found: false };
+        if (/encontrad|^found$|exists|^true$|^ok$|^sim$/.test(lower)) return { found: true };
+        return { found: null };
+      }
+      if (Array.isArray(data)) {
+        for (const item of data) {
+          const r = interpretEmailLookup(item);
+          if (r.found !== null) return r;
+        }
+        return { found: null };
+      }
+      if (typeof data === 'object') {
+        // Campos booleanos diretos
+        const boolKeys = ['found', 'encontrado', 'exists', 'existe', 'success'];
+        for (const k of boolKeys) {
+          if (typeof data[k] === 'boolean') return { found: data[k] };
+        }
+        // Campos string/status
+        const strKeys = ['status', 'result', 'resultado', 'message', 'msg', 'response', 'retorno'];
+        for (const k of strKeys) {
+          if (data[k] != null) {
+            const r = interpretEmailLookup(data[k]);
+            if (r.found !== null) return r;
+          }
+        }
+        // Varredura recursiva
+        for (const v of Object.values(data)) {
+          if (v && typeof v === 'object') {
+            const r = interpretEmailLookup(v);
+            if (r.found !== null) return r;
+          }
+        }
+      }
+      return { found: null };
     }
 
     function computeBaselineScore(dims) {
