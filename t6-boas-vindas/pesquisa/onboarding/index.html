@@ -297,18 +297,17 @@
       font-weight: 500;
     }
     .done-phone {
-      font-family: var(--font-display);
-      font-size: clamp(1.5rem, 5vw, 2rem);
+      font-family: var(--font-sans);
+      font-size: clamp(1.5rem, 5vw, 1.875rem);
       font-weight: 700;
       color: var(--white);
-      letter-spacing: 0.04em;
+      letter-spacing: 0.02em;
       font-variant-numeric: tabular-nums;
     }
     .done-phone-muted {
       color: var(--text-muted);
       font-style: italic;
       letter-spacing: 0;
-      font-family: var(--font-sans);
       font-size: 1rem;
       font-weight: 500;
     }
@@ -403,8 +402,9 @@
       <div class="done">
         <h1 class="done-title">Resposta <em>confirmada</em></h1>
         <p class="done-text">
-          Em nosso sistema, o seu número cadastrado e que será adicionado
-          no grupo é:
+          Você vai solicitar entrada no grupo de WhatsApp
+          <strong>T6 — AIOX Cohort Fundamentals</strong>. O número cadastrado
+          em nosso sistema, que será autorizado a entrar no grupo, é:
         </p>
         <div class="done-phone-box">
           <span class="done-phone-label">Número cadastrado</span>
@@ -412,7 +412,7 @@
         </div>
         <div class="done-actions">
           <a id="btn-confirm" class="btn btn-primary" href="#" rel="noopener">
-            Correto, solicitar entrada no grupo →
+            Número Correto → Solicitar entrada no grupo
           </a>
           <a id="btn-wrong" class="btn btn-ghost" href="#" rel="noopener">
             Está errado, falar com o suporte
@@ -444,8 +444,7 @@
       'Olá, preciso ajustar meu cadastro — o número que apareceu no sistema da T6 está errado.'
     );
 
-    // TODO: preencher quando o link estiver pronto
-    const GROUP_REQUEST_URL = '';      // link da solicitação de entrada no grupo (WhatsApp invite)
+    const GROUP_REQUEST_URL = 'https://chat.whatsapp.com/LARf5IRKWst4UlRv8OmaS1'; // grupo T6 — AIOX Cohort Fundamentals
 
     const BLOCK_LABELS = {
       1: 'Bloco 01 · Identificação',
