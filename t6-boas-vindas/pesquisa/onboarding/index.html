@@ -229,16 +229,74 @@
     .bracket-cta::before { content: "[ "; }
     .bracket-cta::after { content: " ]"; }
 
-    .done { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1.5rem; padding: 3rem 1rem; animation: card-in 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    .done { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1.5rem; padding: 2rem 1rem 3rem; animation: card-in 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
     .done-title {
-      font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); font-weight: 800;
+      font-family: var(--font-display); font-size: clamp(1.75rem, 4.5vw, 2.5rem); font-weight: 800;
       background: linear-gradient(135deg, #F5C76A 0%, #D4A437 50%, #A07A1F 100%);
       -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
       text-shadow: 0 0 24px rgba(212, 164, 55, 0.3);
     }
     .done em { font-style: italic; color: var(--gold-primary); }
-    .done-text { color: var(--text-secondary); max-width: 480px; font-size: 1.05rem; line-height: 1.6; }
+    .done-text { color: var(--text-secondary); max-width: 520px; font-size: 1.05rem; line-height: 1.6; }
     .done-text strong { color: var(--white); font-weight: 600; }
+    .done-text-small { color: var(--text-muted); max-width: 480px; font-size: 0.875rem; line-height: 1.5; }
+
+    /* Phone confirmation box */
+    .done-phone-box {
+      width: 100%;
+      max-width: 480px;
+      padding: 1.5rem 1.25rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold-soft);
+      border-radius: 1rem;
+      box-shadow: 0 0 24px rgba(212, 164, 55, 0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .done-phone-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .done-phone {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 5vw, 2rem);
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.04em;
+      font-variant-numeric: tabular-nums;
+    }
+    .done-phone-muted {
+      color: var(--text-muted);
+      font-style: italic;
+      letter-spacing: 0;
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    /* Action buttons */
+    .done-actions {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+    .done-actions .btn {
+      width: 100%;
+      text-decoration: none;
+    }
+    .btn-disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
 
     .pulse { display: inline-flex; gap: 6px; }
     .pulse span { width: 8px; height: 8px; border-radius: 9999px; background: #000; animation: pulse 1.4s infinite ease-in-out both; }
@@ -309,13 +367,26 @@
 
     <section id="done-section" class="hidden">
       <div class="done">
-        <h1 class="done-title">Resposta confirmada</h1>
+        <h1 class="done-title">Resposta <em>confirmada</em></h1>
         <p class="done-text">
-          Valeu por reservar esses 2 minutinhos. Suas respostas chegaram
-          <em>direitinho</em> — vamos usar pra calibrar o Sábado 1 e o ritmo
-          da T6 do jeito que faz mais sentido pra você.
-          <br><br>
-          <strong>A gente se vê em 13/06.</strong>
+          Em nosso sistema, o seu número cadastrado e que será adicionado
+          no grupo é:
+        </p>
+        <div class="done-phone-box">
+          <span class="done-phone-label">Número cadastrado</span>
+          <span id="done-phone" class="done-phone done-phone-muted">aguardando…</span>
+        </div>
+        <div class="done-actions">
+          <a id="btn-confirm" class="btn btn-primary" href="#" rel="noopener">
+            Correto, solicitar entrada no grupo →
+          </a>
+          <a id="btn-wrong" class="btn btn-ghost" href="#" rel="noopener">
+            Está errado, falar com o suporte
+          </a>
+        </div>
+        <p class="done-text-small">
+          Ao solicitar entrada, aguarde — o time da Academia Lendária aprova
+          seu ingresso no grupo manualmente.
         </p>
         <span class="bracket-cta">Academia Lendária</span>
       </div>
@@ -324,6 +395,10 @@
 
   <script>
     const WEBHOOK_URL = 'https://automacoes-lendarias.app.n8n.cloud/webhook/85de6ea6-5067-4b54-a7b8-545a3b79a2fa';
+    const CONFIRM_WEBHOOK_URL = 'https://automacoes-lendarias.app.n8n.cloud/webhook/51e49334-9147-4e9e-b24a-f325b8c763ea';
+    // TODO: preencher quando os links estiverem prontos
+    const GROUP_REQUEST_URL = '';      // link da solicitação de entrada no grupo (WhatsApp invite)
+    const SUPPORT_WHATSAPP_URL = '';   // link wa.me do suporte para correção cadastral
 
     const BLOCK_LABELS = {
       1: 'Bloco 01 · Identificação',
@@ -387,7 +462,7 @@
         placeholder: 'Pode ser técnico, de tempo, de método — o que vier primeiro.', required: true },
     ];
 
-    const state = { step: 0, answers: {}, others: {}, matrix: {}, submitting: false };
+    const state = { step: 0, answers: {}, others: {}, matrix: {}, submitting: false, confirmedPhone: null };
     const EMAIL_RX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     function escapeHtml(s) {
@@ -650,6 +725,26 @@
           body: JSON.stringify(payload),
         });
         if (!res.ok) throw new Error('http-' + res.status);
+
+        // Aguarda retorno do webhook com o telefone cadastrado.
+        // Aceita múltiplos formatos de payload de resposta.
+        let phone = null;
+        try {
+          const raw = await res.text();
+          if (raw) {
+            try {
+              const data = JSON.parse(raw);
+              phone = extractPhone(data);
+            } catch {
+              // Resposta não-JSON: usa o texto cru se parecer um telefone
+              const trimmed = raw.trim();
+              if (/\d{8,}/.test(trimmed)) phone = trimmed;
+            }
+          }
+        } catch {
+          // se a leitura do body falhar, seguimos com phone=null
+        }
+        state.confirmedPhone = phone;
         showDone();
       } catch (err) {
         state.submitting = false;
@@ -658,9 +753,97 @@
       }
     }
 
+    function extractPhone(data) {
+      if (!data) return null;
+      if (typeof data === 'string') return data.trim() || null;
+      if (Array.isArray(data)) {
+        for (const item of data) {
+          const p = extractPhone(item);
+          if (p) return p;
+        }
+        return null;
+      }
+      if (typeof data === 'object') {
+        const keys = ['telefone', 'phone', 'whatsapp', 'contato', 'celular', 'numero', 'number'];
+        for (const k of keys) {
+          if (data[k] != null && String(data[k]).trim()) return String(data[k]).trim();
+        }
+        // Tenta um nível abaixo (ex.: { data: { telefone: ... } })
+        for (const v of Object.values(data)) {
+          if (v && typeof v === 'object') {
+            const p = extractPhone(v);
+            if (p) return p;
+          }
+        }
+      }
+      return null;
+    }
+
     function showDone() {
       document.getElementById('form-section').classList.add('hidden');
       document.getElementById('done-section').classList.remove('hidden');
+
+      const phoneEl = document.getElementById('done-phone');
+      if (state.confirmedPhone) {
+        phoneEl.textContent = state.confirmedPhone;
+        phoneEl.classList.remove('done-phone-muted');
+      } else {
+        phoneEl.textContent = 'não identificado — fale com o suporte';
+        phoneEl.classList.add('done-phone-muted');
+      }
+
+      const btnConfirm = document.getElementById('btn-confirm');
+      const btnWrong = document.getElementById('btn-wrong');
+
+      // Botão "Correto, solicitar entrada no grupo"
+      if (GROUP_REQUEST_URL) {
+        btnConfirm.href = GROUP_REQUEST_URL;
+        btnConfirm.target = '_blank';
+        btnConfirm.classList.remove('btn-disabled');
+      } else {
+        btnConfirm.classList.add('btn-disabled');
+        btnConfirm.title = 'Link do grupo ainda não configurado';
+      }
+      btnConfirm.onclick = (e) => {
+        // Dispara webhook de confirmação em paralelo (fire-and-forget, com keepalive
+        // pra sobreviver à navegação)
+        try {
+          fetch(CONFIRM_WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            keepalive: true,
+            body: JSON.stringify({
+              event: 'confirm-group-entry',
+              telefone: state.confirmedPhone,
+              email: state.answers.email || null,
+              respondedAt: new Date().toISOString(),
+              source: 't6-boas-vindas/pesquisa/onboarding',
+            }),
+          }).catch(() => {});
+        } catch {}
+        if (!GROUP_REQUEST_URL) {
+          e.preventDefault();
+          alert('Webhook de confirmação enviado.\n\nO link de entrada no grupo ainda não foi configurado — o time vai te chamar manualmente.');
+        }
+        // Se GROUP_REQUEST_URL existir, o navegador segue o href naturalmente
+      };
+
+      // Botão "Está errado"
+      if (SUPPORT_WHATSAPP_URL) {
+        btnWrong.href = SUPPORT_WHATSAPP_URL;
+        btnWrong.target = '_blank';
+        btnWrong.classList.remove('btn-disabled');
+      } else {
+        btnWrong.classList.add('btn-disabled');
+        btnWrong.title = 'Link do suporte ainda não configurado';
+      }
+      btnWrong.onclick = (e) => {
+        if (!SUPPORT_WHATSAPP_URL) {
+          e.preventDefault();
+          alert('O link do suporte ainda não foi configurado.\n\nPor enquanto, fale com o time da Academia Lendária pelos canais de costume.');
+        }
+      };
+
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
