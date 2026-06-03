@@ -247,6 +247,18 @@
     .btn-ghost:hover:not(:disabled) { color: var(--gold-primary); border-color: var(--border-gold-soft); }
     .btn-ghost:disabled { opacity: 0.4; cursor: not-allowed; }
 
+    .btn-danger-soft {
+      background: rgba(239, 68, 68, 0.10);
+      color: #FCA5A5;
+      border: 1px solid rgba(239, 68, 68, 0.35);
+    }
+    .btn-danger-soft:hover:not(:disabled) {
+      background: rgba(239, 68, 68, 0.18);
+      border-color: rgba(239, 68, 68, 0.55);
+      color: #FECACA;
+      box-shadow: 0 0 16px rgba(239, 68, 68, 0.18);
+    }
+
     .bracket-cta { color: var(--gold-primary); letter-spacing: 0.05em; font-weight: 500; }
     .bracket-cta::before { content: "[ "; }
     .bracket-cta::after { content: " ]"; }
@@ -673,7 +685,7 @@
             e o e-mail esteja correto, por favor entre em contato com nosso
             suporte clicando no botão abaixo.
           </p>
-          <a class="btn btn-primary" href="${EMAIL_SUPPORT_URL}" target="_blank" rel="noopener">
+          <a class="btn btn-danger-soft" href="${EMAIL_SUPPORT_URL}" target="_blank" rel="noopener">
             Falar com o suporte no WhatsApp →
           </a>
         `;
