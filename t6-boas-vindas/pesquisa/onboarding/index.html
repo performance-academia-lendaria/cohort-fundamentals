@@ -960,22 +960,41 @@
         btnConfirm.title = 'Link do grupo ainda não configurado';
       }
       btnConfirm.onclick = (e) => {
-        // Dispara webhook de confirmação em paralelo (fire-and-forget, com keepalive
-        // pra sobreviver à navegação)
+        // Monta payload com TUDO que foi coletado ao longo do processo:
+        // - telefone: vem do webhook de submit (sistema da Hotmart)
+        // - email: vem do input da Q1 (validado contra a base)
+        // - respostas: o resto da pesquisa, pro n8n cruzar contexto se quiser
+        const payload = {
+          event: 'confirm-group-entry',
+          telefone: state.confirmedPhone || null,
+          email: (state.answers.email || '').trim() || null,
+          respondedAt: new Date().toISOString(),
+          source: 't6-boas-vindas/pesquisa/onboarding',
+          turma: 'T6',
+          programa: 'Cohort Fundamentals',
+          respostas: {
+            canal: state.answers.canal || null,
+            canal_outro: (state.others.canal || '').trim() || null,
+            nivel_ia: state.answers.nivel_ia || null,
+            dimensoes_aiox: state.matrix.dimensoes_aiox || null,
+            valeu_centavo: state.answers.valeu_centavo || null,
+            receio: state.answers.receio || null,
+          },
+        };
+        console.log('[confirm-group-entry] enviando payload:', payload);
+        // Fire-and-forget com keepalive pra sobreviver à navegação (mobile abre WhatsApp app)
         try {
           fetch(CONFIRM_WEBHOOK_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             keepalive: true,
-            body: JSON.stringify({
-              event: 'confirm-group-entry',
-              telefone: state.confirmedPhone,
-              email: state.answers.email || null,
-              respondedAt: new Date().toISOString(),
-              source: 't6-boas-vindas/pesquisa/onboarding',
-            }),
-          }).catch(() => {});
-        } catch {}
+            body: JSON.stringify(payload),
+          })
+            .then((r) => console.log('[confirm-group-entry] status:', r.status))
+            .catch((err) => console.warn('[confirm-group-entry] falhou:', err));
+        } catch (err) {
+          console.warn('[confirm-group-entry] erro:', err);
+        }
         if (!GROUP_REQUEST_URL) {
           e.preventDefault();
           alert('Webhook de confirmação enviado.\n\nO link de entrada no grupo ainda não foi configurado — o time vai te chamar manualmente.');
