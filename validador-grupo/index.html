@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Validador de Grupo — Academia Lendária</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Orbitron:wght@600;700;800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold-primary: #D4A437;
+      --gold-light: #F5C76A;
+      --gold-deep: #A07A1F;
+      --bg-void: #000000;
+      --bg-deep: #050505;
+      --bg-surface: #0D0D0D;
+      --bg-card: #141414;
+      --bg-modal: #1C1C1C;
+      --white: #FFFFFF;
+      --text-secondary: #B8B8B8;
+      --text-muted: #7A7A7A;
+      --border-void: #1A1A1A;
+      --border-light: #2E2E2E;
+      --border-gold: #D4A437;
+      --success: #22C55E;
+      --error: #EF4444;
+      --font-geist: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-display: 'Orbitron', 'Geist', sans-serif;
+      --font-mono: 'Roboto Mono', monospace;
+    }
+
+    body {
+      font-family: var(--font-geist);
+      background: var(--bg-void);
+      color: var(--text-secondary);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Constelação de fundo */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(212,164,55,0.08), transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(212,164,55,0.05), transparent 40%),
+        radial-gradient(ellipse at center, rgba(212,164,55,0.04) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 64px 24px 96px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 32px 0 48px;
+      position: relative;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+    }
+    .eyebrow {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--gold-primary);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      border: 1px solid rgba(212,164,55,0.3);
+      padding: 8px 20px;
+      margin-bottom: 32px;
+      background: rgba(212,164,55,0.05);
+    }
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: 44px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.05;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 50%, var(--gold-deep) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 40px rgba(212,164,55,0.2);
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
+    }
+    .hero-headline em { font-style: italic; }
+    .hero-sub {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--white);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .hero-sub strong { color: var(--gold-primary); font-weight: 600; }
+
+    @media (max-width: 600px) {
+      .hero-headline { font-size: 32px; }
+    }
+
+    /* SEÇÃO UPLOAD */
+    .panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-void);
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    .field-label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--gold-primary);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .dropzone {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-height: 220px;
+      padding: 32px 20px;
+      border: 2px dashed rgba(212,164,55,0.35);
+      background: rgba(212,164,55,0.03);
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      text-align: center;
+    }
+    .dropzone:hover,
+    .dropzone.is-dragover {
+      border-color: var(--gold-primary);
+      background: rgba(212,164,55,0.08);
+      box-shadow: 0 0 24px rgba(212,164,55,0.15) inset;
+    }
+    .dropzone input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .dropzone-icon {
+      width: 48px;
+      height: 48px;
+      stroke: var(--gold-primary);
+      stroke-width: 1.5;
+      fill: none;
+    }
+    .dropzone-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .dropzone-hint {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .dropzone-hint strong { color: var(--gold-primary); font-weight: 600; }
+
+    /* Preview */
+    .preview {
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .preview.is-active { display: flex; }
+    .preview-frame {
+      position: relative;
+      width: 100%;
+      max-height: 360px;
+      overflow: hidden;
+      border: 1px solid var(--border-light);
+      background: var(--bg-deep);
+    }
+    .preview-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 360px;
+      object-fit: contain;
+    }
+    .preview-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .preview-meta .meta-name {
+      color: var(--white);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 70%;
+    }
+    .btn-remove {
+      background: transparent;
+      border: 1px solid var(--border-light);
+      color: var(--text-secondary);
+      padding: 6px 14px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-remove:hover {
+      border-color: var(--error);
+      color: var(--error);
+    }
+
+    /* CTA */
+    .actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .cta-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: var(--gold-primary);
+      color: var(--bg-void);
+      border: 1px solid var(--gold-primary);
+      padding: 16px 40px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 0 24px rgba(212,164,55,0.3);
+      min-width: 260px;
+    }
+    .cta-primary:hover:not(:disabled) {
+      background: var(--gold-light);
+      box-shadow: 0 0 40px rgba(212,164,55,0.5), 0 0 80px rgba(212,164,55,0.2);
+      transform: translateY(-2px);
+    }
+    .cta-primary:disabled {
+      background: transparent;
+      color: var(--text-muted);
+      border-color: var(--border-light);
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+    .cta-helper {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* Spinner */
+    .spinner {
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(0,0,0,0.25);
+      border-top-color: var(--bg-void);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+    .cta-primary.is-loading .spinner { display: inline-block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Estados de feedback */
+    .feedback {
+      display: none;
+      padding: 20px 24px;
+      border-left: 3px solid var(--gold-primary);
+      background: rgba(212,164,55,0.05);
+      margin-top: 24px;
+    }
+    .feedback.is-active { display: block; }
+    .feedback.is-success {
+      border-left-color: var(--success);
+      background: rgba(34,197,94,0.06);
+    }
+    .feedback.is-error {
+      border-left-color: var(--error);
+      background: rgba(239,68,68,0.06);
+    }
+    .feedback-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 6px;
+      letter-spacing: -0.2px;
+    }
+    .feedback-text {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+    .feedback-text strong { color: var(--white); font-weight: 600; }
+
+    /* Suporte */
+    .support {
+      margin-top: 32px;
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid var(--border-void);
+    }
+    .support p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .support a {
+      color: var(--gold-primary);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+    }
+    .support a:hover { color: var(--gold-light); }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="hero">
+      <span class="eyebrow">Validador de Grupo</span>
+      <h1 class="hero-headline">Envie sua <em>captura</em></h1>
+      <p class="hero-sub">Manda a imagem aqui que a gente confere e segue com o próximo passo.</p>
+    </section>
+
+    <section class="panel">
+      <span class="field-label">Imagem para validação</span>
+
+      <label class="dropzone" id="dropzone">
+        <svg class="dropzone-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="17 8 12 3 7 8" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="12" y1="3" x2="12" y2="15" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="dropzone-title">Arraste a imagem aqui</span>
+        <span class="dropzone-hint">ou <strong>clique pra escolher</strong> · PNG, JPG até 10MB</span>
+        <input type="file" id="fileInput" accept="image/*">
+      </label>
+
+      <div class="preview" id="preview">
+        <div class="preview-frame">
+          <img id="previewImg" alt="Preview da imagem">
+        </div>
+        <div class="preview-meta">
+          <span class="meta-name" id="metaName"></span>
+          <button type="button" class="btn-remove" id="btnRemove">Remover</button>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="cta-primary" id="btnSubmit" disabled>
+          <span class="spinner"></span>
+          <span class="btn-label">Enviar para validação</span>
+        </button>
+        <span class="cta-helper">Aceita um arquivo por vez.</span>
+      </div>
+
+      <div class="feedback" id="feedback">
+        <div class="feedback-title" id="feedbackTitle"></div>
+        <div class="feedback-text" id="feedbackText"></div>
+      </div>
+    </section>
+
+    <div class="support">
+      <p>Algum problema com o envio?</p>
+      <a href="https://wa.me/554888000116" target="_blank" rel="noopener">[ Falar com o suporte ]</a>
+    </div>
+  </main>
+
+  <script>
+    const WEBHOOK_URL = 'https://automacoes-lendarias.app.n8n.cloud/webhook/eb7777d9-79bf-4571-a6b4-2282e6264ef0';
+    const MAX_SIZE_BYTES = 10 * 1024 * 1024;
+
+    const dropzone = document.getElementById('dropzone');
+    const fileInput = document.getElementById('fileInput');
+    const preview = document.getElementById('preview');
+    const previewImg = document.getElementById('previewImg');
+    const metaName = document.getElementById('metaName');
+    const btnRemove = document.getElementById('btnRemove');
+    const btnSubmit = document.getElementById('btnSubmit');
+    const btnLabel = btnSubmit.querySelector('.btn-label');
+    const feedback = document.getElementById('feedback');
+    const feedbackTitle = document.getElementById('feedbackTitle');
+    const feedbackText = document.getElementById('feedbackText');
+
+    let currentFile = null;
+    let previewUrl = null;
+
+    function formatSize(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+    }
+
+    function showFeedback(kind, title, text) {
+      feedback.className = 'feedback is-active is-' + kind;
+      feedbackTitle.textContent = title;
+      feedbackText.innerHTML = text;
+    }
+
+    function clearFeedback() {
+      feedback.className = 'feedback';
+      feedbackTitle.textContent = '';
+      feedbackText.textContent = '';
+    }
+
+    function setFile(file) {
+      if (!file) return;
+      if (!file.type.startsWith('image/')) {
+        showFeedback('error', 'Formato não suportado', 'Envie uma imagem (PNG ou JPG).');
+        return;
+      }
+      if (file.size > MAX_SIZE_BYTES) {
+        showFeedback('error', 'Arquivo muito grande', 'O limite é 10MB. Reduza a imagem e tente de novo.');
+        return;
+      }
+      clearFeedback();
+      currentFile = file;
+      if (previewUrl) URL.revokeObjectURL(previewUrl);
+      previewUrl = URL.createObjectURL(file);
+      previewImg.src = previewUrl;
+      metaName.textContent = file.name + ' · ' + formatSize(file.size);
+      preview.classList.add('is-active');
+      dropzone.style.display = 'none';
+      btnSubmit.disabled = false;
+    }
+
+    function resetFile() {
+      currentFile = null;
+      fileInput.value = '';
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl);
+        previewUrl = null;
+      }
+      previewImg.src = '';
+      metaName.textContent = '';
+      preview.classList.remove('is-active');
+      dropzone.style.display = '';
+      btnSubmit.disabled = true;
+    }
+
+    fileInput.addEventListener('change', (e) => {
+      setFile(e.target.files && e.target.files[0]);
+    });
+
+    btnRemove.addEventListener('click', () => {
+      resetFile();
+      clearFeedback();
+    });
+
+    ['dragenter', 'dragover'].forEach(ev => {
+      dropzone.addEventListener(ev, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.classList.add('is-dragover');
+      });
+    });
+    ['dragleave', 'drop'].forEach(ev => {
+      dropzone.addEventListener(ev, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dropzone.classList.remove('is-dragover');
+      });
+    });
+    dropzone.addEventListener('drop', (e) => {
+      const file = e.dataTransfer.files && e.dataTransfer.files[0];
+      setFile(file);
+    });
+
+    btnSubmit.addEventListener('click', async () => {
+      if (!currentFile) return;
+      btnSubmit.disabled = true;
+      btnSubmit.classList.add('is-loading');
+      btnLabel.textContent = 'Enviando…';
+      clearFeedback();
+
+      const fd = new FormData();
+      fd.append('file', currentFile, currentFile.name);
+      fd.append('filename', currentFile.name);
+      fd.append('mimetype', currentFile.type);
+      fd.append('size', String(currentFile.size));
+      fd.append('submitted_at', new Date().toISOString());
+
+      try {
+        const res = await fetch(WEBHOOK_URL, { method: 'POST', body: fd });
+        if (!res.ok) throw new Error('http-' + res.status);
+        showFeedback(
+          'success',
+          'Imagem recebida',
+          'Recebemos sua captura. A gente confere e te dá retorno em seguida.'
+        );
+        btnLabel.textContent = 'Enviado';
+      } catch (err) {
+        console.error('[validador-grupo] erro no envio:', err);
+        showFeedback(
+          'error',
+          'Falha ao enviar',
+          'Algo deu errado no envio. Tenta de novo em alguns segundos ou fala com o suporte.'
+        );
+        btnSubmit.disabled = false;
+        btnLabel.textContent = 'Tentar de novo';
+      } finally {
+        btnSubmit.classList.remove('is-loading');
+      }
+    });
+  </script>
+</body>
+</html>
