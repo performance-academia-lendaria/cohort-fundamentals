@@ -1011,124 +1011,69 @@
   }
 
   /* =========================================================
-     ÍNDICE / SIDEBAR navegável
+     TOPBAR navegável (estilo Google tabs)
      ========================================================= */
-  .toc-sidebar {
-    position: fixed;
-    top: 32px;
-    right: 24px;
-    width: 240px;
-    z-index: 50;
-    background: rgba(20, 20, 20, 0.88);
-    border: 1px solid var(--color-border-gold-soft);
-    border-radius: var(--radius-lg);
-    padding: var(--space-6) var(--space-4);
+  .topbar-nav {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-    box-shadow: var(--shadow-elevated), var(--shadow-glow-gold-subtle);
-    max-height: calc(100vh - 64px);
-    overflow-y: auto;
+    border-bottom: 1px solid var(--color-border-void);
   }
-  .toc-sidebar-header {
-    font-family: var(--font-primary);
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--color-gold-primary);
-    padding: 0 8px var(--space-3);
-    margin-bottom: var(--space-3);
-    border-bottom: 1px solid var(--color-border-gold-soft);
+  .topbar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-6);
     display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 600;
+    align-items: stretch;
+    gap: var(--space-8);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
-  .toc-sidebar-header::before {
-    content: '';
-    width: 14px;
-    height: 1px;
-    background: var(--color-gold-primary);
-    flex-shrink: 0;
-  }
-  .toc-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-  .toc-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 10px;
-    text-decoration: none;
-    color: var(--color-text-secondary);
-    border-radius: 6px;
-    transition: var(--transition-fast);
-    font-size: 13.5px;
-    font-weight: 500;
-    line-height: 1.3;
+  .topbar-inner::-webkit-scrollbar { display: none; }
+
+  .topbar-item {
     position: relative;
+    padding: 18px 2px;
+    font-family: var(--font-primary);
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.15s ease;
+    border: 0;
   }
-  .toc-item:hover {
-    background: rgba(212,164,55,0.10);
+  .topbar-item:hover {
     color: var(--color-accent-white);
   }
-  .toc-item .toc-n {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 11px;
-    color: var(--color-gold-primary);
-    letter-spacing: 0.04em;
-    min-width: 22px;
-    transition: var(--transition-fast);
+  .topbar-item.active {
+    color: var(--color-accent-white);
+    font-weight: 500;
   }
-  .toc-item:hover .toc-n { color: var(--color-gold-light); }
-  .toc-item .toc-label { flex: 1; }
-  .toc-item .toc-arrow {
-    font-size: 13px;
-    color: var(--color-gold-primary);
-    opacity: 0;
-    transition: opacity 0.15s ease, transform 0.15s ease;
-    margin-left: auto;
+  .topbar-item.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 3px;
+    background: var(--color-gold-primary);
+    border-radius: 2px 2px 0 0;
+    box-shadow: 0 0 8px rgba(212, 164, 55, 0.5);
   }
-  .toc-item:hover .toc-arrow { opacity: 1; transform: translateX(3px); }
 
-  /* Tablet/mobile: vira card inline no topo da página */
-  @media (max-width: 1180px) {
-    .toc-sidebar {
-      position: relative;
-      top: auto;
-      right: auto;
-      width: auto;
-      max-width: 1200px;
-      margin: var(--space-6) auto 0;
-      background: var(--color-bg-card);
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-      box-shadow: none;
-      border-color: var(--color-border-void);
-      max-height: none;
-      overflow: visible;
-      padding: var(--space-6);
-    }
-    .toc-list {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 4px;
-    }
-    .toc-item { padding: 12px 14px; }
-    .toc-item .toc-arrow { opacity: 1; }
-  }
   @media (max-width: 700px) {
-    .toc-sidebar { margin: var(--space-4) var(--space-4) 0; padding: var(--space-4); }
-    .toc-list { grid-template-columns: repeat(2, 1fr); }
+    .topbar-inner { padding: 0 var(--space-4); gap: var(--space-6); }
+    .topbar-item { font-size: 14px; padding: 14px 2px; }
   }
 
-  /* anchor scroll offset */
-  section.block { scroll-margin-top: 24px; }
+  /* anchor scroll offset: considera altura da topbar (~58px) */
+  section.block { scroll-margin-top: 70px; }
+  .hero { scroll-margin-top: 70px; }
 </style>
 </head>
 <body>
@@ -1137,21 +1082,21 @@
 
 <main>
 
-  <!-- ÍNDICE / SIDEBAR -->
-  <aside class="toc-sidebar" aria-label="Índice da página">
-    <div class="toc-sidebar-header">Índice</div>
-    <ul class="toc-list">
-      <li><a class="toc-item" href="#passos"><span class="toc-n">01</span><span class="toc-label">Próximos passos</span><span class="toc-arrow">→</span></a></li>
-      <li><a class="toc-item" href="#instrutora"><span class="toc-n">02</span><span class="toc-label">Sua instrutora</span><span class="toc-arrow">→</span></a></li>
-      <li><a class="toc-item" href="#cronograma"><span class="toc-n">03</span><span class="toc-label">Cronograma</span><span class="toc-arrow">→</span></a></li>
-      <li><a class="toc-item" href="#checklist"><span class="toc-n">04</span><span class="toc-label">Checklist Sábado 1</span><span class="toc-arrow">→</span></a></li>
-      <li><a class="toc-item" href="#links"><span class="toc-n">05</span><span class="toc-label">Links oficiais</span><span class="toc-arrow">→</span></a></li>
-      <li><a class="toc-item" href="#faq"><span class="toc-n">06</span><span class="toc-label">Dúvidas frequentes</span><span class="toc-arrow">→</span></a></li>
-    </ul>
-  </aside>
+  <!-- TOPBAR navegável (sticky no topo) -->
+  <nav class="topbar-nav" aria-label="Índice da página">
+    <div class="topbar-inner">
+      <a class="topbar-item active" href="#top" data-target="top">Início</a>
+      <a class="topbar-item" href="#passos" data-target="passos">Passos</a>
+      <a class="topbar-item" href="#instrutora" data-target="instrutora">Instrutora</a>
+      <a class="topbar-item" href="#cronograma" data-target="cronograma">Cronograma</a>
+      <a class="topbar-item" href="#checklist" data-target="checklist">Checklist</a>
+      <a class="topbar-item" href="#links" data-target="links">Links</a>
+      <a class="topbar-item" href="#faq" data-target="faq">Dúvidas</a>
+    </div>
+  </nav>
 
   <!-- HERO -->
-  <header class="hero">
+  <header class="hero" id="top">
     <div class="wrap">
       <div class="hero-inner">
         <span class="pill"><span class="dot"></span>Acesso ao grupo <em style="font-style:italic;color:var(--color-gold-primary);">liberado</em></span>
@@ -1488,6 +1433,46 @@
   </footer>
 
 </main>
+
+<script>
+(function () {
+  var sections = ['top', 'passos', 'instrutora', 'cronograma', 'checklist', 'links', 'faq'];
+  var links = {};
+  sections.forEach(function (id) {
+    var el = document.querySelector('.topbar-item[data-target="' + id + '"]');
+    if (el) links[id] = el;
+  });
+
+  function setActive(id) {
+    Object.keys(links).forEach(function (k) { links[k].classList.remove('active'); });
+    if (links[id]) links[id].classList.add('active');
+  }
+
+  var sectionEls = sections
+    .map(function (id) { return document.getElementById(id); })
+    .filter(Boolean);
+
+  if (!('IntersectionObserver' in window) || sectionEls.length === 0) return;
+
+  var visible = new Map();
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) visible.set(e.target.id, e.intersectionRatio);
+      else visible.delete(e.target.id);
+    });
+    var best = null;
+    visible.forEach(function (ratio, id) {
+      if (!best || ratio > best.ratio) best = { id: id, ratio: ratio };
+    });
+    if (best) setActive(best.id);
+  }, {
+    rootMargin: '-80px 0px -55% 0px',
+    threshold: [0, 0.25, 0.5, 0.75, 1]
+  });
+
+  sectionEls.forEach(function (el) { observer.observe(el); });
+})();
+</script>
 
 </body>
 </html>
