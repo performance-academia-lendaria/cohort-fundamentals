@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boas-vindas · M&aacute;quina de Receita com IA &middot; M&oacute;dulo Marketing · Academia Lendária</title>
+<meta name="description" content="Sua inscrição foi confirmada. Página oficial de boas-vindas do M&oacute;dulo Marketing da M&aacute;quina de Receita com IA. Salve, siga os passos e comece sua jornada.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300..700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  /* =========================================================
+     TOKENS — Academia Lendár[IA] · Design System oficial (v3)
+     Paleta: gold #C9B298 único accent · canvas near-black #070709
+     Tipografia: Inter Tight · Instrument Serif (ênfase) · JetBrains Mono
+     ========================================================= */
+  :root {
+    /* Gold Brand */
+    --color-gold-primary: #C9B298;
+    --color-gold-light: #E4D8CA;
+    --color-gold-deep: #8D7556;
+    --color-gold-dust: #5A4A34;
+    --color-accent-white: #EDEBE6;
+
+    /* Backgrounds */
+    --color-bg-void: #070709;
+    --color-bg-deep: #050507;
+    --color-bg-surface: #0D0D11;
+    --color-bg-card: #111115;
+    --color-bg-modal: #15151A;
+    --color-bg-gold-wash: rgba(201, 178, 152, 0.04);
+
+    /* Text */
+    --color-text-primary: #EDEBE6;
+    --color-text-secondary: rgba(237, 235, 230, 0.68);
+    --color-text-muted: rgba(237, 235, 230, 0.42);
+    --color-text-gold: #C9B298;
+
+    /* Borders */
+    --color-border-void: rgba(255, 255, 255, 0.07);
+    --color-border-light: rgba(255, 255, 255, 0.14);
+    --color-border-gold: #C9B298;
+    --color-border-gold-soft: rgba(201, 178, 152, 0.3);
+
+    /* State */
+    --color-warning: #D4A574;
+
+    /* Shadows / Glows */
+    --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.5);
+    --shadow-cinematic: 0 24px 64px rgba(0, 0, 0, 0.7), 0 0 80px rgba(201, 178, 152, 0.08);
+    --shadow-glow-gold-subtle: 0 0 16px rgba(201, 178, 152, 0.15);
+    --shadow-glow-gold: 0 0 24px rgba(201, 178, 152, 0.3);
+    --shadow-glow-gold-strong: 0 0 40px rgba(201, 178, 152, 0.45);
+    --shadow-glow-gold-halo: 0 0 80px rgba(201, 178, 152, 0.25), 0 0 160px rgba(201, 178, 152, 0.1);
+    --bracket-glow-hover: 0 0 12px rgba(201, 178, 152, 0.5);
+
+    /* Gradients */
+    --gradient-hero-cosmos: radial-gradient(ellipse at center, rgba(201,178,152,0.18) 0%, rgba(201,178,152,0.06) 30%, #070709 70%);
+    --gradient-gold-halo: radial-gradient(circle at center, rgba(201,178,152,0.25), transparent 60%);
+    --gradient-bevel-gold: linear-gradient(135deg, #E4D8CA 0%, #C9B298 50%, #8D7556 100%);
+    --gradient-edge-glow: linear-gradient(90deg, transparent 0%, rgba(201,178,152,0.4) 50%, transparent 100%);
+    --gradient-constellation-wash: radial-gradient(circle at 20% 30%, rgba(201,178,152,0.06), transparent 40%), radial-gradient(circle at 80% 70%, rgba(201,178,152,0.04), transparent 40%);
+
+    /* Spacing 8pt */
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-24: 6rem;
+
+    /* Type */
+    --font-primary: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-display: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-serif: 'Instrument Serif', 'Times New Roman', serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+
+    /* Radius */
+    --radius-md: 0.5rem;
+    --radius-lg: 1rem;
+    --radius-full: 9999px;
+
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-cinematic: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-primary);
+    background: var(--color-bg-void);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: var(--color-gold-primary); text-decoration: none; transition: var(--transition-fast); }
+  a:hover { color: var(--color-gold-light); }
+
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-6); }
+
+  /* =========================================================
+     CONSTELLATION BACKGROUND
+     ========================================================= */
+  .cosmos-bg {
+    position: fixed;
+    inset: 0;
+    background: var(--gradient-constellation-wash);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .cosmos-bg::before,
+  .cosmos-bg::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: var(--color-gold-primary);
+    opacity: 0.5;
+    box-shadow: 0 0 6px rgba(201,178,152,0.6);
+  }
+  .cosmos-bg::before { width: 2px; height: 2px; top: 18%; left: 12%; }
+  .cosmos-bg::after  { width: 1px; height: 1px; top: 72%; left: 88%; }
+
+  main { position: relative; z-index: 1; }
+
+  /* =========================================================
+     HERO
+     ========================================================= */
+  .hero {
+    background: var(--color-bg-void);
+    position: relative;
+    overflow: hidden;
+    padding: var(--space-24) 0 var(--space-16);
+    text-align: center;
+    border-bottom: 1px solid var(--color-border-void);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-hero-cosmos);
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 1; max-width: 920px; margin: 0 auto; }
+
+  .pill {
+    display: inline-block;
+    padding: var(--space-2) var(--space-6);
+    border: 2px solid var(--color-accent-white);
+    border-radius: var(--radius-full);
+    color: var(--color-accent-white);
+    font-family: var(--font-primary);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    margin-bottom: var(--space-8);
+    background: transparent;
+  }
+  .pill .dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--color-gold-primary);
+    box-shadow: 0 0 8px rgba(201,178,152,0.7);
+    margin-right: 8px;
+    transform: translateY(-2px);
+  }
+
+  .hero h1 {
+    font-family: var(--font-primary);
+    font-size: clamp(36px, 6.5vw, 68px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: var(--color-accent-white);
+    margin-bottom: var(--space-6);
+  }
+  .hero h1 em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+  }
+  .display-gold {
+    font-family: var(--font-display);
+    font-weight: 800;
+    background: var(--gradient-bevel-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 24px rgba(201, 178, 152, 0.3);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+    letter-spacing: 0.02em;
+  }
+
+  .hero-sub {
+    font-size: clamp(16px, 1.8vw, 19px);
+    color: var(--color-text-secondary);
+    max-width: 720px;
+    margin: 0 auto var(--space-12);
+    line-height: 1.6;
+  }
+  .hero-sub strong { color: var(--color-accent-white); font-weight: 600; }
+  .hero-sub em { color: var(--color-gold-primary); font-style: italic; }
+
+  /* meta strip — grid 3x2 (3 colunas, 2 linhas) */
+  .meta-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--color-border-void);
+    border: 1px solid var(--color-border-void);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    max-width: 960px;
+    margin: var(--space-12) auto 0;
+  }
+  .meta-cell {
+    background: var(--color-bg-surface);
+    padding: var(--space-6) var(--space-6);
+    text-align: left;
+    min-height: 92px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .meta-cell .label {
+    font-family: var(--font-primary);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    white-space: nowrap;
+  }
+  .meta-cell .value {
+    font-size: 15px;
+    color: var(--color-accent-white);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .meta-cell .value .gold { color: var(--color-gold-primary); }
+
+  /* =========================================================
+     SECTION
+     ========================================================= */
+  section.block {
+    padding: var(--space-24) 0;
+    position: relative;
+  }
+  section.block + section.block { border-top: 1px solid var(--color-border-void); }
+  section.block.alt { background: var(--color-bg-deep); }
+
+  .sec-eyebrow {
+    display: inline-block;
+    font-family: var(--font-primary);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-gold-primary);
+    margin-bottom: var(--space-4);
+    padding-left: 22px;
+    position: relative;
+  }
+  .sec-eyebrow::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 14px;
+    height: 1px;
+    background: var(--color-gold-primary);
+  }
+  .sec-title {
+    font-family: var(--font-primary);
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    color: var(--color-accent-white);
+    margin-bottom: var(--space-4);
+    max-width: 820px;
+  }
+  .sec-title em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--color-gold-primary);
+  }
+  .sec-lead {
+    font-size: 17px;
+    color: var(--color-text-secondary);
+    max-width: 720px;
+    margin-bottom: var(--space-12);
+    line-height: 1.6;
+  }
+  .sec-lead strong { color: var(--color-accent-white); font-weight: 600; }
+
+  h3 {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--color-accent-white);
+    margin: var(--space-8) 0 var(--space-3);
+    letter-spacing: -0.01em;
+  }
+
+  /* =========================================================
+     BRACKET CTA (assinatura visual)
+     ========================================================= */
+  .bracket-cta {
+    display: inline-block;
+    color: var(--color-gold-primary);
+    font-family: var(--font-primary);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    font-size: 14px;
+  }
+  .bracket-cta::before { content: "[ "; }
+  .bracket-cta::after  { content: " ]"; }
+  .bracket-cta:hover {
+    color: var(--color-gold-light);
+    text-shadow: var(--bracket-glow-hover);
+  }
+  .bracket-cta.lg { font-size: 16px; padding: 4px 0; }
+
+  /* =========================================================
+     STEPS — Próximos Passos numerados (01 / 02 / 03)
+     ========================================================= */
+  .steps {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    margin-top: var(--space-8);
+  }
+  .step {
+    display: grid;
+    grid-template-columns: 120px 1fr minmax(220px, auto);
+    align-items: center;
+    gap: var(--space-8);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-void);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    transition: var(--transition-cinematic);
+    position: relative;
+    overflow: hidden;
+  }
+  .step::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,178,152,0.08) 0%, transparent 60%);
+    opacity: 0;
+    transition: var(--transition-cinematic);
+    pointer-events: none;
+  }
+  .step:hover {
+    border-color: var(--color-border-gold-soft);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow-gold-subtle);
+  }
+  .step:hover::before { opacity: 1; }
+  .step-num {
+    font-family: var(--font-display);
+    font-size: 72px;
+    font-weight: 800;
+    line-height: 1;
+    background: var(--gradient-bevel-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 32px rgba(201,178,152,0.25);
+    letter-spacing: -0.02em;
+    position: relative;
+    z-index: 1;
+  }
+  .step-body { position: relative; z-index: 1; }
+  .step-body h3 {
+    margin: 0 0 8px;
+    font-size: 20px;
+    color: var(--color-accent-white);
+    font-weight: 600;
+  }
+  .step-body p {
+    margin: 0;
+    font-size: 14.5px;
+    color: var(--color-text-secondary);
+    line-height: 1.55;
+  }
+  .step-tag {
+    display: inline-block;
+    font-family: var(--font-primary);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-full);
+    color: var(--color-text-muted);
+    margin-bottom: 10px;
+  }
+  .step-tag.must {
+    color: var(--color-gold-primary);
+    border-color: var(--color-border-gold-soft);
+    background: rgba(201,178,152,0.05);
+  }
+  .step-cta { position: relative; z-index: 1; justify-self: stretch; }
+
+  /* Botão dos passos — visualmente claro como botão */
+  .step-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 14px 22px;
+    background: var(--color-gold-primary);
+    color: #000;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    border: 1px solid var(--color-gold-primary);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition: var(--transition-cinematic);
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.4), var(--shadow-glow-gold-subtle);
+    white-space: nowrap;
+  }
+  .step-btn:hover {
+    background: var(--color-gold-light);
+    border-color: var(--color-gold-light);
+    color: #000;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.4), var(--shadow-glow-gold-strong);
+    transform: translateY(-1px);
+  }
+  .step-btn .arrow {
+    font-size: 16px;
+    transition: transform 0.25s ease;
+  }
+  .step-btn:hover .arrow { transform: translateX(3px); }
+
+  .step-btn.ghost {
+    background: transparent;
+    color: var(--color-gold-primary);
+    border: 1px solid var(--color-border-gold-soft);
+    box-shadow: none;
+  }
+  .step-btn.ghost:hover {
+    background: rgba(201,178,152,0.08);
+    border-color: var(--color-gold-primary);
+    color: var(--color-gold-light);
+    box-shadow: var(--shadow-glow-gold-subtle);
+  }
+  .step-btn .kbd {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    background: rgba(0,0,0,0.25);
+    border: 1px solid rgba(0,0,0,0.3);
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    letter-spacing: 0.02em;
+  }
+  .step-btn.ghost .kbd {
+    background: rgba(201,178,152,0.08);
+    border-color: var(--color-border-gold-soft);
+    color: var(--color-gold-primary);
+  }
+
+  /* =========================================================
+     CALLOUTS
+     ========================================================= */
+  .callout {
+    border: 1px solid var(--color-border-gold-soft);
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-gold-wash);
+    padding: var(--space-6) var(--space-8);
+    margin: var(--space-8) 0;
+    position: relative;
+  }
+  .callout::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--gradient-bevel-gold);
+    border-radius: 3px 0 0 3px;
+  }
+  .callout .label {
+    font-family: var(--font-primary);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-gold-primary);
+    margin-bottom: 8px;
+    display: block;
+    font-weight: 600;
+  }
+  .callout p {
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .callout p strong { color: var(--color-accent-white); font-weight: 600; }
+  .callout p em { color: var(--color-gold-primary); font-style: italic; }
+
+  .callout.warn { border-color: rgba(212,165,116,0.4); background: rgba(212,165,116,0.05); }
+  .callout.warn::before { background: linear-gradient(180deg, #D4A574, #8D7556); }
+  .callout.warn .label { color: var(--color-warning); }
+
+  /* =========================================================
+     INSTRUTORA
+     ========================================================= */
+  .instructor {
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: var(--space-16);
+    align-items: center;
+    margin-top: var(--space-8);
+  }
+  .instructor-photo {
+    position: relative;
+    aspect-ratio: 4/5;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-light);
+    box-shadow: var(--shadow-cinematic);
+  }
+  .instructor-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-gold-halo);
+    mix-blend-mode: overlay;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  .instructor-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .instructor-photo .name-tag {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1;
+    background: rgba(0,0,0,0.7);
+    border: 1px solid var(--color-border-gold-soft);
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    font-family: var(--font-primary);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: var(--color-accent-white);
+    backdrop-filter: blur(8px);
+  }
+  .instructor-photo .name-tag::before {
+    content: '';
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--color-gold-primary);
+    box-shadow: 0 0 6px rgba(201,178,152,0.8);
+    margin-right: 8px;
+    transform: translateY(-1px);
+  }
+  .instructor-bio .sec-eyebrow { margin-bottom: var(--space-3); }
+  .instructor-bio h2 {
+    font-family: var(--font-primary);
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    color: var(--color-accent-white);
+    margin-bottom: var(--space-4);
+  }
+  .instructor-bio h2 em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--color-gold-primary);
+  }
+  .instructor-meta {
+    font-family: var(--font-primary);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-gold-primary);
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-border-light);
+    font-weight: 500;
+  }
+  .instructor-bio p {
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-4);
+  }
+  .instructor-bio p strong { color: var(--color-accent-white); font-weight: 600; }
+  .instructor-bio p em { color: var(--color-gold-primary); font-style: italic; }
+
+  /* =========================================================
+     CRONOGRAMA
+     ========================================================= */
+  .schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+    margin-top: var(--space-8);
+  }
+  .day-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-void);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    transition: var(--transition-cinematic);
+    position: relative;
+    overflow: hidden;
+  }
+  .day-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: var(--gradient-edge-glow);
+    opacity: 0;
+    transition: var(--transition-fast);
+  }
+  .day-card:hover {
+    border-color: var(--color-border-gold-soft);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow-gold-subtle);
+  }
+  .day-card:hover::before { opacity: 1; }
+
+  .day-label {
+    font-family: var(--font-primary);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--color-gold-primary);
+    text-transform: uppercase;
+    margin-bottom: var(--space-3);
+    font-weight: 600;
+  }
+  .day-date {
+    font-family: var(--font-display);
+    font-size: 44px;
+    font-weight: 700;
+    color: var(--color-accent-white);
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: 0.01em;
+  }
+  .day-time {
+    font-family: var(--font-primary);
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--color-border-light);
+  }
+  .lesson {
+    margin-bottom: var(--space-4);
+    padding-left: var(--space-3);
+    border-left: 2px solid var(--color-gold-primary);
+  }
+  .lesson:last-child { margin-bottom: 0; }
+  .lesson-code {
+    font-family: var(--font-primary);
+    font-size: 10px;
+    color: var(--color-gold-primary);
+    letter-spacing: 0.15em;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .lesson-title {
+    font-size: 15px;
+    color: var(--color-accent-white);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  /* PS BLOCK */
+  .ps-wrap {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-lg);
+    padding: var(--space-12);
+    margin-top: var(--space-12);
+    position: relative;
+    overflow: hidden;
+  }
+  .ps-wrap::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: var(--gradient-edge-glow);
+  }
+  .ps-wrap h3 { margin-top: 0; }
+  .ps-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1px;
+    background: var(--color-border-void);
+    border: 1px solid var(--color-border-void);
+    border-radius: var(--radius-md);
+    margin: var(--space-6) 0 var(--space-8);
+    overflow: hidden;
+  }
+  .ps-info-cell {
+    background: var(--color-bg-surface);
+    padding: var(--space-4) var(--space-6);
+  }
+  .ps-info-cell .label {
+    font-family: var(--font-primary);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .ps-info-cell .value {
+    font-size: 14px;
+    color: var(--color-accent-white);
+    font-weight: 600;
+  }
+  .ps-info-cell .value .gold { color: var(--color-gold-primary); }
+
+  /* =========================================================
+     CHECKLIST
+     ========================================================= */
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-6);
+  }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--color-border-void);
+    color: var(--color-text-secondary);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before {
+    content: '';
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--color-border-light);
+    background: var(--color-bg-surface);
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 3px;
+    position: relative;
+  }
+  .checklist li:hover::before {
+    border-color: var(--color-gold-primary);
+    box-shadow: var(--shadow-glow-gold-subtle);
+  }
+  .checklist li strong { color: var(--color-accent-white); font-weight: 600; }
+
+  /* =========================================================
+     LINKS / SUPORTE
+     ========================================================= */
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+  }
+  .link-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-void);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    transition: var(--transition-cinematic);
+  }
+  .link-card:hover {
+    border-color: var(--color-border-gold-soft);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow-gold-subtle);
+  }
+  .link-card .channel {
+    font-family: var(--font-primary);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--color-gold-primary);
+    text-transform: uppercase;
+    margin-bottom: var(--space-3);
+    font-weight: 600;
+  }
+  .link-card h4 {
+    color: var(--color-accent-white);
+    font-family: var(--font-primary);
+    font-size: 17px;
+    font-weight: 600;
+    margin: 0 0 var(--space-3);
+    letter-spacing: -0.01em;
+  }
+  .link-card p { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--color-text-secondary); }
+  .link-card a { word-break: break-all; }
+
+  /* =========================================================
+     FAQ
+     ========================================================= */
+  .faq-item {
+    border: 1px solid var(--color-border-void);
+    background: var(--color-bg-card);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6) var(--space-8);
+    margin-bottom: var(--space-3);
+    transition: var(--transition-fast);
+  }
+  .faq-item:hover { border-color: var(--color-border-gold-soft); }
+  .faq-item h4 {
+    color: var(--color-accent-white);
+    font-family: var(--font-primary);
+    font-size: 17px;
+    font-weight: 600;
+    margin: 0 0 var(--space-2);
+    letter-spacing: -0.01em;
+  }
+  .faq-item p { margin: 0; font-size: 14.5px; color: var(--color-text-secondary); line-height: 1.6; }
+
+  /* =========================================================
+     FINAL CTA
+     ========================================================= */
+  .final-cta {
+    text-align: center;
+    background: var(--color-bg-void);
+    position: relative;
+    padding: var(--space-24) var(--space-6);
+    overflow: hidden;
+  }
+  .final-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-hero-cosmos);
+    pointer-events: none;
+  }
+  .final-cta-inner { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+  .final-cta h2 {
+    font-family: var(--font-primary);
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    color: var(--color-accent-white);
+    margin-bottom: var(--space-6);
+  }
+  .final-cta h2 em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--color-gold-primary);
+  }
+  .final-cta p {
+    font-size: 18px;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-12);
+    line-height: 1.6;
+  }
+  .final-cta-actions {
+    display: flex;
+    gap: var(--space-6);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: var(--space-8);
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 16px 36px;
+    border-radius: var(--radius-full);
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    transition: var(--transition-cinematic);
+    cursor: pointer;
+    border: 2px solid transparent;
+    text-align: center;
+  }
+  .btn-primary {
+    background: var(--color-gold-primary);
+    color: #000;
+    border-color: var(--color-gold-primary);
+  }
+  .btn-primary:hover {
+    background: var(--color-gold-light);
+    border-color: var(--color-gold-light);
+    box-shadow: var(--shadow-glow-gold-strong);
+    color: #000;
+    transform: translateY(-2px);
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--color-gold-primary);
+    border-color: var(--color-gold-primary);
+  }
+  .btn-outline:hover {
+    background: rgba(201,178,152,0.1);
+    box-shadow: var(--shadow-glow-gold-subtle);
+    color: var(--color-gold-light);
+    transform: translateY(-2px);
+  }
+
+  .quote-block {
+    margin-top: var(--space-12);
+    padding: var(--space-8) var(--space-8);
+    border: 1px solid var(--color-border-gold-soft);
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-gold-wash);
+    text-align: left;
+    position: relative;
+  }
+  .quote-block::before {
+    content: '"';
+    position: absolute;
+    top: -20px; left: 24px;
+    font-family: var(--font-display);
+    font-size: 80px;
+    color: var(--color-gold-primary);
+    line-height: 1;
+    opacity: 0.5;
+  }
+  .quote-block .label {
+    font-family: var(--font-primary);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-gold-primary);
+    margin-bottom: var(--space-3);
+    font-weight: 600;
+    display: block;
+  }
+  .quote-block p {
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: 16px;
+    line-height: 1.7;
+    font-style: italic;
+  }
+  .quote-block p strong { color: var(--color-accent-white); font-weight: 600; font-style: normal; }
+
+  /* =========================================================
+     FOOTER
+     ========================================================= */
+  footer {
+    text-align: center;
+    padding: var(--space-12) var(--space-6);
+    border-top: 1px solid var(--color-border-void);
+    background: var(--color-bg-void);
+  }
+  footer p {
+    color: var(--color-text-muted);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  footer p .gold { color: var(--color-gold-primary); }
+  .bracket { color: var(--color-gold-primary); font-style: normal; }
+  footer p + p { margin-top: 8px; text-transform: none; letter-spacing: 0.02em; }
+
+  .footer-legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 20px;
+    max-width: 720px;
+    margin: 0 auto var(--space-6);
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--color-border-void);
+  }
+  .footer-legal a {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    transition: color var(--transition-fast);
+  }
+  .footer-legal a:hover { color: var(--color-gold-primary); }
+  .footer-cnpj { color: var(--color-text-secondary) !important; text-transform: none !important; letter-spacing: 0.04em !important; font-family: var(--font-mono); }
+
+  /* DS refinements — eyebrows/labels em mono, palavras de ênfase em serif itálico */
+  .sec-eyebrow, .step-tag, .day-label, .lesson-code,
+  .link-card .channel, .meta-cell .label, .ps-info-cell .label,
+  .instructor-meta, .callout .label, .quote-block .label,
+  .footer-legal a { font-family: var(--font-mono); }
+  .hero h1 em, .sec-title em, .final-cta h2 em,
+  .instructor-bio h2 em { font-family: var(--font-serif); font-weight: 400; font-style: italic; }
+
+  /* =========================================================
+     RESPONSIVE
+     ========================================================= */
+  @media (max-width: 900px) {
+    .hero { padding: var(--space-16) 0 var(--space-12); }
+    section.block { padding: var(--space-16) 0; }
+    .schedule-grid { grid-template-columns: 1fr; }
+    .instructor { grid-template-columns: 1fr; gap: var(--space-8); }
+    .instructor-photo { max-width: 360px; margin: 0 auto; }
+    .step {
+      grid-template-columns: 80px 1fr;
+      gap: var(--space-4);
+      padding: var(--space-6);
+    }
+    .step-num { font-size: 56px; }
+    .step-cta {
+      grid-column: 1 / -1;
+      padding-left: 96px;
+    }
+    .ps-wrap { padding: var(--space-8) var(--space-6); }
+    .final-cta-actions .btn { width: 100%; }
+  }
+
+  @media (max-width: 560px) {
+    .meta-strip { grid-template-columns: repeat(2, 1fr); }
+    .meta-cell { min-height: auto; padding: var(--space-4); }
+    .step { grid-template-columns: 1fr; text-align: left; }
+    .step-num { font-size: 48px; }
+    .step-cta { padding-left: 0; }
+    .step-btn { width: 100%; }
+    .day-date { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cosmos-bg"></div>
+
+<main>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-inner">
+        <span class="pill"><span class="dot"></span>Sua inscrição foi <em style="font-style:italic;color:var(--color-gold-primary);">confirmada</em></span>
+        <h1>
+          Boas-vindas à<br>
+          <span class="display-gold">M&oacute;dulo Marketing</span><br>
+          <em>da M&aacute;quina de Receita com IA.</em>
+        </h1>
+        <p class="hero-sub">
+          A partir de agora você faz parte da <strong>M&oacute;dulo Marketing</strong>. Em <strong>4 sábados intensivos</strong>, a gente te leva do marketing no achismo até uma <strong>operação de marketing de receita rodando com IA</strong>: oferta validada, funil, tráfego e painel de receita. Esta é a sua página de partida — <strong>salva nos favoritos agora</strong>.
+        </p>
+
+        <div class="meta-strip">
+          <div class="meta-cell"><div class="label">Início</div><div class="value"><span class="gold">20/06/2026</span> · sábado</div></div>
+          <div class="meta-cell"><div class="label">Formato</div><div class="value">4 sábados · 09h–13h</div></div>
+          <div class="meta-cell"><div class="label">Método</div><div class="value">R.O.F.A.</div></div>
+          <div class="meta-cell"><div class="label">Foco</div><div class="value">Marketing de Receita com IA</div></div>
+          <div class="meta-cell"><div class="label">Mentorias</div><div class="value"><span class="gold">Ter · Qui</span> · 18h30</div></div>
+          <div class="meta-cell"><div class="label">Modalidade</div><div class="value">100% online ao vivo</div></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PRÓXIMOS PASSOS -->
+  <section class="block">
+    <div class="wrap">
+      <span class="sec-eyebrow">Próximos passos</span>
+      <h2 class="sec-title">Comece <em>por aqui</em>. <br>5 passos pra você chegar pronto no Sábado 1.</h2>
+      <p class="sec-lead">A ordem importa. Faz na sequência e você chega no dia 20/06 com tudo no lugar — <strong>sem trava técnica, sem perder comunicação</strong>.</p>
+
+      <div class="callout">
+        <span class="label">⭐ Ação imediata · 30 segundos</span>
+        <p><strong>Salva esta página nos favoritos do navegador agora.</strong> Você vai voltar aqui antes de cada sábado. Atalho: <strong>Ctrl + D</strong> (Windows) ou <strong>Cmd + D</strong> (Mac).</p>
+      </div>
+
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-body">
+            <span class="step-tag">Agora</span>
+            <h3>Salva esta página nos favoritos</h3>
+            <p>Este é o seu hub oficial — todos os links, datas e a apresentação da turma ficam aqui. Volta sempre antes das aulas.</p>
+          </div>
+          <div class="step-cta">
+            <span class="step-btn ghost"><span>Salvar</span><span class="kbd">Ctrl/Cmd + D</span></span>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-body">
+            <span class="step-tag must">Obrigatório</span>
+            <h3>Entra no grupo da turma</h3>
+            <p>Pra entrar no WhatsApp oficial da turma, primeiro responde a pesquisa de onboarding — <strong>3 minutinhos</strong>. É por ela que a gente libera seu acesso ao grupo e personaliza sua jornada.</p>
+          </div>
+          <div class="step-cta">
+            <a class="step-btn" href="https://guide.lendario.ai/fundamentals/mria-marketing-boas-vindas/pesquisa/onboarding" target="_blank" rel="noopener"><span>Responder pesquisa</span><span class="arrow">→</span></a>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-body">
+            <span class="step-tag">Acesso</span>
+            <h3>Acessa a Área de Membros</h3>
+            <p>Faz login com o mesmo e-mail da compra. Lá ficam as gravações, materiais, conteúdos complementares e a estrutura do curso.</p>
+          </div>
+          <div class="step-cta">
+            <a class="step-btn" href="https://membros.academialendaria.ai/m/courses?tenant=fundamentals" target="_blank" rel="noopener"><span>Área de membros</span><span class="arrow">→</span></a>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="step-body">
+            <span class="step-tag must">Antes do Sábado 1</span>
+            <h3>Instala o AIOX e prepara seu cockpit</h3>
+            <p>Esta é a aula mais importante antes do dia 20/06. Instala o AIOX, Claude Code, Git e configura o ambiente pra chegar com tudo rodando. <strong>Sem isso, você perde o ritmo do bloco intensivo.</strong></p>
+          </div>
+          <div class="step-cta">
+            <a class="step-btn" href="https://membros.academialendaria.ai/m/lessons/aiox-squad-1776165873077" target="_blank" rel="noopener"><span>Aula de instalação</span><span class="arrow">→</span></a>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">05</div>
+          <div class="step-body">
+            <span class="step-tag">Agenda</span>
+            <h3>Bloqueia as datas das aulas e das mentorias</h3>
+            <p>Marca agora os 4 sábados (09h–13h) e as mentorias coletivas (terça e quinta, 18h30–20h30). A frequência síncrona é parte do critério de aprovação e da entrega da sua operação de marketing.</p>
+          </div>
+          <div class="step-cta">
+            <a class="step-btn ghost" href="#cronograma"><span>Ver cronograma</span><span class="arrow">↓</span></a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="callout warn">
+        <span class="label">Importante · não pula o passo 4</span>
+        <p>O <strong>Sábado 1 é metade setup, metade construção</strong>. Se você chegar sem o ambiente pronto, atrasa o bloco inteiro. Reserva <strong>60 a 90 minutos</strong> no decorrer da semana pra assistir e executar a aula de instalação.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CRONOGRAMA -->
+  <section class="block" id="cronograma">
+    <div class="wrap">
+      <span class="sec-eyebrow">Cronograma</span>
+      <h2 class="sec-title">4 sábados · <em>4 aulas</em> · mentorias na semana.</h2>
+      <p class="sec-lead">As aulas acontecem em bloco único das <strong>09h às 13h</strong>, 1 aula por sábado. As mentorias coletivas são sessões de implementação ao vivo, sempre <strong>terça e quinta, 18h30</strong>.</p>
+
+      <h3>Aulas ao vivo · 4 sábados intensivos (20/06 a 11/07)</h3>
+      <div class="schedule-grid">
+
+        <div class="day-card">
+          <div class="day-label">Sábado 1</div>
+          <div class="day-date">20/06</div>
+          <div class="day-time">09h às 13h · ao vivo</div>
+          <div class="lesson">
+            <div class="lesson-code">A1 · Oferta</div>
+            <div class="lesson-title">Pesquisa, Concorrentes &amp; Ofertas com IA</div>
+          </div>
+        </div>
+
+        <div class="day-card">
+          <div class="day-label">Sábado 2</div>
+          <div class="day-date">27/06</div>
+          <div class="day-time">09h às 13h · ao vivo</div>
+          <div class="lesson">
+            <div class="lesson-code">A2 · Funis</div>
+            <div class="lesson-title">Funis: criativos &amp; páginas de venda</div>
+          </div>
+        </div>
+
+        <div class="day-card">
+          <div class="day-label">Sábado 3</div>
+          <div class="day-date">04/07</div>
+          <div class="day-time">09h às 13h · ao vivo</div>
+          <div class="lesson">
+            <div class="lesson-code">A3 · Tráfego</div>
+            <div class="lesson-title">Gestão de Tráfego com IA</div>
+          </div>
+        </div>
+
+        <div class="day-card">
+          <div class="day-label">Sábado 4</div>
+          <div class="day-date">11/07</div>
+          <div class="day-time">09h às 13h · ao vivo</div>
+          <div class="lesson">
+            <div class="lesson-code">A4 · Receita</div>
+            <div class="lesson-title">Análise de Dados aplicada à Receita</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="ps-wrap">
+        <h3>Mentorias coletivas · implementação ao vivo</h3>
+        <p style="color:var(--color-text-secondary);font-size:15px;line-height:1.6;">As mentorias não são aulas extras. São sessões pra implementar o que viu no sábado, revisar entregável, tirar dúvida pontual e te preparar pra próxima aula. <strong style="color:var(--color-accent-white);">Usa toda semana</strong> — é o canal mais rápido pra sair de qualquer trava.</p>
+
+        <div class="ps-info">
+          <div class="ps-info-cell"><div class="label">Dias</div><div class="value"><span class="gold">Terça</span> e <span class="gold">Quinta</span></div></div>
+          <div class="ps-info-cell"><div class="label">Horário</div><div class="value">18h30 às 20h30</div></div>
+          <div class="ps-info-cell"><div class="label">Duração</div><div class="value">2 horas</div></div>
+          <div class="ps-info-cell"><div class="label">Formato</div><div class="value">Hot seats · implementação</div></div>
+        </div>
+
+        <ul style="list-style:none;padding:0;color:var(--color-text-secondary);font-size:15px;line-height:1.7;">
+          <li style="padding:8px 0;border-bottom:1px solid var(--color-border-void);"><strong style="color:var(--color-accent-white);">Implementar o que viu no sábado</strong> — com a turma e a mentoria ao vivo</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--color-border-void);"><strong style="color:var(--color-accent-white);">Revisar entregável</strong> da aula anterior (oferta, funil, campanha, painel)</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--color-border-void);"><strong style="color:var(--color-accent-white);">Destravar quem ficou pra trás</strong> — se travou, traz sua tela</li>
+          <li style="padding:8px 0;"><strong style="color:var(--color-accent-white);">Preparar você</strong> pra próxima aula</li>
+        </ul>
+      </div>
+
+      <div class="callout warn">
+        <span class="label">Frequência recomendada</span>
+        <p>Pra garantir a entrega da sua operação de marketing no final, mantém <strong>75%+ de presença síncrona</strong> nas aulas. As mentorias são opcionais, mas quem usa toda semana tem <em>3× mais chance</em> de entregar tudo no prazo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHECKLIST -->
+  <section class="block alt">
+    <div class="wrap">
+      <span class="sec-eyebrow">Checklist · Sábado 1</span>
+      <h2 class="sec-title">O que você precisa ter pronto <em>até 19/06</em>.</h2>
+      <p class="sec-lead">Pra começar o Sábado 1 já construindo (e não só instalando), confere cada item antes de 19/06. A maioria você resolve seguindo a aula do passo 4.</p>
+
+      <ul class="checklist">
+        <li><span><strong>Computador próprio</strong> com mínimo 4 GB de RAM (Mac, Linux ou Windows com WSL)</span></li>
+        <li><span><strong>Conta GitHub</strong> criada e logada</span></li>
+        <li><span><strong>Claude Pro ativo</strong> (~US$ 20/mês) — recomendado Max pra quem quiser ir mais fundo</span></li>
+        <li><span><strong>VS Code instalado</strong> (ou Cursor / Windsurf / Antigravity)</span></li>
+        <li><span><strong>AIOX instalado</strong> e Claude Code rodando (segue a aula do passo 4)</span></li>
+        <li><span><strong>Pesquisa de onboarding</strong> respondida (passo 2)</span></li>
+        <li><span><strong>Grupo WhatsApp M&oacute;dulo Marketing</strong> com você dentro</span></li>
+        <li><span><strong>Agenda bloqueada</strong> pros 4 sábados (09h–13h)</span></li>
+        <li><span><strong>Ambiente reservado</strong> — local sem interrupção por 4h</span></li>
+      </ul>
+
+      <div class="callout">
+        <span class="label">Travou em algum item?</span>
+        <p>Não fica parado(a). Cola sua dúvida no grupo da turma ou traz sua tela pra próxima mentoria coletiva (terça ou quinta, 18h30). <em>A gente resolve junto.</em></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LINKS OFICIAIS -->
+  <section class="block">
+    <div class="wrap">
+      <span class="sec-eyebrow">Links oficiais</span>
+      <h2 class="sec-title">Tudo o que você precisa, <em>num lugar só</em>.</h2>
+
+      <div class="links-grid">
+        <div class="link-card">
+          <div class="channel">Pesquisa de Onboarding</div>
+          <h4>Liberação do grupo da turma</h4>
+          <p><a href="https://guide.lendario.ai/fundamentals/mria-marketing-boas-vindas/pesquisa/onboarding" target="_blank" rel="noopener">guide.lendario.ai/fundamentals/mria-marketing-boas-vindas/pesquisa/onboarding</a></p>
+        </div>
+
+        <div class="link-card">
+          <div class="channel">Área de Membros</div>
+          <h4>Gravações e materiais</h4>
+          <p><a href="https://membros.academialendaria.ai/m/courses?tenant=fundamentals" target="_blank" rel="noopener">membros.academialendaria.ai/m/courses?tenant=fundamentals</a></p>
+        </div>
+
+        <div class="link-card">
+          <div class="channel">Aula obrigatória</div>
+          <h4>Instalação do AIOX</h4>
+          <p><a href="https://membros.academialendaria.ai/m/lessons/aiox-squad-1776165873077" target="_blank" rel="noopener">Acessar lição na área de membros →</a></p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="block alt">
+    <div class="wrap">
+      <span class="sec-eyebrow">Dúvidas frequentes</span>
+      <h2 class="sec-title">Pergunta. <em>A gente responde com honestidade.</em></h2>
+
+      <div style="margin-top: var(--space-8);">
+        <div class="faq-item">
+          <h4>Preciso saber programar?</h4>
+          <p>Não. O Fundamentals foi desenhado pra quem nunca programou. Você vai aprender a operar o cockpit, delegar pra agentes e construir com IA — sem precisar escrever código tradicional.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>E se eu não conseguir comparecer a alguma aula?</h4>
+          <p>Todas as aulas são gravadas e ficam na área de membros com acesso vitalício. Mesmo assim, a gente recomenda fortemente a presença ao vivo — o ritmo intensivo de sábado é parte do método.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>As mentorias são obrigatórias?</h4>
+          <p>Não, mas são fortemente recomendadas. Quem usa toda semana implementa o que viu no sábado com muito mais facilidade. Acontecem terça e quinta, 18h30 às 20h30.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>Preciso comprar o Claude Pro?</h4>
+          <p>Sim. O Claude Pro (~US$ 20/mês) é o pré-requisito técnico principal. O plano Max é ideal pra quem quiser explorar com mais profundidade, mas o Pro é suficiente pra acompanhar o curso.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>O que eu entrego ao final do curso?</h4>
+          <p>Uma operação de marketing de receita montada com IA: oferta validada + dossiê de concorrentes, funil com páginas e criativos, plano de campanha de tráfego e um painel de receita — construídos e documentados ao longo dos 4 sábados.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>Como funciona o suporte fora das aulas e mentorias?</h4>
+          <p>O canal principal é o grupo de WhatsApp da turma. Pra dúvida comercial, acesso ou cancelamento, fala com a gente pelos canais oficiais da Academia Lendária.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="final-cta-inner">
+      <span class="sec-eyebrow" style="margin-left:auto;margin-right:auto;display:inline-block;">Próximo movimento</span>
+      <h2>Você já cumpriu o passo 01.<br>Agora <em>responde a pesquisa</em>.</h2>
+      <p>É a porta de entrada pro grupo da turma. <strong style="color:var(--color-accent-white);">3 minutos.</strong> Depois é só seguir os passos.</p>
+
+      <div class="final-cta-actions">
+        <a class="btn btn-primary" href="https://guide.lendario.ai/fundamentals/mria-marketing-boas-vindas/pesquisa/onboarding" target="_blank" rel="noopener">Responder pesquisa →</a>
+        <a class="btn btn-outline" href="https://membros.academialendaria.ai/m/lessons/aiox-squad-1776165873077" target="_blank" rel="noopener">Aula de instalação AIOX</a>
+      </div>
+
+      <div class="quote-block">
+        <span class="label">Antes do Sábado 1</span>
+        <p>Você não precisa saber programar. Mas precisa vir disposto a configurar, testar, quebrar e ajustar. O sábado 1 começa pelo cockpit porque <strong>sem cockpit não existe voo</strong>. E nos 4 sábados juntos, você sai com uma operação de marketing de receita rodando com IA — da oferta ao painel de receita.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <nav class="footer-legal" aria-label="Documentos legais">
+      <a href="https://www.academialendaria.ai/politica-de-privacidade" target="_blank" rel="noopener">Política de Privacidade</a>
+      <a href="https://www.academialendaria.ai/termos-de-uso" target="_blank" rel="noopener">Termos de Uso</a>
+      <a href="https://www.academialendaria.ai/politica-de-cookies" target="_blank" rel="noopener">Política de Cookies</a>
+      <a href="mailto:suporte@academialendaria.ai">Suporte</a>
+    </nav>
+    <p><span class="gold">M&aacute;quina de Receita com IA</span> · M&oacute;dulo Marketing · Academia Lendár<span class="bracket">[IA]</span></p>
+    <p class="footer-cnpj">ACADEMIA LENDÁRIA LTDA. · CNPJ 37.348.342/0001-07</p>
+    <p>© 2026 Academia Lendária. Todos os direitos reservados.</p>
+    <p>Página oficial de boas-vindas · salva nos favoritos</p>
+  </footer>
+
+</main>
+
+</body>
+</html>
