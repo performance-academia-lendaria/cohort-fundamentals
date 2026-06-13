@@ -488,6 +488,43 @@
     color: var(--color-gold-primary);
   }
 
+  /* Passo "Em breve" — estado desligado/esmaecido */
+  .step.soon {
+    opacity: 0.45;
+    filter: grayscale(0.6);
+  }
+  .step.soon:hover {
+    transform: none;
+    border-color: var(--color-border-void);
+    box-shadow: none;
+  }
+  .step.soon:hover::before { opacity: 0; }
+  .step.soon .step-num {
+    -webkit-text-fill-color: var(--color-text-muted);
+    background: none;
+    text-shadow: none;
+    filter: none;
+  }
+  .step-tag.soon {
+    color: var(--color-text-muted);
+    border-color: var(--color-border-light);
+    background: transparent;
+  }
+  .step-btn.soon {
+    background: transparent;
+    color: var(--color-text-muted);
+    border: 1px dashed var(--color-border-light);
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+  .step-btn.soon:hover {
+    background: transparent;
+    color: var(--color-text-muted);
+    border-color: var(--color-border-light);
+    box-shadow: none;
+    transform: none;
+  }
+
   /* =========================================================
      CALLOUTS
      ========================================================= */
@@ -1033,27 +1070,27 @@
           </div>
         </div>
 
-        <div class="step">
+        <div class="step soon">
           <div class="step-num">03</div>
           <div class="step-body">
-            <span class="step-tag">Acesso</span>
+            <span class="step-tag soon">Em breve</span>
             <h3>Acessa a Área de Membros</h3>
-            <p>Faz login com o mesmo e-mail da compra. Lá ficam as gravações, materiais, conteúdos complementares e a estrutura do curso.</p>
+            <p>Em breve: o acesso à área de membros com as gravações, materiais e conteúdos complementares. A gente libera por aqui assim que estiver pronto.</p>
           </div>
           <div class="step-cta">
-            <a class="step-btn" href="https://membros.academialendaria.ai/m/courses?tenant=fundamentals" target="_blank" rel="noopener"><span>Área de membros</span><span class="arrow">→</span></a>
+            <span class="step-btn soon"><span>Em breve</span></span>
           </div>
         </div>
 
-        <div class="step">
+        <div class="step soon">
           <div class="step-num">04</div>
           <div class="step-body">
-            <span class="step-tag">Agenda</span>
+            <span class="step-tag soon">Em breve</span>
             <h3>Bloqueia as datas das aulas e das mentorias</h3>
-            <p>Marca agora os 4 encontros ([HORÁRIO]) e as mentorias coletivas ([DIAS], [HORÁRIO]). A frequência síncrona é parte do critério de aprovação e da entrega da sua operação comercial.</p>
+            <p>Em breve: as datas dos encontros e das mentorias coletivas pra você bloquear na agenda. A gente confirma o calendário por aqui em breve.</p>
           </div>
           <div class="step-cta">
-            <a class="step-btn ghost" href="#cronograma"><span>Ver cronograma</span><span class="arrow">↓</span></a>
+            <span class="step-btn soon"><span>Em breve</span></span>
           </div>
         </div>
 
@@ -1062,88 +1099,6 @@
       <div class="callout warn">
         <span class="label">Importante · vem com o material pré-aula em mãos</span>
         <p>O primeiro encontro já começa <strong>colocando a mão na massa no seu processo comercial</strong>. Reserva um tempo na semana pra revisar o material de preparação e chegar com seu cenário de vendas atual em mente — assim você aproveita o bloco inteiro.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CRONOGRAMA -->
-  <section class="block" id="cronograma">
-    <div class="wrap">
-      <span class="sec-eyebrow">Cronograma</span>
-      <h2 class="sec-title">4 encontros · <em>4 aulas</em> · mentorias na semana.</h2>
-      <p class="sec-lead">As aulas seguem o método <strong>P.C.F.A.</strong> — Processo, CRM, Follow-up e Automação. As mentorias coletivas são sessões de implementação ao vivo ao longo da semana.</p>
-
-      <h3>Aulas ao vivo · 4 encontros intensivos</h3>
-      <div class="schedule-grid">
-
-        <div class="day-card">
-          <div class="day-label">Encontro 1</div>
-          <div class="day-date">[DATA A1]</div>
-          <div class="day-time">[HORÁRIO] · ao vivo</div>
-          <div class="lesson">
-            <div class="lesson-code">A1 · Processo</div>
-            <div class="lesson-title">Processo Comercial &amp; Playbook com IA</div>
-            <div class="lesson-desc">Processo ponta a ponta, ICP e qualificação (BANT/GPCT) e playbook de vendas vivo — tudo com IA. <strong>Entrega:</strong> processo documentado + playbook + roteiro de qualificação.</div>
-          </div>
-        </div>
-
-        <div class="day-card">
-          <div class="day-label">Encontro 2</div>
-          <div class="day-date">[DATA A2]</div>
-          <div class="day-time">[HORÁRIO] · ao vivo</div>
-          <div class="lesson">
-            <div class="lesson-code">A2 · CRM</div>
-            <div class="lesson-title">CRM &amp; Gestão de Pipeline com IA</div>
-            <div class="lesson-desc">Montagem e higiene de CRM, lead scoring por IA e forecast de receita por estágio. <strong>Entrega:</strong> CRM estruturado + modelo de scoring + painel de forecast.</div>
-          </div>
-        </div>
-
-        <div class="day-card">
-          <div class="day-label">Encontro 3</div>
-          <div class="day-date">[DATA A3]</div>
-          <div class="day-time">[HORÁRIO] · ao vivo</div>
-          <div class="lesson">
-            <div class="lesson-code">A3 · Follow-up</div>
-            <div class="lesson-title">Follow-up &amp; Cadências com IA</div>
-            <div class="lesson-desc">Cadências multicanal, copy de follow-up por IA e reativação de base parada. <strong>Entrega:</strong> cadência completa + biblioteca de mensagens.</div>
-          </div>
-        </div>
-
-        <div class="day-card">
-          <div class="day-label">Encontro 4</div>
-          <div class="day-date">[DATA A4]</div>
-          <div class="day-time">[HORÁRIO] · ao vivo</div>
-          <div class="lesson">
-            <div class="lesson-code">A4 · Automação</div>
-            <div class="lesson-title">Automação &amp; Fechamento com IA</div>
-            <div class="lesson-desc">Automações de vendas, agentes de IA no comercial e análise de conversão. <strong>Entrega:</strong> automação comercial rodando + painel de conversão.</div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="ps-wrap">
-        <h3>Mentorias coletivas · implementação ao vivo</h3>
-        <p style="color:var(--color-text-secondary);font-size:15px;line-height:1.6;">As mentorias não são aulas extras. São sessões pra implementar o que viu na aula, revisar entregável, tirar dúvida pontual e te preparar pra próxima aula. <strong style="color:var(--color-accent-white);">Usa toda semana</strong> — é o canal mais rápido pra sair de qualquer trava.</p>
-
-        <div class="ps-info">
-          <div class="ps-info-cell"><div class="label">Dias</div><div class="value"><span class="gold">[DIAS]</span></div></div>
-          <div class="ps-info-cell"><div class="label">Horário</div><div class="value">[HORÁRIO]</div></div>
-          <div class="ps-info-cell"><div class="label">Duração</div><div class="value">[DURAÇÃO]</div></div>
-          <div class="ps-info-cell"><div class="label">Formato</div><div class="value">Hot seats · implementação</div></div>
-        </div>
-
-        <ul style="list-style:none;padding:0;color:var(--color-text-secondary);font-size:15px;line-height:1.7;">
-          <li style="padding:8px 0;border-bottom:1px solid var(--color-border-void);"><strong style="color:var(--color-accent-white);">Implementar o que viu na aula</strong> — com a turma e a mentoria ao vivo</li>
-          <li style="padding:8px 0;border-bottom:1px solid var(--color-border-void);"><strong style="color:var(--color-accent-white);">Revisar entregável</strong> da aula anterior (playbook, CRM, cadência, automação)</li>
-          <li style="padding:8px 0;border-bottom:1px solid var(--color-border-void);"><strong style="color:var(--color-accent-white);">Destravar quem ficou pra trás</strong> — se travou, traz sua tela</li>
-          <li style="padding:8px 0;"><strong style="color:var(--color-accent-white);">Preparar você</strong> pra próxima aula</li>
-        </ul>
-      </div>
-
-      <div class="callout warn">
-        <span class="label">Frequência recomendada</span>
-        <p>Pra garantir a entrega da sua operação comercial no final, mantém <strong>75%+ de presença síncrona</strong> nas aulas. As mentorias são opcionais, mas quem usa toda semana tem <em>3× mais chance</em> de entregar tudo no prazo.</p>
       </div>
     </div>
   </section>
