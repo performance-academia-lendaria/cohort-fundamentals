@@ -1,14 +1,18 @@
 // =============================================================================
 // /api/onboarding — Proxy único de onboarding (MRIA)
 //
-// Esconde os webhooks do n8n do lado do servidor e roteia por { turma, etapa }.
-// O navegador nunca vê uma URL do n8n — só chama /api/onboarding.
+// Esconde o webhook do n8n do lado do servidor. O navegador nunca vê a URL do
+// n8n — só chama /api/onboarding.
 //
 // O cliente envia: { turma, etapa, payload }
 //   - turma:  'marketing' | 'comercial'
 //   - etapa:  'email-lookup' | 'submit' | 'confirm'
-//   - payload: o corpo exato que o n8n já espera (mantém os fluxos atuais
-//              funcionando sem nenhuma alteração no n8n).
+//   - payload: o corpo que a página montou para aquela etapa.
+//
+// O proxy repassa para UM ÚNICO webhook n8n um corpo achatado
+// { turma, etapa, ...payload } — a workflow roteia internamente por "etapa"
+// (Switch) e usa "turma" para casar a compra.
+//   Workflow: [WH] [LEADS] [SHEETS+AC] - sistema novo (1 webhook)
 //
 // A resposta do n8n é repassada de volta ao cliente (necessária para
 // 'email-lookup' → found, e 'submit' → telefone cadastrado).
@@ -16,22 +20,10 @@
 // Servido em: guide.lendario.ai/fundamentals/api/onboarding
 // =============================================================================
 
-const N8N = 'https://automacoes-lendarias.app.n8n.cloud/webhook/';
+// Webhook único (lado servidor; nunca exposto ao cliente).
+const N8N_WEBHOOK = 'https://automacoes-lendarias.app.n8n.cloud/webhook/onboarding';
 
-// Mapa turma → etapa → webhook (lado servidor; nunca exposto ao cliente).
-const WEBHOOKS = {
-  marketing: {
-    'email-lookup': N8N + 'b4bbb68a-8aee-4476-880d-59e3846d7c61',
-    submit:         N8N + '85de6ea6-5067-4b54-a7b8-545a3b79a2fa',
-    confirm:        N8N + '51e49334-9147-4e9e-b24a-f325b8c763ea',
-  },
-  comercial: {
-    'email-lookup': N8N + '0697b6f6-3376-46b1-8676-87612793d615',
-    submit:         N8N + '73d374e5-4565-429e-b9ed-f48907ad33b4',
-    confirm:        N8N + '4945f028-462f-42d0-948c-55358152c74e',
-  },
-};
-
+const TURMAS = ['marketing', 'comercial'];
 const ETAPAS = ['email-lookup', 'submit', 'confirm'];
 
 function json(data, status = 200) {
@@ -46,7 +38,7 @@ export async function GET() {
   return json({
     ok: true,
     service: 'onboarding-proxy',
-    turmas: Object.keys(WEBHOOKS),
+    turmas: TURMAS,
     etapas: ETAPAS,
   });
 }
@@ -63,15 +55,14 @@ export async function POST(request) {
   const etapa = String(body?.etapa || '').trim();
   const payload = body?.payload;
 
-  const turmaMap = WEBHOOKS[turma];
-  if (!turmaMap) return json({ error: 'turma-desconhecida', turma }, 400);
-
-  const url = turmaMap[etapa];
-  if (!url) return json({ error: 'etapa-desconhecida', etapa }, 400);
-
+  if (!TURMAS.includes(turma)) return json({ error: 'turma-desconhecida', turma }, 400);
+  if (!ETAPAS.includes(etapa)) return json({ error: 'etapa-desconhecida', etapa }, 400);
   if (payload == null || typeof payload !== 'object') {
     return json({ error: 'payload-ausente' }, 400);
   }
+
+  // Corpo achatado: a workflow lê body.turma / body.etapa e os campos do payload.
+  const upstreamBody = { ...payload, turma, etapa };
 
   // O n8n valida o Origin da requisição (forbidden_origin). Como agora quem
   // chama é o servidor (não o navegador), repassamos o Origin/Referer do
@@ -79,16 +70,15 @@ export async function POST(request) {
   const ORIGIN = request.headers.get('origin') || 'https://guide.lendario.ai';
   const REFERER = request.headers.get('referer') || ORIGIN + '/fundamentals/';
 
-  // Repassa ao n8n exatamente o payload que a página montou.
   try {
-    const upstream = await fetch(url, {
+    const upstream = await fetch(N8N_WEBHOOK, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Origin: ORIGIN,
         Referer: REFERER,
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(upstreamBody),
     });
 
     // Devolve o corpo do n8n de forma transparente (texto cru), preservando
