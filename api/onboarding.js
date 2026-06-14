@@ -73,11 +73,21 @@ export async function POST(request) {
     return json({ error: 'payload-ausente' }, 400);
   }
 
+  // O n8n valida o Origin da requisição (forbidden_origin). Como agora quem
+  // chama é o servidor (não o navegador), repassamos o Origin/Referer do
+  // cliente — caindo no domínio oficial como padrão.
+  const ORIGIN = request.headers.get('origin') || 'https://guide.lendario.ai';
+  const REFERER = request.headers.get('referer') || ORIGIN + '/fundamentals/';
+
   // Repassa ao n8n exatamente o payload que a página montou.
   try {
     const upstream = await fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        Origin: ORIGIN,
+        Referer: REFERER,
+      },
       body: JSON.stringify(payload),
     });
 
