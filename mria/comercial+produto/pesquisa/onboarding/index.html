@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Pesquisa de Onboarding · Comercial + Produto | Academia Lendária</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300..700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../shared/pesquisa-engine.css">
+</head>
+<body>
+  <script>
+    // ----- Bundle Comercial + Produto (pesquisa combinada: 2 matrizes, 2 grupos) -----
+    // TODO(Performance): definir o LINK REAL do grupo de Produto (groups[].url vazio é ignorado).
+    window.PESQUISA_CONFIG = {
+      turma: 'comercial+produto',
+      apiUrl: '../../../api/onboarding',
+      titulo: 'Pesquisa de Onboarding · Comercial + Produto | Academia Lendária',
+      brandPill: 'Máquina de Receita com IA · Comercial + Produto',
+      programa: 'Máquina de Receita com IA',
+      turmaLabel: 'Módulos Comercial + Produto',
+      grupoNome: 'Comercial + Produto — Máquina de Receita com IA',
+      groups: [
+        { label: 'Comercial', url: 'https://sndflw.com/i/Mh7Vei2u1WdTO7Zi9PbB' },
+        { label: 'Produto', url: '' },
+      ],
+      source: 'mria/comercial+produto/pesquisa/onboarding',
+      supportPhoneDigits: '554888000116',
+      blockLabels: {
+        1: 'Bloco 01 · Identificação',
+        2: 'Bloco 02 · Onde você está hoje',
+        3: 'Bloco 03 · Sua visão',
+      },
+      questions: [
+        { id: 'email', block: 1, type: 'email',
+          label: 'Qual o e-mail que você usou pra comprar a Máquina de Receita com IA?',
+          helper: 'Mesmo e-mail da Hotmart — usamos pra vincular sua resposta à sua matrícula nos dois módulos (Comercial + Produto).',
+          placeholder: 'voce@email.com', required: true },
+
+        { id: 'canal', block: 1, type: 'radio',
+          label: 'Como você chegou até a turma?',
+          required: true, allowOther: true,
+          options: [
+            { value: 'aula_gratuita', label: 'Aula gratuita ao vivo / YouTube' },
+            { value: 'indicacao', label: 'Indicação de outro aluno' },
+            { value: 'aluno_lendario', label: 'Já era aluno Lendário' },
+            { value: 'trafego_pago', label: 'Tráfego pago (Instagram, YouTube, Google)' },
+            { value: 'outro', label: 'Outro' },
+          ] },
+
+        { id: 'nivel_ia', block: 2, type: 'radio',
+          label: 'Qual seu nível atual de uso de IA?',
+          helper: 'Escolhe a opção que mais se aproxima da sua realidade hoje.',
+          required: true,
+          options: [
+            { value: '1', label: '1. Uso só ChatGPT/Claude como chat de texto' },
+            { value: '2', label: '2. Uso IA com prompts elaborados, mas só no chat' },
+            { value: '3', label: '3. Já usei ferramentas de IA além do chat (geradores de imagem/vídeo, automações, no-code, agentes), mas sem método' },
+            { value: '4', label: '4. Já montei algo funcional com IA (campanha, página, automação, integração), mas sem consistência' },
+            { value: '5', label: '5. Já oriento outras pessoas no uso de IA' },
+          ] },
+
+        { id: 'dimensoes_comercial', block: 2, type: 'matrix',
+          label: 'Módulo Comercial — marque seu nível ATUAL em cada frente (método P.C.F.A.)',
+          helper: 'Vamos repetir essa mesma matriz na formatura pra medir o quanto você evoluiu — responde honesto, não tem certo nem errado.',
+          required: true,
+          scale: [1, 2, 3, 4, 5],
+          scaleLegend: { min: '1 = não sei nada', max: '5 = domino completamente' },
+          rows: [
+            { id: 'processo', label: 'Processo & Playbook', description: 'Desenhar um processo comercial replicável e qualificar leads (ICP, BANT/GPCT) com IA' },
+            { id: 'crm', label: 'CRM & Pipeline', description: 'Estruturar o CRM, fazer lead scoring e prever receita (forecast) com IA' },
+            { id: 'followup', label: 'Follow-up & Cadências', description: 'Montar cadências multicanal e reativar leads com copy gerada por IA' },
+            { id: 'automacao', label: 'Automação & Fechamento', description: 'Automatizar a operação comercial, usar agentes de IA e ler a conversão pra fechar mais' },
+          ] },
+
+        { id: 'dimensoes_produto', block: 2, type: 'matrix',
+          label: 'Módulo Produto — marque seu nível ATUAL em cada frente (método D.M.M.E.)',
+          helper: 'Mesma lógica: responde honesto. Essa matriz também se repete na formatura.',
+          required: true,
+          scale: [1, 2, 3, 4, 5],
+          scaleLegend: { min: '1 = não sei nada', max: '5 = domino completamente' },
+          rows: [
+            { id: 'discovery', label: 'Discovery & Validação', description: 'Validar o problema, priorizar o roadmap e prototipar o produto com IA' },
+            { id: 'metricas', label: 'Métricas & Retenção', description: 'Montar o painel de métricas e planos de ativação e retenção com IA' },
+            { id: 'monetizacao', label: 'Monetização & Pricing', description: 'Definir o modelo de pricing e a estrutura de planos do produto com IA' },
+            { id: 'expansao', label: 'PLG & Expansão', description: 'Desenhar o onboarding, o PLG e a expansão de receita (NRR) com IA' },
+          ] },
+
+        { id: 'valeu_centavo', block: 3, type: 'textarea',
+          label: 'Se ao final dos dois módulos você disser "valeu cada centavo", o que teria que ter acontecido?',
+          helper: 'Sem filtro — fala o que pra VOCÊ significaria sucesso.',
+          placeholder: 'Pensa um pouco antes de responder.', required: true },
+
+        { id: 'receio', block: 3, type: 'textarea',
+          label: 'Qual seu MAIOR receio ou bloqueio ao começar?',
+          helper: 'Honesto. O que mais te preocupa antes da Aula 1?',
+          placeholder: 'Pode ser técnico, de tempo, de método — o que vier primeiro.', required: true },
+      ],
+    };
+  </script>
+  <script src="../../../shared/pesquisa-engine.js"></script>
+</body>
+</html>
