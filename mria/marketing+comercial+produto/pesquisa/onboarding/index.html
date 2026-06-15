@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex,nofollow">
-  <title>Pesquisa de Onboarding · Marketing + Comercial + Produto | Academia Lendária</title>
+  <title>Pesquisa de Onboarding · A Tríade completa | Academia Lendária</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300..700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
@@ -16,14 +16,14 @@
     window.PESQUISA_CONFIG = {
       turma: 'marketing+comercial+produto',
       apiUrl: '../../../api/onboarding',
-      titulo: 'Pesquisa de Onboarding · Marketing + Comercial + Produto | Academia Lendária',
-      brandPill: 'Máquina de Receita com IA · Marketing + Comercial + Produto',
+      titulo: 'Pesquisa de Onboarding · A Tríade completa | Academia Lendária',
+      brandPill: 'Máquina de Receita com IA · A Tríade completa',
       programa: 'Máquina de Receita com IA',
-      turmaLabel: 'Módulos Marketing + Comercial + Produto',
-      grupoNome: 'Marketing + Comercial + Produto — Máquina de Receita com IA',
+      turmaLabel: 'A Tríade (Marketing + Vendas + Produto)',
+      grupoNome: 'A Tríade — Máquina de Receita com IA',
       groups: [
         { label: 'Marketing', url: 'https://sndflw.com/i/8iinSnLWu3mRhUjUiLge' },
-        { label: 'Comercial', url: 'https://sndflw.com/i/Mh7Vei2u1WdTO7Zi9PbB' },
+        { label: 'Vendas', url: 'https://sndflw.com/i/Mh7Vei2u1WdTO7Zi9PbB' },
         { label: 'Produto', url: 'https://sndflw.com/i/oWzyCzz39sYx8oDBKwiP' },
       ],
       source: 'mria/marketing+comercial+produto/pesquisa/onboarding',
@@ -36,7 +36,7 @@
       questions: [
         { id: 'email', block: 1, type: 'email',
           label: 'Qual o e-mail que você usou pra comprar a Máquina de Receita com IA?',
-          helper: 'Mesmo e-mail da Hotmart — usamos pra vincular sua resposta à sua matrícula nos três módulos (Marketing + Comercial + Produto).',
+          helper: 'Mesmo e-mail da Hotmart — usamos pra vincular sua resposta à sua matrícula nos três módulos (Marketing + Vendas + Produto).',
           placeholder: 'voce@email.com', required: true },
 
         { id: 'canal', block: 1, type: 'radio',
@@ -63,7 +63,7 @@
           ] },
 
         { id: 'dimensoes_marketing', block: 2, type: 'matrix',
-          label: 'Módulo Marketing — marque seu nível ATUAL em cada frente (método R.O.F.A.)',
+          label: 'Marketing — marque seu nível ATUAL em cada frente (método R.O.F.A.)',
           helper: 'Vamos repetir essa mesma matriz na formatura pra medir o quanto você evoluiu — responde honesto, não tem certo nem errado.',
           required: true,
           scale: [1, 2, 3, 4, 5],
@@ -76,7 +76,7 @@
           ] },
 
         { id: 'dimensoes_comercial', block: 2, type: 'matrix',
-          label: 'Módulo Comercial — marque seu nível ATUAL em cada frente (método P.C.F.A.)',
+          label: 'Vendas — marque seu nível ATUAL em cada frente (método P.C.F.A.)',
           helper: 'Mesma lógica: responde honesto. Essa matriz também se repete na formatura.',
           required: true,
           scale: [1, 2, 3, 4, 5],
@@ -89,7 +89,7 @@
           ] },
 
         { id: 'dimensoes_produto', block: 2, type: 'matrix',
-          label: 'Módulo Produto — marque seu nível ATUAL em cada frente (método D.M.M.E.)',
+          label: 'Produto — marque seu nível ATUAL em cada frente (método D.M.M.E.)',
           helper: 'Mesma lógica: responde honesto. Essa matriz também se repete na formatura.',
           required: true,
           scale: [1, 2, 3, 4, 5],
