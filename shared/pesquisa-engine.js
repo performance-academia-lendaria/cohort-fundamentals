@@ -132,14 +132,7 @@
           <span class="done-phone-label">Número cadastrado</span>
           <span id="done-phone" class="done-phone done-phone-muted">aguardando…</span>
         </div>
-        <div class="done-actions">
-          <a id="btn-confirm" class="btn btn-primary" href="#" rel="noopener">
-            Número Correto → Solicitar entrada no grupo
-          </a>
-          <a id="btn-wrong" class="btn btn-ghost" href="#" rel="noopener">
-            Número errado → Alterar cadastro com suporte
-          </a>
-        </div>
+        <div class="done-actions" id="done-actions"></div>
         <p class="done-text-small">
           Ao solicitar entrada, aguarde, o time da Academia Lendária aprova
           seu ingresso no grupo o mais breve possível.
@@ -540,8 +533,20 @@
       }
     });
 
-    const score = computeBaselineScore(payload.answers.dimensoes_aiox);
-    if (score !== null) payload.answers.baseline_score = score;
+    // Baseline por matriz (baseline_<id>) + overall (baseline_score).
+    // Suporta múltiplas matrizes (ex.: dimensoes_marketing + dimensoes_comercial).
+    let allCells = [];
+    QUESTIONS.forEach((q) => {
+      if (q.type !== 'matrix') return;
+      const m = payload.answers[q.id];
+      if (!m) return;
+      const sc = computeBaselineScore(m);
+      if (sc !== null) payload.answers['baseline_' + q.id] = sc;
+      allCells = allCells.concat(Object.values(m).map(Number).filter((n) => Number.isFinite(n) && n >= 1 && n <= 5));
+    });
+    if (allCells.length) {
+      payload.answers.baseline_score = Math.round((allCells.reduce((a, b) => a + b, 0) / allCells.length) * 100) / 100;
+    }
 
     try {
       const res = await callApi('submit', payload);
@@ -596,6 +601,38 @@
     return null;
   }
 
+  // Payload de confirm genérico (qualquer turma/qtde de matrizes).
+  function buildConfirmPayload() {
+    const respostas = {};
+    QUESTIONS.forEach((q) => {
+      respostas[q.id] = q.type === 'matrix' ? (state.matrix[q.id] || null) : (state.answers[q.id] || null);
+    });
+    if (state.others.canal) respostas.canal_outro = (state.others.canal || '').trim() || null;
+    return {
+      event: 'confirm-group-entry',
+      telefone: state.confirmedPhone || null,
+      email: (state.answers.email || '').trim() || null,
+      respondedAt: new Date().toISOString(),
+      source: CONFIG.source,
+      turma: CONFIG.turmaLabel,
+      programa: CONFIG.programa,
+      respostas: respostas,
+    };
+  }
+
+  let confirmSent = false;
+  function fireConfirmOnce() {
+    if (confirmSent) return;
+    confirmSent = true;
+    // Fire-and-forget com keepalive (mobile abre o app do WhatsApp na sequência).
+    // Sem console.log — payload contém PII.
+    try {
+      callApi('confirm', buildConfirmPayload(), { keepalive: true }).catch(() => {});
+    } catch (err) {
+      /* não bloqueia a entrada no grupo */
+    }
+  }
+
   function showDone() {
     document.getElementById('form-section').classList.add('hidden');
     document.getElementById('done-section').classList.remove('hidden');
@@ -609,62 +646,57 @@
       phoneEl.classList.add('done-phone-muted');
     }
 
-    const btnConfirm = document.getElementById('btn-confirm');
-    const btnWrong = document.getElementById('btn-wrong');
+    // Grupos: CONFIG.groups [{label,url}] (multi) ou CONFIG.groupUrl (single).
+    let groups = Array.isArray(CONFIG.groups) ? CONFIG.groups.filter((g) => g && g.url) : [];
+    if (!groups.length && GROUP_REQUEST_URL) groups = [{ label: '', url: GROUP_REQUEST_URL }];
+    const multi = groups.length > 1;
 
-    if (GROUP_REQUEST_URL) {
-      btnConfirm.href = GROUP_REQUEST_URL;
-      btnConfirm.target = '_blank';
-      btnConfirm.classList.remove('btn-disabled');
-    } else {
-      btnConfirm.classList.add('btn-disabled');
-      btnConfirm.title = 'Link do grupo ainda não configurado';
-    }
-    btnConfirm.onclick = (e) => {
-      const payload = {
-        event: 'confirm-group-entry',
-        telefone: state.confirmedPhone || null,
-        email: (state.answers.email || '').trim() || null,
-        respondedAt: new Date().toISOString(),
-        source: CONFIG.source,
-        turma: CONFIG.turmaLabel,
-        programa: CONFIG.programa,
-        respostas: {
-          canal: state.answers.canal || null,
-          canal_outro: (state.others.canal || '').trim() || null,
-          nivel_ia: state.answers.nivel_ia || null,
-          dimensoes_aiox: state.matrix.dimensoes_aiox || null,
-          valeu_centavo: state.answers.valeu_centavo || null,
-          receio: state.answers.receio || null,
-        },
-      };
-      // Fire-and-forget com keepalive (mobile abre o app do WhatsApp na sequência).
-      // Sem console.log — payload contém PII.
-      try {
-        callApi('confirm', payload, { keepalive: true }).catch(() => {});
-      } catch (err) {
-        /* não bloqueia a entrada no grupo */
-      }
-      if (!GROUP_REQUEST_URL) {
+    const actions = document.getElementById('done-actions');
+    actions.innerHTML = '';
+
+    if (!groups.length) {
+      // Sem link configurado: registra a confirmação e avisa.
+      const b = document.createElement('a');
+      b.className = 'btn btn-primary';
+      b.href = '#';
+      b.textContent = 'Solicitar entrada no grupo';
+      b.onclick = (e) => {
         e.preventDefault();
-        alert('Webhook de confirmação enviado.\n\nO link de entrada no grupo ainda não foi configurado — o time vai te chamar manualmente.');
-      }
-    };
-
-    if (SUPPORT_WHATSAPP_URL) {
-      btnWrong.href = SUPPORT_WHATSAPP_URL;
-      btnWrong.target = '_blank';
-      btnWrong.classList.remove('btn-disabled');
+        fireConfirmOnce();
+        alert('Recebemos sua confirmação. O link de entrada no grupo ainda não foi configurado — o time vai te chamar.');
+      };
+      actions.appendChild(b);
     } else {
-      btnWrong.classList.add('btn-disabled');
-      btnWrong.title = 'Link do suporte ainda não configurado';
+      groups.forEach((g) => {
+        const b = document.createElement('a');
+        b.className = 'btn btn-primary';
+        b.href = g.url;
+        b.target = '_blank';
+        b.rel = 'noopener';
+        b.textContent = multi
+          ? ('Entrar no grupo: ' + (g.label || 'WhatsApp'))
+          : 'Número Correto → Solicitar entrada no grupo';
+        b.onclick = () => { fireConfirmOnce(); }; // dispara 1x; a navegação segue o href
+        actions.appendChild(b);
+      });
     }
-    btnWrong.onclick = (e) => {
-      if (!SUPPORT_WHATSAPP_URL) {
+
+    // Botão "número errado" (suporte)
+    const wrong = document.createElement('a');
+    wrong.className = 'btn btn-ghost';
+    wrong.textContent = 'Número errado → Alterar cadastro com suporte';
+    if (SUPPORT_WHATSAPP_URL) {
+      wrong.href = SUPPORT_WHATSAPP_URL;
+      wrong.target = '_blank';
+      wrong.rel = 'noopener';
+    } else {
+      wrong.href = '#';
+      wrong.onclick = (e) => {
         e.preventDefault();
         alert('O link do suporte ainda não foi configurado.\n\nPor enquanto, fale com o time da Academia Lendária pelos canais de costume.');
-      }
-    };
+      };
+    }
+    actions.appendChild(wrong);
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }

@@ -23,7 +23,7 @@
 // Webhook único (lado servidor; nunca exposto ao cliente).
 const N8N_WEBHOOK = 'https://automacoes-lendarias.app.n8n.cloud/webhook/onboarding';
 
-const TURMAS = ['marketing', 'comercial'];
+const TURMAS = ['marketing', 'comercial', 'produto', 'marketing+comercial'];
 const ETAPAS = ['email-lookup', 'submit', 'confirm'];
 
 function json(data, status = 200) {
